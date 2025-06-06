@@ -21,15 +21,71 @@ input[type="text"] {
     box-sizing: border-box;
 }
 
-/* ヘッダー */
+/* 基本ヘッダー */
 .header {
-    display: grid;
+    position: relative;
+    display: flex;
     align-items: center;
     padding: 40px 100px;
     color: #2552ff;
-    font-weight: bold;
-    font-size: 32px;
+}
 
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 1fr;
+.header__menu-toggle {
+    font-size: 32px;
+    cursor: pointer;
+}
+
+.header__title {
+    margin-left: 15px;
+}
+
+/* ポップアップ */
+.header__menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    padding-top: 200px;
+    background: #fff;
+    display: none;
+    z-index: 999;
+    overflow-y: auto;
+}
+
+.header__menu.show {
+    display: block;
+}
+
+/* クローズボタン */
+.header__menu-close {
+    position: absolute;
+    top: 40px;
+    left: 100px;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    font-size: 20px;
+    background-color: #2552ff;;
+    color: #fff;
+    cursor: pointer;
+    z-index: 1001;
+    text-align: center;
+    border-radius: 4px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* メニューリンク */
+.header__menu-link,
+.header__menu-form {
+    display: block;
+    margin-bottom: 20px;
+    color: #2552ff;
+    font-size: 26px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.header__menu-form--logout {
+    color: #2552ff;
 }
