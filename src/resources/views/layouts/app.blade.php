@@ -18,7 +18,7 @@
 
             {{-- メニューアイコン --}}
             <div class="header__menu-toggle" id="menu-toggle">
-                <i class="fas fa-bars"></i>
+                <img src="images/icon/menu.png" alt="Menu Icon" class="icon">
             </div>
 
             {{-- サイトタイトル --}}

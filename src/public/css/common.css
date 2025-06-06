@@ -30,8 +30,12 @@ input[type="text"] {
     color: #2552ff;
 }
 
-.header__menu-toggle {
-    font-size: 32px;
+.header__menu-toggle img {
+    display: block;
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
     cursor: pointer;
 }
 
