@@ -52,13 +52,14 @@ input[type="text"] {
     height: 100vh;
     padding-top: 200px;
     background: #fff;
-    display: none;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
     z-index: 999;
     overflow-y: auto;
 }
 
 .header__menu.show {
-    display: block;
+    transform: translateX(0);
 }
 
 /* クローズボタン */
