@@ -1,10 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/register', [AuthController::class, 'store'])
-    ->middleware(['guest'])
-    ->name('register');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::view('/thanks', 'auth.thanks')->name('register.thanks');
+Route::get('/', [ShopController::class, 'index'])->name('shops.index');
