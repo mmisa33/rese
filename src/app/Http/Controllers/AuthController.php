@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\RegisterRequest;
-use App\Actions\Fortify\CreateNewUser;
 
 class AuthController extends Controller
 {
