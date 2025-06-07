@@ -12,9 +12,9 @@
             会員登録ありがとうございます
         </h2>
 
-        {{-- トップページへ移行 --}}
+        {{-- ログインページへ移行 --}}
         <div class="thanks-form__login">
-            <a class="thanks-form__login--link" href="{{ route('shops.index') }}">ログインする</a>
+            <a class="thanks-form__login--link" href="{{ route('login') }}">ログインする</a>
         </div>
     </div>
 </div>
