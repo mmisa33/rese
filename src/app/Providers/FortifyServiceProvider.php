@@ -9,6 +9,7 @@ use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 
 use Laravel\Fortify\Http\Requests\LoginRequest as FortifyLoginRequest;
 use Laravel\Fortify\Contracts\RegisterResponse;
@@ -22,6 +23,13 @@ class FortifyServiceProvider extends ServiceProvider
         $this->app->instance(RegisterResponse::class, new class implements RegisterResponse {
             public function toResponse($request)
             {
+                // 登録後に自動ログインされていたらログアウト
+                Auth::logout();
+
+                // セッションの再生成（セキュリティ）
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+
                 return response()->view('auth.thanks');
             }
         });
