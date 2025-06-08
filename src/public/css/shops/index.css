@@ -1,0 +1,43 @@
+.search-form {
+    display: flex;
+    align-items: center;
+    padding: 10px 10px;
+    background-color: white;
+    box-shadow: 4px 3px 6px rgba(0, 0, 0, 0.4);
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.search-form__keyword-input {
+    padding: 0 5px;
+}
+
+.search-form__area,
+.search-form__genre {
+    display: flex;
+    align-items: center;
+    border-right: 1px solid #C8C8C8;
+}
+
+/* アイコン */
+.select-icon {
+    width: 18px;
+    height: 10px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.keyword-icon {
+    display: flex;
+    align-items: center;
+    width: 18px;
+    height: 18px;
+    margin: 0 10px;
+}
+
+.search-form__area-select,
+.search-form__genre-select {
+    padding: 5px 10px;
+    cursor: pointer;
+}
