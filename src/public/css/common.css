@@ -26,14 +26,14 @@ input[type="text"] {
     position: relative;
     display: flex;
     align-items: center;
-    padding: 40px 100px;
+    padding: 40px 110px;
     color: #2552ff;
 }
 
 .header__menu-toggle img {
     display: block;
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     border-radius: 4px;
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
     cursor: pointer;
@@ -41,6 +41,7 @@ input[type="text"] {
 
 .header__title {
     margin-left: 15px;
+    font-size: 36px;
 }
 
 /* ポップアップ */
@@ -93,4 +94,16 @@ input[type="text"] {
 
 .header__menu-form--logout {
     color: #2552ff;
+}
+
+.link {
+    margin-left: auto;
+    width: 50%;
+}
+
+/* レスポンシブデザイン (タブレット768px - 850px) */
+@media screen and (min-width: 768px) and (max-width: 850px) {
+    .link {
+
+    }
 }

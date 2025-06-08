@@ -40,6 +40,10 @@
                     <a class="header__menu-link" href="{{ route('login') }}">Login</a>
                 @endauth
             </div>
+
+            <div class="link">
+                @yield('link')
+            </div>
         </header>
 
         {{-- メインコンテンツ --}}

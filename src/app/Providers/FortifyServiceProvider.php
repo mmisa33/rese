@@ -26,7 +26,7 @@ class FortifyServiceProvider extends ServiceProvider
                 // 登録後に自動ログインされていたらログアウト
                 Auth::logout();
 
-                // セッションの再生成（セキュリティ）
+                // セッションの再生成
                 $request->session()->invalidate();
                 $request->session()->regenerateToken();
 
