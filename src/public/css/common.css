@@ -14,6 +14,7 @@ a {
     display: flex;
     flex-direction: column;
     height: 100%;
+    margin: 40px 110px;
 }
 
 input[type="text"] {
@@ -26,7 +27,7 @@ input[type="text"] {
     position: relative;
     display: flex;
     align-items: center;
-    padding: 40px 110px;
+    margin-bottom: 40px;
     color: #2552ff;
 }
 

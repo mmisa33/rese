@@ -1,3 +1,4 @@
+/* 検索フォーム */
 .search-form {
     display: flex;
     align-items: center;
@@ -20,7 +21,12 @@
     border-right: 1px solid #C8C8C8;
 }
 
-/* アイコン */
+.search-form__area-select,
+.search-form__genre-select {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
 .select-icon {
     width: 18px;
     height: 10px;
@@ -36,8 +42,98 @@
     margin: 0 10px;
 }
 
-.search-form__area-select,
-.search-form__genre-select {
-    padding: 5px 10px;
+.select-icon {
+    width: 18px;
+    height: 10px;
+    margin: 0 10px;
     cursor: pointer;
+}
+
+.keyword-icon {
+    display: flex;
+    align-items: center;
+    width: 18px;
+    height: 18px;
+    margin: 0 10px;
+}
+
+/* 商品リスト */
+.shop__list {
+    margin-bottom: 30px;
+}
+
+.shop__grid-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.shop__card {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    background-color: white;
+    box-shadow: 4px 3px 6px rgba(0, 0, 0, 0.4);
+    border-radius: 6px;
+}
+
+.shop__card-image {
+    width: 100%;
+    height: 290px;
+    object-fit: cover;
+}
+
+.shop__card-body {
+    padding: 20px 20px;
+}
+
+.shop__card-title {
+    display: flex;
+    margin-bottom: 5px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.shop__card-tags {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.shop__card-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.shop__details-btn {
+    display: inline-block;
+    background-color: #2962ff;
+    color: white;
+    padding: 7px 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.shop__like-button i.liked {
+    font-size: 32px;
+    /* いいね済みは大きめ */
+    color: red;
+    /* 赤色 */
+}
+
+.shop__like-button i.not-liked {
+    font-size: 32px;
+    /* いいねしてない時は少し小さめ */
+    color: gainsboro;
+    /* グレーなど薄めの色 */
+}
+
+/* レスポンシブデザイン (タブレット768px - 850px) */
+@media (max-width: 850px) and (min-width: 768px) {
+    .shop__grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
