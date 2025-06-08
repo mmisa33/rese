@@ -45,4 +45,9 @@ class Shop extends Model
     {
         return $this->belongsTo(Genre::class);
     }
+
+    public function likedByUsers()
+    {
+        return $this->belongsToMany(User::class, 'likes')->withTimestamps();
+    }
 }

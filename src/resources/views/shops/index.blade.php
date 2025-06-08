@@ -44,22 +44,56 @@
 </div>
 @endsection
 
+@section('content')
 {{-- 店舗一覧 --}}
-{{-- <div class="shop__list">
-    <div class="item__grid-container">
-        @foreach ($items as $item)
-            <a href="{{ route('item.show', ['item_id' => $item->id]) }}" class="item__card-link">
-                <div class="item__card">
-                    <img class="item__card-image" src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name }}">
-                    <p class="item__card-title">
-                        @if ($item->sold_status)
-                            <span class="item__card-label">Sold</span>
-                        @endif
-                        {{ $item->name }}
+<div class="shop__list">
+    <div class="shop__grid-container">
+        @foreach ($shops as $shop)
+            <div class="shop__card">
+                {{-- イメージ画像 --}}
+                <img class="shop__card-image" src="{{ asset('storage/' . $shop->image_path) }}" alt="{{ $shop->name }}">
+
+                <div class="shop__card-body">
+                    {{-- 店舗名 --}}
+                    <h3 class="shop__card-title">
+                        {{ $shop->name }}
+                    </h3>
+
+                    {{-- タグ --}}
+                    <p class="shop__card-tags">
+                        <span>#{{ $shop->area->name }}</span>
+                        <span>#{{ $shop->genre->name }}</span>
                     </p>
+
+                    {{-- 詳細ボタン --}}
+                    <div class="shop__card-actions">
+                        <div class="shop__details-btn">
+                            <a href="{{ route('shop.show', ['shop_id' => $shop->id]) }}" class="shop__details-btn--submit">詳しくみる</a>
+                        </div>
+
+                        {{-- いいねボタン --}}
+                        <div class="shop__like-btn">
+                            @auth
+                                <form method="POST" action="{{ route('shops.like', ['shop_id' => $shop->id]) }}" class="shop__like-form">
+                                    @csrf
+                                    <button type="submit" class="shop__like-button">
+                                        @if (auth()->user()->likes->contains('id', $shop->id))
+                                            <i class="fa-solid fa-heart liked"></i>
+                                        @else
+                                            <i class="fa-solid fa-heart not-liked"></i>
+                                        @endif
+                                    </button>
+                                </form>
+                            @else
+                                <a href="{{ route('login') }}" class="shop__like-button">
+                                    <i class="fa-regular fa-heart"></i>
+                                </a>
+                            @endauth
+                        </div>
+                    </div>
                 </div>
-            </a>
+            </div>
         @endforeach
     </div>
 </div>
-@endsection --}}
+@endsection
