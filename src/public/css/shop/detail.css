@@ -1,0 +1,148 @@
+.shop-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+}
+
+.shop-detail__info {
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+}
+
+.info__title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* 戻るボタン */
+.info__back {
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    font-size: 22px;
+    font-weight: 500;
+    background-color: white;
+    ;
+    color: black;
+    text-align: center;
+    border-radius: 4px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* 店舗名 */
+.info__name {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+/* イメージ画像 */
+.info__img img {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    margin-top: 25px;
+}
+
+/* タグ・商品説明 */
+.info__tags,
+.info__description {
+    margin-top: 25px;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+/* 予約フォーム */
+.reservation-form {
+    grid-column: 2;
+    background-color: #2563eb;
+    border-radius: 8px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.reservation-form__content {
+    padding: 25px;
+}
+
+.reservation-form__title {
+    margin-bottom: 25px;
+    font-size: 22px;
+    color: white;
+}
+
+.reservation-form__select {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.reservation-form__select--date input,
+.reservation-form__select--time select,
+.reservation-form__select--number select {
+    padding: 5px;
+    background-color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.reservation-form__select--date input {
+    width: 30%;
+}
+
+.reservation-form__select--time select,
+.reservation-form__select--number select {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.reservation-form__confirm {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    margin: 20px 0;
+    padding: 25px 20px;
+    color: white;
+    text-align: left;
+}
+
+.reservation-form__confirm-table {
+    width: 100%;
+}
+
+.reservation-form__confirm-header {
+    width: 20%;
+    padding: 3px 0;
+}
+
+.reservation-form__btn {
+    width: 100%;
+    padding: 20px;
+    background-color: #1d4ed8;
+    color: white;
+    border-radius: 0 0 10px 10px;
+}
+
+.error-message {
+    margin-top: 2px;
+    color: white;
+}
+
+/* レスポンシブデザイン (タブレット768px - 850px) */
+@media screen and (min-width: 768px) and (max-width: 850px) {
+    .shop-detail {
+        grid-template-columns: 1fr;
+    }
+
+    .shop-detail__image {
+        grid-column: span 1;
+        margin: 0 auto;
+    }
+
+    .shop-detail__info {
+        grid-column: span 1;
+    }
+
+    .shop-detail__shop-detail {
+        margin-bottom: 20px;
+    }
+}

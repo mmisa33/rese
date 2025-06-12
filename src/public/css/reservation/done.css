@@ -1,12 +1,12 @@
-/* サンクスフォーム */
-.thanks-form {
+/* 予約完了フォーム */
+.done-form {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 /* フォームボックス */
-.thanks-form__inner {
+.done-form__inner {
     width: 28vw;
     padding: 110px 30px;
     background-color: white;
@@ -16,17 +16,17 @@
     text-align: center;
 }
 
-.thanks-form__message{
+.done-form__message {
     font-size: 25px;
     font-weight: 500;
 }
 
-/* ログインページ移行ボタン */
-.thanks-form__login {
+/* トップページ移行ボタン */
+.done-form__home {
     margin-top: 50px;
 }
 
-.thanks-form__login--link {
+.done-form__home--link {
     background-color: #2962ff;
     color: white;
     padding: 7px 15px;
@@ -37,11 +37,11 @@
 
 /* レスポンシブデザイン (タブレット768px - 850px) */
 @media screen and (min-width: 768px) and (max-width: 850px) {
-    .thanks-form__inner {
+    .done-form__inner {
         width: 50vw;
     }
 
-    .thanks-form__message {
+    .done-form__message {
         font-size: 23px;
         font-weight: 500;
     }
