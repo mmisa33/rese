@@ -18,7 +18,7 @@
 
             {{-- メニューアイコン --}}
             <div class="header__menu-toggle" id="menu-toggle">
-                <img src="images/icon/menu.png" alt="Menu Icon" class="icon">
+                <img src="{{ asset('images/icon/menu.png') }}" alt="Menu Icon" class="icon">
             </div>
 
             {{-- サイトタイトル --}}
@@ -28,14 +28,14 @@
             <div class="header__menu" id="menu">
                 <span class="header__menu-close" id="menu-close">&times;</span>
                 @auth
-                    <a class="header__menu-link" href="{{ route('shops.index') }}">Home</a>
+                    <a class="header__menu-link" href="{{ route('shop.index') }}">Home</a>
                     <form class="header__menu-form" method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="header__menu-form--logout">Logout</button>
                     </form>
                     <a class="header__menu-link" href="">Mypage</a>
                 @else
-                    <a class="header__menu-link" href="{{ route('shops.index') }}">Home</a>
+                    <a class="header__menu-link" href="{{ route('shop.index') }}">Home</a>
                     <a class="header__menu-link" href="{{ route('register') }}">Registration</a>
                     <a class="header__menu-link" href="{{ route('login') }}">Login</a>
                 @endauth

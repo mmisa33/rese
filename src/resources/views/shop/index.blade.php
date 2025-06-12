@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/shops/index.css')}}">
+<link rel="stylesheet" href="{{ asset('css/shop/index.css')}}">
 @endsection
 
 @section('link')
@@ -51,7 +51,6 @@
         @foreach ($shops as $shop)
             <div class="shop__card">
                 {{-- イメージ画像 --}}
-                {{-- <img class="shop__card-image" src="{{ asset('storage/' . $shop->image_path) }}" alt="{{ $shop->name }}"> --}}
                 <img src="{{ Storage::url($shop->image_path) }}" alt="{{ $shop->name }}" class="shop__card-image">
 
                 <div class="shop__card-body">
@@ -75,7 +74,7 @@
                         {{-- いいねボタン --}}
                         <div class="shop__like-btn">
                             @auth
-                                <form method="POST" action="{{ route('shops.like', ['shop_id' => $shop->id]) }}" class="shop__like-form">
+                                <form method="POST" action="{{ route('shop.like', ['shop_id' => $shop->id]) }}" class="shop__like-form">
                                     @csrf
                                     <button type="submit" class="shop__like-button">
                                         @if (auth()->user()->likes->contains('id', $shop->id))

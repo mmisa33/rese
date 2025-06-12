@@ -18,7 +18,7 @@ class ShopController extends Controller
 
         $shops = Shop::filter($request->only(['area', 'genre', 'keyword']))->get();
 
-        return view('shops.index', compact('shops', 'areas', 'genres'));
+        return view('shop.index', compact('shops', 'areas', 'genres'));
     }
 
     // いいね機能
@@ -43,6 +43,6 @@ class ShopController extends Controller
     public function show($shop_id)
     {
         $shop = Shop::findOrFail($shop_id);
-        return view('shops.show', compact('shop'));
+        return view('shop.detail', compact('shop'));
     }
 }
