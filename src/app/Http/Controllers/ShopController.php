@@ -11,6 +11,7 @@ use App\Models\Like;
 
 class ShopController extends Controller
 {
+    // 飲食店一覧ページを表示
     public function index(Request $request)
     {
         $areas = Area::all();
@@ -40,9 +41,23 @@ class ShopController extends Controller
         return back();
     }
 
-    public function show($shop_id)
+    // 飲食店詳細ページを表示
+    public function show($id)
     {
-        $shop = Shop::findOrFail($shop_id);
-        return view('shop.detail', compact('shop'));
+        $shop = Shop::findOrFail($id);
+
+        // 時間選択（11:00〜22:30まで）
+        $startHour = 11;
+        $endHour = 22;
+        $timeOptions = [];
+        for ($h = $startHour; $h <= $endHour; $h++) {
+            $timeOptions[] = sprintf('%02d:00', $h);
+            $timeOptions[] = sprintf('%02d:30', $h);
+        }
+
+        // 人数選択（1〜10人）
+        $peopleOptions = range(1, 10);
+
+        return view('shop.detail', compact('shop', 'timeOptions', 'peopleOptions'));
     }
 }

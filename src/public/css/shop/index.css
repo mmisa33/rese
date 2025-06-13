@@ -57,7 +57,7 @@
     margin: 0 10px;
 }
 
-/* 商品リスト */
+/* 飲食店リスト */
 .shop__list {
     margin-bottom: 30px;
 }
@@ -119,16 +119,12 @@
 
 .shop__like-button i.liked {
     font-size: 32px;
-    /* いいね済みは大きめ */
     color: red;
-    /* 赤色 */
 }
 
 .shop__like-button i.not-liked {
     font-size: 32px;
-    /* いいねしてない時は少し小さめ */
     color: gainsboro;
-    /* グレーなど薄めの色 */
 }
 
 /* レスポンシブデザイン (タブレット768px - 850px) */

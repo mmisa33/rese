@@ -7,7 +7,7 @@
 @section('content')
 <div class="shop-detail">
 
-    {{-- 店舗情報 --}}
+    {{-- 飲食店情報 --}}
     <div class="shop-detail__info">
         <div class="info__title">
             {{-- 戻るボタン --}}
@@ -15,7 +15,7 @@
                 <a href="{{ route('shop.index') }}" class="info__back-link">&lt;</a>
             </div>
 
-            {{-- 店舗名 --}}
+            {{-- 飲食店名 --}}
             <h2 class="info__name">
                 {{ $shop->name }}
             </h2>
@@ -32,7 +32,7 @@
             <span>#{{ $shop->genre->name }}</span>
         </p>
 
-        {{-- 店舗説明 --}}
+        {{-- 飲食店説明 --}}
         <div class="info__description">
             {{ $shop->description }}
         </div>
@@ -45,37 +45,38 @@
             <div class="reservation-form__content">
                 <h3 class="reservation-form__title">予約</h3>
 
-                <div class="reservation-form__select">
+                <div class="reservation-form__group">
                     {{-- 日付選択 --}}
-                    <div class="reservation-form__select--date">
-                        <input type="date" name="date" id="date">
+                    <div class="reservation-form__select">
+                        <input class="reservation-form__select--date" type="date" name="date" id="date">
                         @error('date')
                             <p class="error-message">{{ $message }}</p>
                         @enderror
                     </div>
 
                     {{-- 時間選択 --}}
-                    <div class="reservation-form__select--time">
-                        <select name="time" id="time">
+                    <div class="reservation-form__select select-wrapper">
+                        <select class="reservation-form__select--time" name="time" id="time">
                             <option value="">時間を選択</option>
-                            @for ($h = 11; $h <= 22; $h++)
-                                <option value="{{ $h }}:00">{{ $h }}:00</option>
-                                <option value="{{ $h }}:30">{{ $h }}:30</option>
-                            @endfor
+                            @foreach ($timeOptions as $time)
+                                <option value="{{ $time }}">{{ $time }}</option>
+                            @endforeach
                         </select>
+                        <img src="{{ asset('images/icon/select.png') }}" alt="Select Icon" class="select-icon">
                         @error('time')
                             <p class="error-message">{{ $message }}</p>
                         @enderror
                     </div>
 
                     {{-- 人数選択 --}}
-                    <div class="reservation-form__select--number">
-                        <select name="number" id="number">
+                    <div class="reservation-form__select select-wrapper">
+                        <select class="reservation-form__select--number" name="number" id="number">
                             <option value="">人数を選択</option>
-                            @for ($i = 1; $i <= 10; $i++)
-                                <option value="{{ $i }}">{{ $i }}人</option>
-                            @endfor
+                            @foreach ($peopleOptions as $num)
+                                <option value="{{ $num }}">{{ $num }}人</option>
+                            @endforeach
                         </select>
+                        <img src="{{ asset('images/icon/select.png') }}" alt="Select Icon" class="select-icon">
                         @error('number')
                             <p class="error-message">{{ $message }}</p>
                         @enderror
@@ -84,22 +85,22 @@
 
                 {{-- 確認欄 --}}
                 <div class="reservation-form__confirm">
-                    <table class="reservation-form__confirm-table">
-                        <tr class="reservation-form__confirm-row">
-                            <th class="reservation-form__confirm-header">Shop</th>
-                            <td class="reservation-form__confirm-content">{{ $shop->name }}</td>
+                    <table class="reservation-form__table">
+                        <tr class="reservation-form__row">
+                            <th class="reservation-form__header">Shop</th>
+                            <td class="reservation-form__cell">{{ $shop->name }}</td>
                         </tr>
-                        <tr class="reservation-form__confirm-row">
-                            <th class="reservation-form__confirm-header">Date</th>
-                            <td class="reservation-form__confirm-content" id="confirm-date">未選択</td>
+                        <tr class="reservation-form__row">
+                            <th class="reservation-form__header">Date</th>
+                            <td class="reservation-form__cell" id="confirm-date">未選択</td>
                         </tr>
-                        <tr class="reservation-form__confirm-row">
-                            <th class="reservation-form__confirm-header">Time</th>
-                            <td class="reservation-form__confirm-content" id="confirm-time">未選択</td>
+                        <tr class="reservation-form__row">
+                            <th class="reservation-form__header">Time</th>
+                            <td class="reservation-form__cell" id="confirm-time">未選択</td>
                         </tr>
-                        <tr class="reservation-form__confirm-row">
-                            <th class="reservation-form__confirm-header">Number</th>
-                            <td class="reservation-form__confirm-content" id="confirm-number">未選択</td>
+                        <tr class="reservation-form__row">
+                            <th class="reservation-form__header">Number</th>
+                            <td class="reservation-form__cell" id="confirm-number">未選択</td>
                         </tr>
                     </table>
                 </div>
