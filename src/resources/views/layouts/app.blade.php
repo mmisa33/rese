@@ -33,7 +33,7 @@
                         @csrf
                         <button type="submit" class="header__menu-form--logout">Logout</button>
                     </form>
-                    <a class="header__menu-link" href="">Mypage</a>
+                    <a class="header__menu-link" href="{{ route('mypage') }}">Mypage</a>
                 @else
                     <a class="header__menu-link" href="{{ route('shop.index') }}">Home</a>
                     <a class="header__menu-link" href="{{ route('register') }}">Registration</a>
