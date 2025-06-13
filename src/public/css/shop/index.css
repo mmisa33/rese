@@ -12,40 +12,32 @@
 
 .search-form__keyword-input {
     padding: 0 5px;
+    height: 38px;
 }
 
 .search-form__area,
 .search-form__genre {
+    position: relative;
     display: flex;
     align-items: center;
+    height: 38px;
     border-right: 1px solid #C8C8C8;
 }
 
 .search-form__area-select,
 .search-form__genre-select {
-    padding: 5px 10px;
+    padding: 5px 35px 5px 10px;
     cursor: pointer;
 }
 
 .select-icon {
-    width: 18px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    width: 15px;
     height: 10px;
-    margin: 0 10px;
-    cursor: pointer;
-}
-
-.keyword-icon {
-    display: flex;
-    align-items: center;
-    width: 18px;
-    height: 18px;
-    margin: 0 10px;
-}
-
-.select-icon {
-    width: 18px;
-    height: 10px;
-    margin: 0 10px;
     cursor: pointer;
 }
 
