@@ -10,7 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Models\Shop;
 use App\Models\Reservation;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
