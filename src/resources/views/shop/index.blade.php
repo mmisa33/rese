@@ -19,7 +19,7 @@
                     </option>
                 @endforeach
             </select>
-            <img src="images/icon/select.png" alt="Select Icon" class="select-icon">
+            <img src="{{ asset('images/icon/select.png') }}" alt="Select Icon" class="select-icon">
         </div>
 
         {{-- ジャンル --}}
@@ -32,7 +32,7 @@
                     </option>
                 @endforeach
             </select>
-            <img src="images/icon/select.png" alt="Select Icon" class="select-icon">
+            <img src="{{ asset('images/icon/select.png') }}" alt="Select Icon" class="select-icon">
         </div>
 
         {{-- キーワード --}}
@@ -45,7 +45,7 @@
 @endsection
 
 @section('content')
-{{-- 店舗一覧 --}}
+{{-- 飲食店一覧 --}}
 <div class="shop__list">
     <div class="shop__grid-container">
         @foreach ($shops as $shop)
@@ -54,7 +54,7 @@
                 <img src="{{ Storage::url($shop->image_path) }}" alt="{{ $shop->name }}" class="shop__card-image">
 
                 <div class="shop__card-body">
-                    {{-- 店舗名 --}}
+                    {{-- 飲食店名 --}}
                     <h3 class="shop__card-title">
                         {{ $shop->name }}
                     </h3>

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
+    // 予約機能
     public function store(ReservationRequest $request)
     {
         Reservation::create([
