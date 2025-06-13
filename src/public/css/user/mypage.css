@@ -1,0 +1,156 @@
+.mypage__user-name {
+    width: 100%;
+    margin-bottom: 25px;
+    font-size: 32px;
+    text-align: center;
+}
+
+.mypage-container {
+    display: flex;
+    width: 100%;
+    gap: 120px;
+    padding: 30px;
+    margin-bottom: 80px;
+}
+
+.mypage__reservation-title,
+.mypage__like-title {
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+.mypage__reservation {
+    width: 40%;
+}
+
+.mypage__like {
+    width: 60%;
+}
+
+.reservation-card {
+    margin-bottom: 40px;
+    padding: 30px;
+    background-color: #3366ff;
+    border-radius: 8px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    font-size: 20px;
+    color: white;
+    text-align: left;
+}
+
+.reservation-card__title {
+    display: flex;
+    align-items: center;
+}
+
+.reservation-card__title img,
+.close-btn__delite img {
+    display: block;
+    width: 30px;
+    height: 30px;
+}
+
+.reservation-card__header-name {
+    margin-left: 40px;
+}
+
+.close-btn {
+    margin-left: auto;
+}
+
+.reservation-card__table {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.reservation-card__header {
+    width: 25%;
+    font-weight: 500;
+}
+
+.reservation-card__header,
+.reservation-card__cell {
+    padding: 10px 0;
+}
+
+.shop__grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 80px;
+    row-gap: 25px;
+}
+
+.shop__card {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    background-color: white;
+    box-shadow: 4px 3px 6px rgba(0, 0, 0, 0.4);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.shop__card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.shop__card-body {
+    padding: 20px 20px;
+}
+
+.shop__card-title {
+    display: flex;
+    margin-bottom: 5px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.shop__card-tags {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.shop__card-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.shop__details-btn {
+    display: inline-block;
+    background-color: #2962ff;
+    color: white;
+    padding: 7px 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.shop__like-button i.liked {
+    font-size: 32px;
+    color: red;
+}
+
+.shop__like-button i.not-liked {
+    font-size: 32px;
+    color: gainsboro;
+}
+/* レスポンシブデザイン (タブレット768px - 850px) */
+@media screen and (min-width: 768px) and (max-width: 850px) {
+    .mypage-container {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .mypage__reservation,
+    .mypage__like {
+        width: 100%;
+    }
+
+    .shop__grid-container {
+        grid-template-columns: 1fr;
+    }
+}
