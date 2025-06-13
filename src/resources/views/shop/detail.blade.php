@@ -48,7 +48,7 @@
                 <div class="reservation-form__group">
                     {{-- 日付選択 --}}
                     <div class="reservation-form__select">
-                        <input class="reservation-form__select--date" type="date" name="date" id="date">
+                        <input class="reservation-form__select--date" type="date" name="date" id="date" value="{{ old('date') }}">
                         @error('date')
                             <p class="error-message">{{ $message }}</p>
                         @enderror
@@ -59,7 +59,7 @@
                         <select class="reservation-form__select--time" name="time" id="time">
                             <option value="">時間を選択</option>
                             @foreach ($timeOptions as $time)
-                                <option value="{{ $time }}">{{ $time }}</option>
+                            <option value="{{ $time }}" {{ old('time') == $time ? 'selected' : '' }}>{{ $time }}</option>
                             @endforeach
                         </select>
                         <img src="{{ asset('images/icon/select.png') }}" alt="Select Icon" class="select-icon">
@@ -73,7 +73,7 @@
                         <select class="reservation-form__select--number" name="number" id="number">
                             <option value="">人数を選択</option>
                             @foreach ($peopleOptions as $num)
-                                <option value="{{ $num }}">{{ $num }}人</option>
+                            <option value="{{ $num }}" {{ old('number') == $num ? 'selected' : '' }}>{{ $num }}人</option>
                             @endforeach
                         </select>
                         <img src="{{ asset('images/icon/select.png') }}" alt="Select Icon" class="select-icon">
