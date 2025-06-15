@@ -24,7 +24,9 @@
                                 <form method="POST" action="{{ route('reservation.destroy', $reservation->id) }}" class="reservation-form__delete" data-reservation-id="{{ $reservation->id }}">
                                     @csrf
                                     @method('DELETE')
-                                    <img src="{{ asset('images/icon/delete.png') }}" alt="Delete Icon" class="icon">
+                                    <button type="submit" class="icon-button">
+                                        <img src="{{ asset('images/icon/delete.png') }}" alt="Delete Icon" class="icon">
+                                    </button>
                                 </form>
                             </div>
                         </div>
