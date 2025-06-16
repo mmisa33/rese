@@ -36,4 +36,38 @@ class ReservationController extends Controller
 
         return redirect()->route('mypage');
     }
+
+    // 編集フォームを表示
+    public function edit($id)
+    {
+        $reservation = Reservation::with('shop')->findOrFail($id);
+
+        // 時間選択（11:00〜22:30まで）
+        $startHour = 11;
+        $endHour = 22;
+        $timeOptions = [];
+        for ($h = $startHour; $h <= $endHour; $h++) {
+            $timeOptions[] = sprintf('%02d:00', $h);
+            $timeOptions[] = sprintf('%02d:30', $h);
+        }
+
+        // 人数選択（1〜10人）
+        $peopleOptions = range(1, 10);
+
+        return view('reservation.edit', compact('reservation', 'timeOptions', 'peopleOptions'));
+    }
+
+    // 更新処理
+    public function update(ReservationRequest $request, $id)
+    {
+        $reservation = Reservation::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
+
+        $reservation->update([
+            'date' => $request->date,
+            'time' => $request->time,
+            'number' => $request->number,
+        ]);
+
+        return redirect()->route('mypage');
+    }
 }

@@ -20,4 +20,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/mypage', [UserController::class, 'mypage'])->name('mypage');
     Route::delete('/reservation/{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
+    Route::get('/reservation/{id}/edit', [ReservationController::class, 'edit'])->name('reservation.edit');
+    Route::put('/reservation/{id}', [ReservationController::class, 'update'])->name('reservation.update');
 });
