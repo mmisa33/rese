@@ -20,14 +20,24 @@
                             <img src="{{ asset('images/icon/clock.png') }}" alt="Clock Icon" class="icon">
                             <div class="reservation-card__header-name">予約{{ $index + 1 }}</div>
 
-                            <div class="close-btn">
-                                <form method="POST" action="{{ route('reservation.destroy', $reservation->id) }}" class="reservation-form__delete" data-reservation-id="{{ $reservation->id }}">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="icon-button">
-                                        <img src="{{ asset('images/icon/delete.png') }}" alt="Delete Icon" class="icon">
-                                    </button>
-                                </form>
+                            <div class="reservation-card__btn">
+                                {{-- 編集ボタン --}}
+                                <div class="edit-btn">
+                                    <a href="{{ route('reservation.edit', $reservation->id) }}" class="icon-button">
+                                        <img src="{{ asset('images/icon/edit.png') }}" alt="Edit Icon" class="icon">
+                                    </a>
+                                </div>
+
+                                {{-- 削除ボタン --}}
+                                <div class="close-btn">
+                                    <form method="POST" action="{{ route('reservation.destroy', $reservation->id) }}" class="reservation-form__delete" data-reservation-id="{{ $reservation->id }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="icon-button">
+                                            <img src="{{ asset('images/icon/delete.png') }}" alt="Delete Icon" class="icon">
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                         <table class="reservation-card__table">

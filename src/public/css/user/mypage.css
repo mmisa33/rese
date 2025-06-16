@@ -44,8 +44,8 @@
 }
 
 .reservation-card__title img,
+.edit-btn__delite img,
 .close-btn__delite img {
-    display: block;
     width: 30px;
     height: 30px;
 }
@@ -54,8 +54,11 @@
     margin-left: 40px;
 }
 
-.close-btn {
+.reservation-card__btn {
+    display: flex;
+    align-items: center;
     margin-left: auto;
+    gap: 15px;
 }
 
 .reservation-card__table {

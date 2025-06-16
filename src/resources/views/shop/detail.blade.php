@@ -11,9 +11,7 @@
     <div class="shop-detail__info">
         <div class="info__title">
             {{-- 戻るボタン --}}
-            <div class="info__back">
-                <a href="{{ route('shop.index') }}" class="info__back-link">&lt;</a>
-            </div>
+            <a href="{{ route('shop.index') }}" class="back-btn">&lt;</a>
 
             {{-- 飲食店名 --}}
             <h2 class="info__name">

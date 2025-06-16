@@ -14,7 +14,7 @@ class AuthController extends Controller
 
         // 認証済みの場合
         if ($user instanceof MustVerifyEmail && $user->hasVerifiedEmail()) {
-            return redirect()->intended('/');
+            return redirect()->intended('/thanks');
         }
 
         // 認証未完了の場合
