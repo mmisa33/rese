@@ -38,6 +38,13 @@
                                         </button>
                                     </form>
                                 </div>
+
+                                {{-- 予約ごとに表示（マイページなど） --}}
+                                @if (!$reservation->review)
+                                <a href="{{ route('review.create', ['reservation_id' => $reservation->id]) }}">評価する</a>
+                                @else
+                                <p>評価済み</p>
+                                @endif
                             </div>
                         </div>
                         <table class="reservation-card__table">

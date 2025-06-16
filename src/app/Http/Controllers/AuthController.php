@@ -12,13 +12,16 @@ class AuthController extends Controller
     {
         $user = Auth::user();
 
-        // 認証済みの場合
-        if ($user instanceof MustVerifyEmail && $user->hasVerifiedEmail()) {
-            return redirect()->intended('/thanks');
+        if ($user->role === 'user') {
+            if ($user instanceof MustVerifyEmail && $user->hasVerifiedEmail()) {
+                return redirect()->intended('/thanks');
+            }
+
+            return redirect()->route('verification.notice')
+                ->with('error', 'メール認証が完了していません');
         }
 
-        // 認証未完了の場合
-        return redirect()->route('verification.notice')
-            ->with('error', 'メール認証が完了していません');
+        // 管理者・店舗代表者はメール認証不要
+        return $this->redirectToDashboard($user->role);
     }
 }

@@ -12,6 +12,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Auth;
 
 use Laravel\Fortify\Http\Requests\LoginRequest as FortifyLoginRequest;
+use App\Actions\Fortify\CustomLoginResponse;
+use Laravel\Fortify\Contracts\LoginResponse;
 use Laravel\Fortify\Contracts\RegisterResponse;
 use Laravel\Fortify\Fortify;
 
@@ -19,6 +21,8 @@ class FortifyServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
+        $this->app->singleton(LoginResponse::class, CustomLoginResponse::class);
+
         // 会員登録後にプロフィールサンクスページへリダイレクト
         $this->app->instance(RegisterResponse::class, new class implements RegisterResponse {
             public function toResponse($request)
