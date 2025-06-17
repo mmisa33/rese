@@ -4,31 +4,30 @@ namespace App\Http\Controllers;
 
 use App\Models\Reservation;
 use App\Models\Review;
-use Illuminate\Http\Request;
+use App\Http\Requests\ReviewRequest;
 use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
+    //  評価投稿ページを表示
     public function create($reservation_id)
     {
         $reservation = Reservation::with('shop')->findOrFail($reservation_id);
 
-        // 自分の予約か＆評価済でないかチェック
+        // 自分の予約かつ未評価か確認
         if ($reservation->user_id !== Auth::id() || $reservation->review) {
             abort(403);
         }
 
-        return view('review.create', compact('reservation'));
+        $ratings = range(Review::RATING_MIN, Review::RATING_MAX);
+
+        return view('review.create', compact('reservation', 'ratings'));
     }
 
-    public function store(Request $request, $reservation_id)
+    // 評価の登録処理
+    public function store(ReviewRequest $request, $reservation_id)
     {
-        $request->validate([
-            'rating' => 'required|integer|between:1,5',
-            'comment' => 'nullable|string|max:1000',
-        ]);
-
-        $reservation = Reservation::findOrFail($reservation_id);
+        $reservation = Reservation::with('shop')->findOrFail($reservation_id);
 
         if ($reservation->user_id !== Auth::id() || $reservation->review) {
             abort(403);
@@ -41,6 +40,6 @@ class ReviewController extends Controller
             'comment' => $request->comment,
         ]);
 
-        return redirect()->route('mypage')->with('message', '評価を投稿しました。');
+        return redirect()->route('mypage');
     }
 }

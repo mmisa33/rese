@@ -86,7 +86,7 @@
                                 </form>
                             @else
                                 <a href="{{ route('login') }}" class="shop__like-button">
-                                    <i class="fa-regular fa-heart"></i>
+                                    <i class="fa-solid fa-heart not-liked"></i>
                                 </a>
                             @endauth
                         </div>

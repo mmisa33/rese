@@ -21,29 +21,33 @@
                             <div class="reservation-card__header-name">予約{{ $index + 1 }}</div>
 
                             <div class="reservation-card__btn">
-                                {{-- 編集ボタン --}}
-                                <div class="edit-btn">
-                                    <a href="{{ route('reservation.edit', $reservation->id) }}" class="icon-button">
-                                        <img src="{{ asset('images/icon/edit.png') }}" alt="Edit Icon" class="icon">
-                                    </a>
-                                </div>
-
-                                {{-- 削除ボタン --}}
-                                <div class="close-btn">
-                                    <form method="POST" action="{{ route('reservation.destroy', $reservation->id) }}" class="reservation-form__delete" data-reservation-id="{{ $reservation->id }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="icon-button">
-                                            <img src="{{ asset('images/icon/delete.png') }}" alt="Delete Icon" class="icon">
-                                        </button>
-                                    </form>
-                                </div>
-
-                                {{-- 予約ごとに表示（マイページなど） --}}
-                                @if (!$reservation->review)
-                                <a href="{{ route('review.create', ['reservation_id' => $reservation->id]) }}">評価する</a>
+                                @if ($reservation->isFuture)
+                                    {{-- 来店前：編集・削除ボタン --}}
+                                    <div class="edit-btn">
+                                        <a href="{{ route('reservation.edit', $reservation->id) }}" class="icon-button">
+                                            <img src="{{ asset('images/icon/edit.png') }}" alt="Edit Icon" class="icon">
+                                        </a>
+                                    </div>
+                                    <div class="close-btn">
+                                        <form method="POST" action="{{ route('reservation.destroy', $reservation->id) }}" class="reservation-form__delete" data-reservation-id="{{ $reservation->id }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="icon-button">
+                                                <img src="{{ asset('images/icon/delete.png') }}" alt="Delete Icon" class="icon">
+                                            </button>
+                                        </form>
+                                    </div>
                                 @else
-                                <p>評価済み</p>
+                                    {{-- 来店後：評価ボタン or 評価済み --}}
+                                    @if (!$reservation->review)
+                                        <div class="review-btn">
+                                            <a href="{{ route('review.create', ['reservation_id' => $reservation->id]) }}" class="icon-button">
+                                                <img src="{{ asset('images/icon/star.png') }}" alt="Review Icon" class="icon">
+                                            </a>
+                                        </div>
+                                    @else
+                                    <p class="reviewed-label">評価済み</p>
+                                    @endif
                                 @endif
                             </div>
                         </div>

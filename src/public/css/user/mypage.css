@@ -41,14 +41,31 @@
 .reservation-card__title {
     display: flex;
     align-items: center;
-}
-
-.reservation-card__title img,
-.edit-btn__delite img,
-.close-btn__delite img {
-    width: 30px;
     height: 30px;
 }
+
+.icon-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    display: block;
+}
+
+.reviewed-label {
+    background-color: white;
+    color: #3366ff;
+    padding: 5px 12px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+}
+
 
 .reservation-card__header-name {
     margin-left: 40px;
