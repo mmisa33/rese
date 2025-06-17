@@ -1,0 +1,160 @@
+.admin-home__header {
+    width: 100%;
+    margin-bottom: 25px;
+    font-size: 36px;
+    text-align: center;
+}
+
+.admin-home__container {
+    display: flex;
+    width: 100%;
+    gap: 120px;
+    padding: 30px;
+    margin-bottom: 80px;
+}
+
+.owner-list__title,
+.notice-mail__title {
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+.owner-list {
+    width:40%;
+}
+
+.notice-mail {
+    width: 60%;
+}
+
+.owner-list__section {
+    margin-bottom: 40px;
+    padding: 40px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    font-size: 20px;
+    color: black;
+    text-align: left;
+}
+
+.owner-list__create-btn {
+    margin-bottom: 35px;
+}
+
+.create-btn {
+    background-color:#3366ff;
+    color: white;
+    padding: 7px 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.owner-list__list {
+    padding: 8px 0;
+    border-bottom: 1px dotted #ccc;
+    font-size: 18px;
+    font-weight: 500;
+    list-style: none;
+}
+
+.owner-list__name {
+    font-weight: bold;
+}
+
+.owner-list__email {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.icon {
+    margin-right: 5px;
+    width: 16px;
+    height: 16px;
+}
+
+
+.shop__grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 80px;
+    row-gap: 25px;
+}
+
+.shop__card {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    background-color: white;
+    box-shadow: 4px 3px 6px rgba(0, 0, 0, 0.4);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.shop__card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.shop__card-body {
+    padding: 20px 20px;
+}
+
+.shop__card-title {
+    display: flex;
+    margin-bottom: 5px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.shop__card-tags {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.shop__card-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.shop__details-btn {
+    display: inline-block;
+    background-color: #2962ff;
+    color: white;
+    padding: 7px 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.shop__like-button i.liked {
+    font-size: 32px;
+    color: red;
+}
+
+.shop__like-button i.not-liked {
+    font-size: 32px;
+    color: gainsboro;
+}
+
+/* レスポンシブデザイン (タブレット768px - 850px) */
+@media screen and (min-width: 768px) and (max-width: 850px) {
+    .mypage-container {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .mypage__reservation,
+    .mypage__like {
+        width: 100%;
+    }
+
+    .shop__grid-container {
+        grid-template-columns: 1fr;
+    }
+}

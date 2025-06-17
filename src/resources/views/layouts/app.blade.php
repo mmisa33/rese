@@ -27,17 +27,45 @@
             {{-- ポップアップメニュー --}}
             <div class="header__menu" id="menu">
                 <span class="header__menu-close" id="menu-close">&times;</span>
+
                 @auth
+                    @if (Auth::user()->role === 'user')
+                    {{-- 一般ユーザー用メニュー --}}
                     <a class="header__menu-link" href="{{ route('shop.index') }}">Home</a>
+                    <a class="header__menu-link" href="{{ route('mypage') }}">Mypage</a>
                     <form class="header__menu-form" method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="header__menu-form--logout">Logout</button>
                     </form>
-                    <a class="header__menu-link" href="{{ route('mypage') }}">Mypage</a>
-                @else
-                    <a class="header__menu-link" href="{{ route('shop.index') }}">Home</a>
-                    <a class="header__menu-link" href="{{ route('register') }}">Registration</a>
-                    <a class="header__menu-link" href="{{ route('login') }}">Login</a>
+
+                    @elseif (Auth::user()->role === 'admin')
+                        {{-- 管理者用メニュー --}}
+                        <a class="header__menu-link" href="{{ route('admin.index') }}">Home</a>
+                        <form class="header__menu-form" method="POST" action="{{ route('admin.logout') }}">
+                            @csrf
+                            <button type="submit" class="header__menu-form--logout">Logout</button>
+                        </form>
+
+                    @elseif (Auth::user()->role === 'owner')
+                        {{-- 店舗代表者用メニュー --}}
+                        <a class="header__menu-link" href="{{ route('owner.dashboard') }}">Owner Dashboard</a>
+                        <form class="header__menu-form" method="POST" action="{{ route('admin.logout') }}">
+                            @csrf
+                            <button type="submit" class="header__menu-form--logout">Logout</button>
+                        </form>
+                    @endif
+
+                    @else
+                    {{-- 未ログイン時 --}}
+                    @if (Request::is('admin/*'))
+                        {{-- 管理者ログイン画面 --}}
+                        <a class="header__menu-link" href="{{ route('admin.login') }}">Login</a>
+                    @else
+                        {{-- 一般ログイン画面 --}}
+                        <a class="header__menu-link" href="{{ route('shop.index') }}">Home</a>
+                        <a class="header__menu-link" href="{{ route('register') }}">Registration</a>
+                        <a class="header__menu-link" href="{{ route('login') }}">Login</a>
+                    @endif
                 @endauth
             </div>
 

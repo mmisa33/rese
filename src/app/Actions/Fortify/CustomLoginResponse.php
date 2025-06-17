@@ -11,9 +11,9 @@ class CustomLoginResponse implements LoginResponseContract
         $user = $request->user();
 
         if ($user->role === 'admin') {
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('admin.index');
         } elseif ($user->role === 'owner') {
-            return redirect()->route('owner.dashboard');
+            return redirect()->route('owner.index');
         } else {
             return redirect()->route('shop.index');
         }
