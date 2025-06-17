@@ -62,7 +62,6 @@
 .review-form__select {
     font-size: 17px;
     font-weight: 500;
-    margin-bottom: 20px;
 }
 
 .review-form__select--rating {
@@ -77,6 +76,7 @@
 
 .review-form__textarea textarea {
     width: 100%;
+    margin-top: 20px;
     padding: 10px;
     border-radius: 5px;
     color: #333;
@@ -116,6 +116,7 @@
 .error-message {
     margin-top: 2px;
     color: white;
+    font-weight: 500;
 }
 
 /* レスポンシブ */

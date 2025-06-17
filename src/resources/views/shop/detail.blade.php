@@ -47,10 +47,10 @@
                     {{-- 日付選択 --}}
                     <div class="reservation-form__select">
                         <input class="reservation-form__select--date" type="date" name="date" id="date" value="{{ old('date') }}">
-                        @error('date')
-                            <p class="error-message">{{ $message }}</p>
-                        @enderror
                     </div>
+                    @error('date')
+                        <p class="error-message">{{ $message }}</p>
+                    @enderror
 
                     {{-- 時間選択 --}}
                     <div class="reservation-form__select select-wrapper">
@@ -61,10 +61,10 @@
                             @endforeach
                         </select>
                         <img src="{{ asset('images/icon/select.png') }}" alt="Select Icon" class="select-icon">
-                        @error('time')
-                            <p class="error-message">{{ $message }}</p>
-                        @enderror
                     </div>
+                    @error('time')
+                        <p class="error-message">{{ $message }}</p>
+                    @enderror
 
                     {{-- 人数選択 --}}
                     <div class="reservation-form__select select-wrapper">
@@ -75,10 +75,10 @@
                             @endforeach
                         </select>
                         <img src="{{ asset('images/icon/select.png') }}" alt="Select Icon" class="select-icon">
-                        @error('number')
-                            <p class="error-message">{{ $message }}</p>
-                        @enderror
                     </div>
+                    @error('number')
+                        <p class="error-message">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 {{-- 確認欄 --}}
