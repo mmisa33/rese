@@ -11,7 +11,7 @@
         <h2 class="reservation-edit__name">予約変更</h2>
     </div>
 
-    {{-- 予約変更フォームン --}}
+    {{-- 予約変更フォーム --}}
     <div class="reservation-edit__form">
         <form action="{{ route('reservation.update', ['id' => $reservation->id]) }}" method="POST" class="reservation-form">
             @csrf
@@ -23,10 +23,10 @@
                 {{-- 日付 --}}
                 <div class="reservation-form__select">
                     <input class="reservation-form__select--date" type="date" name="date" value="{{ old('date', $reservation->date) }}">
-                    @error('date')
-                        <p class="error-message">{{ $message }}</p>
-                    @enderror
                 </div>
+                @error('date')
+                    <p class="error-message">{{ $message }}</p>
+                @enderror
 
                 {{-- 時間 --}}
                 <div class="reservation-form__select select-wrapper">
@@ -37,10 +37,10 @@
                         @endforeach
                     </select>
                     <img src="{{ asset('images/icon/select.png') }}" alt="Select Icon" class="select-icon">
-                    @error('time')
-                        <p class="error-message">{{ $message }}</p>
-                    @enderror
                 </div>
+                @error('time')
+                    <p class="error-message">{{ $message }}</p>
+                @enderror
 
                 {{-- 人数 --}}
                 <div class="reservation-form__select select-wrapper">
@@ -51,10 +51,10 @@
                         @endforeach
                     </select>
                     <img src="{{ asset('images/icon/select.png') }}" alt="Select Icon" class="select-icon">
-                    @error('number')
-                        <p class="error-message">{{ $message }}</p>
-                    @enderror
                 </div>
+                @error('number')
+                    <p class="error-message">{{ $message }}</p>
+                @enderror
 
                 {{-- 確認欄 --}}
                 <div class="reservation-form__confirm">

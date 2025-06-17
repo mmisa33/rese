@@ -31,18 +31,18 @@
                         @endforeach
                     </select>
                     <img src="{{ asset('images/icon/select.png') }}" alt="Select Icon" class="select-icon">
-                    @error('rating')
-                        <p class="error-message">{{ $message }}</p>
-                    @enderror
                 </div>
+                @error('rating')
+                    <p class="error-message">{{ $message }}</p>
+                @enderror
 
                 {{-- コメント --}}
                 <div class="review-form__textarea">
                     <textarea name="comment" rows="5" placeholder="コメント（任意）">{{ old('comment') }}</textarea>
-                    @error('comment')
-                        <p class="error-message">{{ $message }}</p>
-                    @enderror
                 </div>
+                @error('comment')
+                    <p class="error-message">{{ $message }}</p>
+                @enderror
             </div>
 
             <button type="submit" class="review-form__btn">評価を送信</button>

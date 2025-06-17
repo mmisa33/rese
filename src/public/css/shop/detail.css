@@ -163,6 +163,7 @@
 .error-message {
     margin-top: 2px;
     color: white;
+    font-weight: 500;
 }
 
 /* レスポンシブデザイン (タブレット768px - 850px) */
