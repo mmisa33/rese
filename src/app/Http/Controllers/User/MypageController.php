@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Models\Like;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Reservation;
 
-class UserController extends Controller
+class MypageController extends Controller
 {
     public function mypage()
     {
