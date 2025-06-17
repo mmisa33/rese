@@ -1,0 +1,126 @@
+.review-post {
+    margin-bottom: 80px;
+}
+
+.review-post__title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.back-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 22px;
+    text-align: center;
+    line-height: 36px;
+    background-color: white;
+    color: #333;
+    border-radius: 6px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+}
+
+.review-post__name {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.review-post__form {
+    margin: 40px auto;
+    width: 45%;
+    background-color: #2563eb;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+}
+
+.review-form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.review-form__content {
+    padding: 25px;
+    flex: 1;
+}
+
+.review-form__title {
+    margin-bottom: 25px;
+    font-size: 24px;
+    color: white;
+    text-align: center;
+}
+
+.review-form__shop {
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.review-form__select {
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.review-form__select--rating {
+    width: 100%;
+    height: 35px;
+    padding: 5px 10px;
+    background-color: white;
+    color: #333;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.review-form__textarea textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    color: #333;
+    font-size: 16px;
+    resize: vertical;
+    background-color: white;
+}
+
+.select-wrapper {
+    position: relative;
+}
+
+.select-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    width: 15px;
+    height: 10px;
+    cursor: pointer;
+}
+
+.review-form__btn {
+    margin-top: 40px;
+    width: 100%;
+    padding: 20px;
+    background-color: blue;
+    border-radius: 0 0 10px 10px;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+}
+
+.error-message {
+    margin-top: 2px;
+    color: white;
+}
+
+/* レスポンシブ */
+@media screen and (max-width: 850px) {
+    .review-post__form {
+        width: 90%;
+    }
+}

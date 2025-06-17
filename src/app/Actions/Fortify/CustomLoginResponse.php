@@ -10,11 +10,12 @@ class CustomLoginResponse implements LoginResponseContract
     {
         $user = $request->user();
 
-        // ロールごとのリダイレクト先
-        return match ($user->role) {
-            'admin' => redirect()->route('admin.dashboard'),
-            'owner' => redirect()->route('owner.dashboard'),
-            default => redirect()->route('mypage'),
-        };
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        } elseif ($user->role === 'owner') {
+            return redirect()->route('owner.dashboard');
+        } else {
+            return redirect()->route('shop.index');
+        }
     }
 }
