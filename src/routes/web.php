@@ -20,10 +20,18 @@ Route::get('/', [ShopController::class, 'index'])->name('shop.index');
 Route::get('/search', [ShopController::class, 'index'])->name('shop.search');
 Route::get('/detail/{shop_id}', [ShopController::class, 'show'])->name('shop.show');
 
+// 管理者用ログイン
 Route::prefix('admin')->group(function () {
-    Route::get('/login', [AuthController::class, 'create'])->name('admin.login');
-    Route::post('/login', [AuthController::class, 'store'])->name('admin.login.submit');
+    Route::get('/login', [AuthController::class, 'createAdminLogin'])->name('admin.login');
+    Route::post('/login', [AuthController::class, 'storeAdminLogin'])->name('admin.login.submit');
     Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
+});
+
+// 店舗代表者用ログイン
+Route::prefix('owner')->group(function () {
+    Route::get('/login', [AuthController::class, 'createOwnerLogin'])->name('owner.login');
+    Route::post('/login', [AuthController::class, 'storeOwnerLogin'])->name('owner.login.submit');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('owner.logout');
 });
 
 Route::middleware(['auth', 'verified', 'role:user'])->group(function () {

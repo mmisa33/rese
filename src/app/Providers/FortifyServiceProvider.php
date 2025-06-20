@@ -56,9 +56,13 @@ class FortifyServiceProvider extends ServiceProvider
 
         // ログインページの表示
         Fortify::loginView(function (Request $request) {
-            return $request->is('admin/*')
-                ? view('admin.auth.login')
-                : view('auth.login');
+            if ($request->is('admin/*')) {
+                return view('admin.auth.login');
+            } elseif ($request->is('owner/*')) {
+                return view('owner.auth.login');
+            } else {
+                return view('auth.login');
+            }
         });
 
         RateLimiter::for('login', function (Request $request) {
