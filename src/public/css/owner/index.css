@@ -1,0 +1,152 @@
+/* 全体レイアウト */
+.owner-home__header {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+.owner-home__container {
+    display: flex;
+    gap: 60px;
+    padding: 20px;
+}
+
+.shop-info {
+    flex: 1 1 60%;
+}
+
+.owner-home__reservations {
+    flex: 1 1 40%;
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.shop-info__title {
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+/* 店舗情報 */
+.shop-info__section {
+    margin-bottom: 40px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    color: black;
+    text-align: left;
+}
+
+.shop-info__form {
+    padding: 20px 40px 40px;
+}
+
+.shop-info__form-group {
+    margin-top: 20px;
+}
+
+.shop-info__form--label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.shop-info__form--input,
+.shop-info__form--select,
+.shop-info__form--textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.shop-info__form--input[type="file"] {
+    padding: px;
+}
+
+.shop-info__img {
+    margin-bottom: 10px;
+}
+
+.shop-info__img img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 4px;
+    object-fit: cover;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.select-wrapper {
+    position: relative;
+}
+
+.select-icon {
+    position: absolute;
+    right: 15px;
+    top: 60%;
+    transform: translateY(50%);
+    pointer-events: none;
+    width: 15px;
+    height: 10px;
+    cursor: pointer;
+}
+
+.error-message {
+    margin-top: 4px;
+    color: red;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.flash-message.success {
+    background-color: #e6f4ea;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+    padding: 12px 20px;
+    margin: 20px 0;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.shop-info__btn {
+    width: 100%;
+    padding: 20px;
+    background-color: blue;
+    border-radius: 0 0 10px 10px;
+    font-size: 20px;
+    color: white;
+    font-weight: 500;
+    text-align: center;
+}
+
+
+
+.reservation-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.reservation-list__item {
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+    font-size: 16px;
+}
+
+/* レスポンシブ対応 */
+@media screen and (max-width: 768px) {
+    .owner-home__container {
+        flex-direction: column;
+    }
+
+    .shop-info,
+    .owner-home__reservations {
+        flex: 1 1 100%;
+        margin-bottom: 30px;
+    }
+}

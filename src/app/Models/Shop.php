@@ -15,6 +15,7 @@ class Shop extends Model
         'area_id',
         'genre_id',
         'image_path',
+        'owner_id',
     ];
 
     // 検索処理
@@ -54,5 +55,10 @@ class Shop extends Model
     public function owner()
     {
         return $this->belongsTo(User::class, 'owner_id');
+    }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
     }
 }

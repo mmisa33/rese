@@ -8,7 +8,8 @@ use App\Http\Controllers\User\ReservationController;
 use App\Http\Controllers\User\ReviewController;
 
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\OwnerController;
+use App\Http\Controllers\Admin\OwnerController as AdminOwnerController;
+use App\Http\Controllers\Owner\OwnerController as ShopOwnerController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -43,13 +44,22 @@ Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
 // 管理者用
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/index', [AdminController::class, 'index'])->name('admin.index');
-    Route::get('/owner/create', [OwnerController::class, 'create'])->name('admin.owner.create');
-    Route::post('/owner', [OwnerController::class, 'store'])->name('admin.owner.store');
-    Route::get('/owner/{owner}', [OwnerController::class, 'show'])->name('admin.owner.show');
+    Route::get('/owner/create', [AdminOwnerController::class, 'create'])->name('admin.owner.create');
+    Route::post('/owner', [AdminOwnerController::class, 'store'])->name('admin.owner.store');
+    Route::get('/owner/{owner}', [AdminOwnerController::class, 'show'])->name('admin.owner.show');
 });
 
 // 店舗代表者用
-Route::middleware(['auth', 'role:owner'])->group(function () {
-    // 利用者用マイページなど
-    // Route::get('/owner/dashboard', [OwnerController::class, 'dashboard'])->name('owner.dashboard');
+Route::middleware(['auth', 'role:owner'])->prefix('owner')->group(function () {
+    Route::get('/index', [ShopOwnerController::class, 'index'])->name('owner.index'); // ← 修正
+
+    // 店舗情報の作成・編集
+    // Route::get('/shop/create', [ShopOwnerController::class, 'createShop'])->name('owner.shop.create');
+    Route::post('/shop', [ShopOwnerController::class, 'storeShop'])->name('owner.shop.store');
+
+    // Route::get('/shop/edit', [ShopOwnerController::class, 'editShop'])->name('owner.shop.edit');
+    Route::put('/shop', [ShopOwnerController::class, 'updateShop'])->name('owner.shop.update');
+
+    // 予約確認
+    Route::get('/reservations', [ShopOwnerController::class, 'reservations'])->name('owner.reservations');
 });
