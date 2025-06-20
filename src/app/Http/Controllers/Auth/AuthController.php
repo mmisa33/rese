@@ -10,60 +10,97 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 class AuthController extends Controller
 {
-    // ログインページ表示
-    public function create(Request $request)
+    // ユーザー用ログインページ表示
+    public function createUserLogin()
     {
-        return $request->is('admin/*')
-            ? view('admin.auth.login') // 管理者・店舗代表者用ログインページ
-            : view('auth.login');      // 一般ユーザー用ログインページ
+        return view('auth.login');
     }
 
-    // ログイン処理
-    public function store(LoginRequest $request)
+    // ユーザー用ログイン処理
+    public function storeUserLogin(LoginRequest $request)
     {
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
 
-            // 管理者 or 店舗代表者のみ許可
-            if (in_array($user->role, ['admin', 'owner'])) {
-                $request->session()->regenerate();
-
-                // role別にリダイレクト先を分ける
-                if ($user->role === 'admin') {
-                    return redirect()->intended(route('admin.index'));
-                } else {
-                    return redirect()->intended(route('owner.index'));
-                }
+            if ($user->role !== 'user') {
+                Auth::logout();
+                return back()->withErrors(['email' => '一般ユーザー以外はこの画面からログインできません。']);
             }
 
-            Auth::logout();
-            return back()->withErrors(['email' => '管理者または店舗代表者のみログイン可能です']);
+            $request->session()->regenerate();
+
+            // ユーザーはメール認証が必須
+            if ($user instanceof MustVerifyEmail && ! $user->hasVerifiedEmail()) {
+                Auth::logout();
+                return redirect()->route('verification.notice')
+                    ->with('error', 'メール認証が完了していません');
+            }
+
+            return redirect()->intended(route('shop.index'));
         }
 
         return back()->withErrors(['email' => 'ログイン情報が登録されていません']);
     }
 
-    // メール認証チェック
-    public function verifyCheck()
+    // オーナー用ログインページ表示
+    public function createOwnerLogin()
     {
-        $user = Auth::user();
-
-        if ($user->role === 'user') {
-            if ($user instanceof MustVerifyEmail && $user->hasVerifiedEmail()) {
-                return redirect()->intended('/thanks');
-            }
-
-            return redirect()->route('verification.notice')
-                ->with('error', 'メール認証が完了していません');
-        }
-
-        // 管理者・店舗代表者はメール認証不要
-        return $this->redirectToDashboard($user->role);
+        return view('owner.auth.login');
     }
 
-    // ログアウト処理
+    // オーナー用ログイン処理
+    public function storeOwnerLogin(LoginRequest $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+
+            if ($user->role !== 'owner') {
+                Auth::logout();
+                return back()->withErrors(['email' => '店舗代表者以外はこの画面からログインできません。']);
+            }
+
+            $request->session()->regenerate();
+
+            // メール認証は不要の場合が多いのでスキップ可能
+
+            return redirect()->intended(route('owner.index'));
+        }
+
+        return back()->withErrors(['email' => 'ログイン情報が登録されていません']);
+    }
+
+    // 管理者用ログインページ表示
+    public function createAdminLogin()
+    {
+        return view('admin.auth.login');
+    }
+
+    // 管理者用ログイン処理
+    public function storeAdminLogin(LoginRequest $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+
+            if ($user->role !== 'admin') {
+                Auth::logout();
+                return back()->withErrors(['email' => '管理者以外はこの画面からログインできません。']);
+            }
+
+            $request->session()->regenerate();
+
+            return redirect()->intended(route('admin.index'));
+        }
+
+        return back()->withErrors(['email' => 'ログイン情報が登録されていません']);
+    }
+
+    // ログアウト処理（共通）
     public function logout(Request $request)
     {
         $role = Auth::user()->role;
@@ -72,11 +109,12 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        // role によってリダイレクト先を切り替え
-        if ($role === 'admin' || $role === 'owner') {
+        if ($role === 'admin') {
             return redirect()->route('admin.login');
+        } elseif ($role === 'owner') {
+            return redirect()->route('owner.login');
+        } else {
+            return redirect()->route('login');
         }
-
-        return redirect()->route('login');
     }
 }

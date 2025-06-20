@@ -1,5 +1,5 @@
 /* ログインフォーム */
-.admin-login-form {
+.owner-login-form {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,7 +7,7 @@
 }
 
 /* フォームボックス */
-.admin-login-form__inner {
+.owner-login-form__inner {
     width: 28vw;
     background-color: white;
     border-radius: 6px;
@@ -16,7 +16,7 @@
 }
 
 /* ヘッダー部分 */
-.admin-login-form__header {
+.owner-login-form__header {
     background-color: #2962ff;
     color: white;
     font-weight: bold;
@@ -26,12 +26,12 @@
 }
 
 /* フォーム本体 */
-.admin-login-form__form {
+.owner-login-form__form {
     padding: 20px 30px;
 }
 
 /* 各入力グループ */
-.admin-login-form__group {
+.owner-login-form__group {
     display: flex;
     align-items: center;
     width: 100%;
@@ -41,20 +41,20 @@
 }
 
 /* アイコン */
-.admin-login-form__label .icon {
+.owner-login-form__label .icon {
     width: 28px;
     height: 28px;
     margin-right: 10px;
 }
 
 /* 入力フォーム */
-.admin-login-form__field {
+.owner-login-form__field {
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.admin-login-form__input {
+.owner-login-form__input {
     width: 100%;
     outline: none;
     border: none;
@@ -73,12 +73,12 @@
 }
 
 /* ログインボタン */
-.admin-login-form__btn {
+.owner-login-form__btn {
     text-align: right;
     margin-top: 25px;
 }
 
-.admin-login-form__btn--submit {
+.owner-login-form__btn--submit {
     background-color: #2962ff;
     color: white;
     padding: 7px 15px;
@@ -89,7 +89,7 @@
 
 /* レスポンシブデザイン (タブレット768px - 850px) */
 @media screen and (min-width: 768px) and (max-width: 850px) {
-    .admin-login-form__inner {
+    .owner-login-form__inner {
         width: 50vw;
     }
 }
