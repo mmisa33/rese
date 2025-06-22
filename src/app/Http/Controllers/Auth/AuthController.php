@@ -26,7 +26,7 @@ class AuthController extends Controller
 
             if ($user->role !== 'user') {
                 Auth::logout();
-                return back()->withErrors(['email' => '一般ユーザー以外はこの画面からログインできません。']);
+                return back()->withErrors(['email' => '一般ユーザー以外はログインできません。']);
             }
 
             $request->session()->regenerate();
@@ -44,13 +44,13 @@ class AuthController extends Controller
         return back()->withErrors(['email' => 'ログイン情報が登録されていません']);
     }
 
-    // オーナー用ログインページ表示
+    // 管理者用ログインページ表示
     public function createOwnerLogin()
     {
         return view('owner.auth.login');
     }
 
-    // オーナー用ログイン処理
+    // 管理者用ログイン処理
     public function storeOwnerLogin(LoginRequest $request)
     {
         $credentials = $request->only('email', 'password');
@@ -60,12 +60,10 @@ class AuthController extends Controller
 
             if ($user->role !== 'owner') {
                 Auth::logout();
-                return back()->withErrors(['email' => '店舗代表者以外はこの画面からログインできません。']);
+                return back()->withErrors(['email' => '店舗代表者以外はログインできません']);
             }
 
             $request->session()->regenerate();
-
-            // メール認証は不要の場合が多いのでスキップ可能
 
             return redirect()->intended(route('owner.index'));
         }
@@ -89,7 +87,7 @@ class AuthController extends Controller
 
             if ($user->role !== 'admin') {
                 Auth::logout();
-                return back()->withErrors(['email' => '管理者以外はこの画面からログインできません。']);
+                return back()->withErrors(['email' => '管理者以外は画面からログインできません']);
             }
 
             $request->session()->regenerate();
