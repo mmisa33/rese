@@ -20,37 +20,21 @@
                             <img src="{{ asset('images/icon/clock.png') }}" alt="Clock Icon" class="icon">
                             <div class="reservation-card__header-name">予約{{ $index + 1 }}</div>
 
-                            <div class="reservation-card__btn">
-                                @if ($reservation->isFuture)
-                                    {{-- 来店前：編集・削除ボタン --}}
-                                    <div class="edit-btn">
-                                        <a href="{{ route('reservation.edit', $reservation->id) }}" class="icon-button">
-                                            <img src="{{ asset('images/icon/edit.png') }}" alt="Edit Icon" class="icon">
-                                        </a>
-                                    </div>
-                                    <div class="close-btn">
-                                        <form method="POST" action="{{ route('reservation.destroy', $reservation->id) }}" class="reservation-form__delete" data-reservation-id="{{ $reservation->id }}">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="icon-button">
-                                                <img src="{{ asset('images/icon/delete.png') }}" alt="Delete Icon" class="icon">
-                                            </button>
-                                        </form>
-                                    </div>
-                                @else
-                                    {{-- 来店後：評価ボタン or 評価済み --}}
-                                    @if (!$reservation->review)
-                                        <div class="review-btn">
-                                            <a href="{{ route('review.create', ['reservation_id' => $reservation->id]) }}" class="icon-button">
-                                                <img src="{{ asset('images/icon/star.png') }}" alt="Review Icon" class="icon">
-                                            </a>
-                                        </div>
-                                    @else
-                                    <p class="reviewed-label">評価済み</p>
-                                    @endif
-                                @endif
-                            </div>
+                            {{-- 削除ボタン（来店前のみ） --}}
+                            @if ($reservation->isFuture)
+                                <div class="reservation-card__btn">
+                                    <form method="POST" action="{{ route('reservation.destroy', $reservation->id) }}" class="reservation-form__delete" data-reservation-id="{{ $reservation->id }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="icon-button">
+                                            <img src="{{ asset('images/icon/delete.png') }}" alt="Delete Icon" class="icon">
+                                        </button>
+                                    </form>
+                                </div>
+                            @endif
                         </div>
+
+                        {{-- 予約内容 --}}
                         <table class="reservation-card__table">
                             <tr class="reservation-card__row">
                                 <th class="reservation-card__header">Shop</th>
@@ -69,6 +53,25 @@
                                 <td class="reservation-card__cell" id="confirm-number">{{ $reservation->number }}人</td>
                             </tr>
                         </table>
+
+                        {{-- フッター：予約変更＆レビュー --}}
+                        <div class="reservation-card__footer">
+                            {{-- 予約変更 --}}
+                            @if ($reservation->isFuture)
+                                <a href="{{ route('reservation.edit', $reservation->id) }}" class="footer-btn active">予約変更</a>
+                            @else
+                                <span class="footer-btn disabled">予約変更</span>
+                            @endif
+
+                            {{-- レビュー --}}
+                            @if (!$reservation->isFuture && !$reservation->review)
+                                <a href="{{ route('review.create', ['reservation_id' => $reservation->id]) }}" class="footer-btn active">レビュー</a>
+                            @elseif (!$reservation->isFuture && $reservation->review)
+                                <span class="footer-btn done">評価済み</span>
+                            @else
+                                <span class="footer-btn disabled">レビュー</span>
+                            @endif
+                        </div>
                     </div>
                 @endforeach
             </div>

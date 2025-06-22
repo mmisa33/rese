@@ -106,24 +106,43 @@
                 </button>
             </form>
         </div>
-    </div>
 
+        {{-- 予約情報 --}}
+        <div class="owner-home__reservation-list">
+            <h3 class="reservation-list__title">予約状況</h3>
 
-        {{-- 右カラム：予約情報一覧 --}}
-        <div class="owner-home__reservations">
-            <h3 class="section-title">予約情報一覧</h3>
-
-            <ul class="reservation-list">
-                @foreach($reservations as $reservation)
-                    <li class="reservation-list__item">
-                        <div><strong>予約者:</strong> {{ $reservation->user->name }}</div>
-                        <div><strong>日時:</strong> {{ $reservation->reserved_at->format('Y/m/d H:i') }}</div>
-                        <div><strong>人数:</strong> {{ $reservation->number_of_people }}人</div>
-                        <div><strong>状態:</strong> {{ $reservation->status }}</div>
-                    </li>
+            <div class="reservation-list">
+                @foreach ($reservations as $index => $reservation)
+                    <div class="reservation-card">
+                        <div class="reservation-card__title">
+                            <img src="{{ asset('images/icon/clock.png') }}" alt="Clock Icon" class="icon">
+                            <div class="reservation-card__header-name">予約{{ $index + 1 }}</div>
+                        </div>
+                        <table class="reservation-card__table">
+                            <tr class="reservation-card__row">
+                                <th class="reservation-card__header">Name</th>
+                                <td class="reservation-card__cell">{{ $reservation->user->name }}</td>
+                            </tr>
+                            <tr class="reservation-card__row">
+                                <th class="reservation-card__header">Date</th>
+                                <td class="reservation-card__cell">{{ $reservation->date }}</td>
+                            </tr>
+                            <tr class="reservation-card__row">
+                                <th class="reservation-card__header">Time</th>
+                                <td class="reservation-card__cell">{{ $reservation->time }}</td>
+                            </tr>
+                            <tr class="reservation-card__row">
+                                <th class="reservation-card__header">Number</th>
+                                <td class="reservation-card__cell">{{ $reservation->number }}人</td>
+                            </tr>
+                            <tr class="reservation-card__row">
+                                <th class="reservation-card__header">Status</th>
+                                <td class="reservation-card__cell">{{ $reservation->status }}</td>
+                            </tr>
+                        </table>
+                    </div>
                 @endforeach
-            </ul>
-        </div>
+            </div>
         </div>
     </div>
 </div>
