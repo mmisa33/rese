@@ -5,23 +5,19 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use App\Models\NoticeMail;
-use App\Models\Owner;
 use App\Models\User;
 
 class AdminController extends Controller
 {
     public function index()
     {
-        // オーナー（ユーザーの中から role = owner）を取得
-        $owners = User::where('role', 'owner')->with('shop')->get();
-
-        // 一般ユーザーの数
-        $userCount = User::where('role', 'user')->count();
+        // 店舗代表者を取得
+        $owners = User::where('role', 'owner')->with('shop')->paginate(15);
 
         // お知らせメール一覧
         $notices = NoticeMail::latest()->take(10)->get();
 
-        return view('admin.index', compact('userCount', 'owners', 'notices'));
+        return view('admin.index', compact( 'owners', 'notices'));
     }
 
     public function showNoticeForm()

@@ -24,7 +24,7 @@ class OwnerController extends Controller
             'role' => 'owner',
         ]);
 
-        return redirect()->route('admin.index');
+        return redirect()->route('admin.index')->with('status', '店舗代表者を作成しました');
     }
 
     // 店舗代表者詳細ページを表示

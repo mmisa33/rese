@@ -11,17 +11,17 @@
     <h2 class="admin-home__header">管理者メニュー</h2>
 
     <div class="admin-home__container">
-
-        {{-- <div class="admin-section">
-            <h2>システム情報</h2>
-            <ul>
-                <li>登録ユーザー数: {{ $userCount }}</li>
-            </ul>
-        </div> --}}
-
         {{-- 店舗代表者一覧 --}}
         <div class="owner-list">
             <h3 class="owner-list__title">店舗代表者一覧</h3>
+
+            {{-- フラッシュメッセージ --}}
+            @if (session('status'))
+            <div class="flash-message">
+                {{ session('status') }}
+            </div>
+            @endif
+
             <div class="owner-list__section">
                 <div class="owner-list__create-btn">
                     <a href="{{ route('admin.owner.create') }}" class="create-btn">新規作成</a>
@@ -34,6 +34,10 @@
                         </a>
                     </li>
                 @endforeach
+
+                <div class="pagination">
+                    {{ $owners->links() }}
+                </div>
             </div>
         </div>
 
