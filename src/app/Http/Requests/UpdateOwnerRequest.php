@@ -33,6 +33,7 @@ class UpdateOwnerRequest extends FormRequest
             'shop_name' => $owner && $owner->shop
                 ? ['required', 'string', 'max:255']  // 店舗情報が作成されている場合
                 : ['nullable'],  // 店舗情報が作成されていない場合
+            'password' => ['nullable', 'min:8', 'max:50'],
         ];
     }
 
@@ -63,6 +64,9 @@ class UpdateOwnerRequest extends FormRequest
             'email.email' => '有効なメールアドレスを入力してください',
             'email.max' => 'メールアドレスは100文字以内で入力してください',
             'email.unique' => 'このメールアドレスは既に使用されています',
+
+            'password.min' => 'パスワードは8文字以上で入力してください',
+            'password.max' => 'パスワードは50文字以内で入力してください',
         ];
     }
 }

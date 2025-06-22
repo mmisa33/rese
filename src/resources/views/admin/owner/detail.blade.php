@@ -12,11 +12,25 @@
     </div>
 
     <div class="owner-detail__content">
-        <form method="POST" action="{{ route('admin.owner.update', $owner->id) }}">
-            @csrf
-            @method('PUT')
+        <div class="owner-detail__info">
+            <form method="POST" action="{{ route('admin.owner.destroy', $owner->id) }}">
+                @csrf
+                @method('DELETE')
+                <div class="owner-detail__btn">
+                    <button type="submit" class="owner-detail__btn--delete" onclick="return confirm('本当に削除してもよろしいですか？')"><img src="{{ asset('images/icon/delete02.png') }}" alt="Delete Icon" class="icon"></button>
+                </div>
+            </form>
 
-            <div class="owner-detail__info">
+            <form method="POST" action="{{ route('admin.owner.update', $owner->id) }}">
+                @csrf
+                @method('PUT')
+
+                @if (session('error'))
+                    <div class="flash-message error">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
                 <div class="owner-detail__item">
                     <label class="label" for="shop_name">Shop Name</label>
                     <input type="text" id="shop_name" name="shop_name" value="{{ old('shop_name', optional($owner->shop)->name ?? '店舗情報が作成されていません') }}"
@@ -42,11 +56,19 @@
                     @enderror
                 </div>
 
+                <div class="owner-detail__item">
+                    <label class="label" for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="更新する場合のみ入力してください" autocomplete="new-password">
+                    @error('password')
+                        <p class="error-message">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <div class="owner-detail__btn">
                     <button type="submit" class="owner-detail__btn--update">更新する</button>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 @endsection
