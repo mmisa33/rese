@@ -13,6 +13,14 @@
         {{-- 予約飲食店一覧 --}}
         <div class="mypage__reservation">
             <h3 class="mypage__reservation-title">予約状況</h3>
+
+            {{-- フラッシュメッセージ --}}
+            @if (session('status'))
+            <div class="flash-message">
+                {{ session('status') }}
+            </div>
+            @endif
+
             <div class="reservation-list">
                 @foreach ($reservations as $index => $reservation)
                     <div class="reservation-card">

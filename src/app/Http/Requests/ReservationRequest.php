@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Validator;
 use App\Models\Reservation;
 
 class ReservationRequest extends FormRequest
@@ -32,18 +31,25 @@ class ReservationRequest extends FormRequest
         ];
     }
 
-    // 同じユーザーが同日に予約済みかチェック
-    public function withValidator(Validator $validator)
+    // // 同じ店舗に同日に予約が重複していないかをチェック
+    public function withValidator($validator)
     {
         $validator->after(function ($validator) {
             $userId = auth()->id();
+            $shopId = $this->input('shop_id');
             $date = $this->input('date');
-            $exists = Reservation::where('user_id', $userId)
-                ->where('date', $date)
+            $reservationId = $this->route('id');
+
+            $alreadyReserved = Reservation::where([
+                ['user_id', $userId],
+                ['shop_id', $shopId],
+                ['date', $date],
+            ])
+                ->when($reservationId, fn($q) => $q->where('id', '!=', $reservationId))
                 ->exists();
 
-            if ($exists) {
-                $validator->errors()->add('date', '同日に既に予約があります。別の日を選択してください。');
+            if ($alreadyReserved) {
+                $validator->errors()->add('date', '同日の予約が存在します。別の日を選択してください');
             }
         });
     }

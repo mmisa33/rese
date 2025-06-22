@@ -69,6 +69,6 @@ class ReservationController extends Controller
             'number' => $request->number,
         ]);
 
-        return redirect()->route('mypage');
+        return redirect()->route('mypage')->with('status', '予約内容を更新しました');
     }
 }
