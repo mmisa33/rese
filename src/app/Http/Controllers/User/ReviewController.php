@@ -41,6 +41,6 @@ class ReviewController extends Controller
             'comment' => $request->comment,
         ]);
 
-        return redirect()->route('mypage');
+        return redirect()->route('mypage')->with('status', 'レビューを投稿しました');
     }
 }
