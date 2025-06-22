@@ -41,7 +41,22 @@
         <div class="notice-mail">
             <h3 class="notice-mail__title">お知らせメール</h3>
             <div class="notice-mail__section">
-                <a href="" class="btn btn-primary">お知らせを送信する</a>
+                <a href="{{ route('admin.notice.form') }}" class="create-btn\
+                
+                ">お知らせを送信する</a>
+
+                @if ($notices->isNotEmpty())
+                    <ul class="notice-mail__list">
+                        @foreach ($notices as $notice)
+                            <li class="notice-mail__item">
+                                <span class="notice-mail__date">{{ $notice->created_at->format('Y/m/d') }}</span>
+                                <span class="notice-mail__subject">{{ $notice->subject }}</span>
+                            </li>
+                        @endforeach
+                    </ul>
+                @else
+                    <p class="notice-mail__empty">まだお知らせは送信されていません。</p>
+                @endif
             </div>
         </div>
     </div>
