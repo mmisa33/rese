@@ -55,6 +55,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/owner/create', [AdminOwnerController::class, 'create'])->name('admin.owner.create');
     Route::post('/owner', [AdminOwnerController::class, 'store'])->name('admin.owner.store');
     Route::get('/owner/{owner}', [AdminOwnerController::class, 'show'])->name('admin.owner.show');
+    Route::put('/owner/{owner}', [AdminOwnerController::class, 'update'])->name('admin.owner.update');
     Route::get('/notice', [AdminController::class, 'showNoticeForm'])->name('admin.notice.form');
     Route::post('/notice', [AdminController::class, 'sendNotice'])->name('admin.notice.send');
 });

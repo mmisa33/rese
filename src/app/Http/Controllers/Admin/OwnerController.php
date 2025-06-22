@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\UpdateOwnerRequest;
+use Illuminate\Http\Request;
 use App\Models\User;
 
 class OwnerController extends Controller
@@ -32,5 +34,21 @@ class OwnerController extends Controller
     {
         $owner = User::with('shop')->findOrFail($id);
         return view('admin.owner.detail', compact('owner'));
+    }
+
+    // 店舗代表者の更新処理
+    public function update(UpdateOwnerRequest $request, User $owner)
+    {
+        if ($owner->shop) {
+            $owner->shop->name = $request->input('shop_name');
+            $owner->shop->save();
+        }
+
+        $owner->name = $request->input('owner_name');
+        $owner->email = $request->input('email');
+        $owner->save();
+
+        return redirect()->route('admin.index')
+            ->with('status', "店舗代表者情報を更新しました");
     }
 }

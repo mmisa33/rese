@@ -34,7 +34,7 @@
 }
 
 .owner-detail__info {
-    padding: 60px 40px 30px 40px ;
+    padding: 60px 40px 40px 40px ;
     font-size: 20px;
     font-weight: 500;
 }
@@ -47,6 +47,43 @@
     font-weight: bold;
     display: inline-block;
     width: 150px;
+}
+
+.owner-detail__info input {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 6px;
+    box-sizing: border-box;
+}
+
+/* ボタン */
+.owner-detail__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.owner-detail__btn--update,
+.owner-detail__btn--delete {
+    margin-top: 35px;
+    padding: 12px 25px;
+    background-color: #2563eb;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 6px;
+    text-align: center;
+}
+
+/* エラーメッセージ */
+.error-message {
+    margin-top: 4px;
+    font-size: 18px;
+    color: red;
+    font-weight: 500;
 }
 
 /* レスポンシブ対応 */

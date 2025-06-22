@@ -11,14 +11,42 @@
         <h2 class="owner-detail__title">店舗代表者情報</h2>
     </div>
 
-    {{-- 詳細情報 --}}
     <div class="owner-detail__content">
-        <div class="owner-detail__info">
-            <p class="owner-detail__item"><span class="label">Shop Name</span> {{ $owner->shop->name ?? '未割当' }}</p>
-            <p class="owner-detail__item"><span class="label">Owner Name</span> {{ $owner->name }}</p>
-            <p class="owner-detail__item"><span class="label">Email</span> {{ $owner->email }}</p>
-            {{-- <p class="owner-detail__item"><span class="label">Password</span> {{ $owner->password }}</p> --}}
-        </div>
+        <form method="POST" action="{{ route('admin.owner.update', $owner->id) }}">
+            @csrf
+            @method('PUT')
+
+            <div class="owner-detail__info">
+                <div class="owner-detail__item">
+                    <label class="label" for="shop_name">Shop Name</label>
+                    <input type="text" id="shop_name" name="shop_name" value="{{ old('shop_name', optional($owner->shop)->name ?? '店舗情報が作成されていません') }}"
+                    @if(!$owner->shop) disabled @endif>
+                    @error('shop_name')
+                        <p class="error-message">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="owner-detail__item">
+                    <label class="label" for="owner_name">Owner Name</label>
+                    <input type="text" id="owner_name" name="owner_name" value="{{ old('owner_name', $owner->name) }}">
+                    @error('owner_name')
+                        <p class="error-message">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="owner-detail__item">
+                    <label class="label" for="email">Email</label>
+                    <input type="email" id="email" name="email" value="{{ old('email', $owner->email) }}">
+                    @error('email')
+                        <p class="error-message">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="owner-detail__btn">
+                    <button type="submit" class="owner-detail__btn--update">更新する</button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 @endsection
