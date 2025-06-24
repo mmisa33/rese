@@ -8,7 +8,7 @@
 <div class="admin-notice">
     <div class="admin-notice__title">
         <a href="{{ route('admin.index') }}" class="back-btn">&lt;</a>
-        <h2 class="admin-notice__header">お知らせメール送信</h2>
+        <h2>お知らせメール送信</h2>
     </div>
 
     <div class="admin-notice__content">
