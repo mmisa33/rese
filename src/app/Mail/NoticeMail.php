@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Mail;
+
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -21,8 +23,6 @@ class NoticeMail extends Mailable
     {
         return $this->subject($this->subjectLine)
             ->view('emails.notice')
-            ->with([
-                'messageBody' => $this->messageBody,
-            ]);
+            ->with(['messageBody' => $this->messageBody]);
     }
 }

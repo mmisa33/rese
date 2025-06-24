@@ -29,8 +29,13 @@
                 @foreach($owners as $owner)
                     <li class="owner-list__list">
                         <a href="{{ route('admin.owner.show', $owner->id) }}" class="owner-list__link">
-                            <div class="owner-list__name"><img src="{{ asset('images/icon/user.png') }}" alt="User Icon" class="icon">{{ $owner->name }}</div>
-                            <div class="owner-list__email">（{{ $owner->email }}）</div>
+                            <div class="owner-list__row">
+                                <div class="owner-list__name">
+                                    <img src="{{ asset('images/icon/user.png') }}" alt="User Icon" class="icon">
+                                    {{ $owner->name }}
+                                </div>
+                                <div class="owner-list__email">（{{ $owner->email }}）</div>
+                            </div>
                         </a>
                     </li>
                 @endforeach
@@ -45,21 +50,28 @@
         <div class="notice-mail">
             <h3 class="notice-mail__title">お知らせメール</h3>
             <div class="notice-mail__section">
-                <a href="{{ route('admin.notice.form') }}" class="create-btn\
-                
-                ">お知らせを送信する</a>
+                <div class="owner-list__submit-btn">
+                    <a href="{{ route('admin.notice.form') }}" class="submit-btn">新規作成</a>
+                </div>
 
                 @if ($notices->isNotEmpty())
                     <ul class="notice-mail__list">
                         @foreach ($notices as $notice)
                             <li class="notice-mail__item">
-                                <span class="notice-mail__date">{{ $notice->created_at->format('Y/m/d') }}</span>
-                                <span class="notice-mail__subject">{{ $notice->subject }}</span>
+                                <a href="{{ route('admin.notice.show', $notice->id) }}" class="notice-mail__link">
+                                    <div class="notice-mail__row">
+                                        <div class="notice-mail__date">
+                                            <img src="{{ asset('images/icon/email.png') }}" alt="Email Icon" class="icon">
+                                            {{ $notice->created_at->format('Y/m/d') }}
+                                        </div>
+                                        <div class="notice-mail__subject">{{ $notice->subject }}</div>
+                                    </div>
+                                </a>
                             </li>
                         @endforeach
                     </ul>
                 @else
-                    <p class="notice-mail__empty">まだお知らせは送信されていません。</p>
+                    <p class="notice-mail__empty">お知らせは送信されていません</p>
                 @endif
             </div>
         </div>

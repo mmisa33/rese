@@ -9,5 +9,5 @@ class NoticeMail extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['subject', 'message'];
+    protected $fillable = ['subject', 'message', 'target'];
 }

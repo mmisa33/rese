@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
-use App\Models\NoticeMail;
+use App\Http\Requests\NoticeMailRequest;
+use Illuminate\Support\Facades\Mail;
 use App\Models\User;
+use App\Models\NoticeMail;
+use App\Mail\NoticeMail as NoticeMailable;
 
 class AdminController extends Controller
 {
@@ -25,19 +27,33 @@ class AdminController extends Controller
         return view('admin.email.notice');
     }
 
-    public function sendNotice(Request $request)
+    public function sendNotice(NoticeMailRequest $request)
     {
-        $request->validate([
-            'subject' => 'required|string|max:100',
-            'message' => 'required|string|max:1000',
-        ]);
+        $emails = [];
 
-        $users = User::where('role', 'user')->get();
-
-        foreach ($users as $user) {
-            Mail::to($user->email)->send(new NoticeMail($request->subject, $request->message));
+        if ($request->target === 'all') {
+            $emails = User::pluck('email')->toArray();
+        } elseif ($request->target === 'owners') {
+            $emails = User::where('role', 'owner')->pluck('email')->toArray();
+        } elseif ($request->target === 'custom') {
+            $emails = array_map('trim', explode(',', $request->emails));
         }
 
-        return redirect()->route('admin.index')->with('success', 'お知らせメールを送信しました。');
+        foreach ($emails as $email) {
+            Mail::to($email)->send(new NoticeMailable($request->subject, $request->message));
+        }
+
+        NoticeMail::create([
+            'subject' => $request->subject,
+            'message' => $request->message,
+            'target'  => $request->target,
+        ]);
+
+        return redirect()->route('admin.notice.form')->with('success', 'メールを送信しました');
+    }
+
+    public function showNotice(NoticeMail $notice)
+    {
+        return view('admin.email.notice_show', compact('notice'));
     }
 }

@@ -40,12 +40,20 @@
     text-align: left;
 }
 
-.owner-list__create-btn {
+.owner-list__list:hover,
+.notice-mail__item:hover {
+    background-color: #f9f9f9;
+}
+
+/* ボタン */
+.owner-list__create-btn,
+.owner-list__submit-btn {
     margin-bottom: 35px;
 }
 
-.create-btn {
-    background-color:#3366ff;
+.create-btn,
+.submit-btn {
+    background-color: #3366ff;
     color: white;
     padding: 7px 15px;
     border-radius: 5px;
@@ -54,6 +62,7 @@
     font-weight: bold;
 }
 
+/* 店舗代表者一覧 */
 .owner-list__list {
     padding: 8px 0;
     border-bottom: 1px dotted #ccc;
@@ -64,11 +73,19 @@
 
 .owner-list__name {
     font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 400px;
 }
 
 .owner-list__email {
     font-size: 0.9em;
     color: #666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 400px;
 }
 
 .icon {
@@ -126,35 +143,48 @@
     pointer-events: none;
 }
 
-.notice-mail__create-btn {
-    margin-bottom: 35px;
-}
-
 .notice-mail__list {
-    padding-left: 0;
+    padding: 0;
+    margin: 0;
     list-style: none;
 }
 
 .notice-mail__item {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     padding: 8px 0;
-    border-bottom: 1px dotted #ccc;
-    font-size: 18px;
-    font-weight: 500;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .notice-mail__subject {
+    margin-left: 12px;
+    font-size: 18px;
     font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 600px;
 }
 
 .notice-mail__date {
-    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
     color: #666;
-    margin-left: 24px;
+    margin-left: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.notice-mail__empty {
+    padding: 20px;
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    margin-top: 10px;
 }
 
 /* フラッシュメッセージ */
@@ -172,17 +202,17 @@
 
 /* レスポンシブデザイン (タブレット768px - 850px) */
 @media screen and (min-width: 768px) and (max-width: 850px) {
-    .mypage-container {
+    .admin-home__container {
         flex-direction: column;
         gap: 40px;
     }
 
-    .mypage__reservation,
-    .mypage__like {
+    .owner-list,
+    .notice-mail {
         width: 100%;
     }
 
-    .shop__grid-container {
-        grid-template-columns: 1fr;
+    .notice-mail__subject {
+        max-width: 400px;
     }
 }

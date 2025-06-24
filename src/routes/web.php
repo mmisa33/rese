@@ -59,6 +59,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::delete('/owner/{owner}', [AdminOwnerController::class, 'destroy'])->name('admin.owner.destroy');
     Route::get('/notice', [AdminController::class, 'showNoticeForm'])->name('admin.notice.form');
     Route::post('/notice', [AdminController::class, 'sendNotice'])->name('admin.notice.send');
+    Route::get('/admin/notice/{notice}', [AdminController::class, 'showNotice'])->name('admin.notice.show');
 });
 
 // 店舗代表者用

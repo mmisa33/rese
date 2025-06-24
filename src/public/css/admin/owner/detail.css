@@ -1,10 +1,4 @@
 /* タイトル */
-.owner-detail__title {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
 .back-btn {
     width: 36px;
     height: 36px;
@@ -19,6 +13,9 @@
 }
 
 .owner-detail__title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
     font-size: 36px;
     font-weight: bold;
 }

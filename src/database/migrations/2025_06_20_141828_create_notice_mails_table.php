@@ -15,6 +15,7 @@ class CreateNoticeMailsTable extends Migration
     {
         Schema::create('notice_mails', function (Blueprint $table) {
             $table->id();
+            $table->string('target');
             $table->string('subject');
             $table->text('message');
             $table->timestamps();
