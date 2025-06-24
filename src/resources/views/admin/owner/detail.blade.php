@@ -8,7 +8,7 @@
 <div class="owner-detail">
     <div class="owner-detail__title">
         <a href="{{ route('admin.index') }}" class="back-btn">&lt;</a>
-        <h2 class="owner-detail__title">店舗代表者情報</h2>
+        <h2>店舗代表者情報</h2>
     </div>
 
     <div class="owner-detail__content">

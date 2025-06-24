@@ -9,6 +9,8 @@ use App\Http\Controllers\User\ReviewController;
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\OwnerController as AdminOwnerController;
+use App\Http\Controllers\Admin\NoticeMailController;
+
 use App\Http\Controllers\Owner\OwnerController as ShopOwnerController;
 
 use Illuminate\Support\Facades\Route;
@@ -57,9 +59,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/owner/{owner}', [AdminOwnerController::class, 'show'])->name('admin.owner.show');
     Route::put('/owner/{owner}', [AdminOwnerController::class, 'update'])->name('admin.owner.update');
     Route::delete('/owner/{owner}', [AdminOwnerController::class, 'destroy'])->name('admin.owner.destroy');
-    Route::get('/notice', [AdminController::class, 'showNoticeForm'])->name('admin.notice.form');
-    Route::post('/notice', [AdminController::class, 'sendNotice'])->name('admin.notice.send');
-    Route::get('/admin/notice/{notice}', [AdminController::class, 'showNotice'])->name('admin.notice.show');
+    Route::get('/notice', [NoticeMailController::class, 'showNoticeForm'])->name('admin.notice.form');
+    Route::post('/notice', [NoticeMailController::class, 'sendNotice'])->name('admin.notice.send');
+    Route::get('/notice/{notice}', [NoticeMailController::class, 'showNotice'])->name('admin.notice.show');
 });
 
 // 店舗代表者用
