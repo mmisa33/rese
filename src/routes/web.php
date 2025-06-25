@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\NoticeMailController;
 
 use App\Http\Controllers\Owner\OwnerController as ShopOwnerController;
 use App\Http\Controllers\Owner\NoticeMailController as OwnerNoticeMailController;
+use App\Http\Controllers\Owner\ReservationController as OwnerReservationController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -84,7 +85,7 @@ Route::middleware(['auth', 'role:owner'])->prefix('owner')->group(function () {
     Route::put('/shop', [ShopOwnerController::class, 'updateShop'])->name('owner.shop.update');
 
     // 予約確認
-    Route::get('/reservations', [ShopOwnerController::class, 'reservations'])->name('owner.reservations');
+    Route::get('/reservation', [OwnerReservationController::class, 'index'])->name('owner.reservation');
 
     Route::get('/notice', [OwnerNoticeMailController::class, 'showNoticeForm'])->name('owner.notice.form');
     Route::post('/notice', [OwnerNoticeMailController::class, 'sendNotice'])->name('owner.notice.send');
