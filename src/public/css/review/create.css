@@ -49,7 +49,7 @@
 }
 
 .review-form__title {
-    margin-bottom: 30px;
+    margin-bottom: 35px;
     font-size: 24px;
     color: white;
     text-align: center;
@@ -57,7 +57,7 @@
 
 /* レビュー星 */
 .review-form__stars {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .review-form__label {
