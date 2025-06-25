@@ -26,7 +26,7 @@ class AuthController extends Controller
 
             if ($user->role !== 'user') {
                 Auth::logout();
-                return back()->withErrors(['email' => '一般ユーザー以外はログインできません。']);
+                return back()->withErrors(['email' => '一般ユーザー以外はログインできません']);
             }
 
             $request->session()->regenerate();
@@ -114,5 +114,17 @@ class AuthController extends Controller
         } else {
             return redirect()->route('login');
         }
+    }
+
+    // サンクスページを表示
+    public function thanks(Request $request)
+    {
+        // ログアウト処理
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return view('auth.thanks');
     }
 }

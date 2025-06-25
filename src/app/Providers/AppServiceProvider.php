@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use Laravel\Fortify\Contracts\VerifyEmailResponse;
+use App\Http\Responses\ThanksAfterVerifyEmailResponse;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,7 +16,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(
+            VerifyEmailResponse::class,
+            ThanksAfterVerifyEmailResponse::class
+        );
     }
 
     /**

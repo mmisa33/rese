@@ -40,7 +40,7 @@ class ReservationController extends Controller
         $reservation = Reservation::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
         $reservation->delete();
 
-        return redirect()->route('mypage');
+        return redirect()->route('mypage')->with('status', '予約を削除しました');
     }
 
     // 編集フォームを表示

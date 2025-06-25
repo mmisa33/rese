@@ -58,6 +58,8 @@ Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
     Route::get('/reservation/payment/success', [ReservationController::class, 'paymentSuccess'])->name('reservation.payment.success');
 
     Route::get('/reservation/verify/{id}', [ReservationController::class, 'verify'])->name('reservation.verify');
+
+    Route::get('/thanks', [AuthController::class, 'thanks'])->name('thanks');
 });
 
 // 管理者用

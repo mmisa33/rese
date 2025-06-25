@@ -21,9 +21,9 @@
                         <form method="GET" action="{{ route('owner.reservation') }}">
                             <select class="reservation-table__select" name="date" id="date" onchange="this.form.submit()">
                                 <option value="">予約日&emsp;▼</option>
-                                @foreach ($dates as $date)
-                                    <option value="{{ $date }}" @if($selectedDate === $date) selected @endif>
-                                        {{ \Carbon\Carbon::parse($date)->format('Y-n-j') }}
+                                @foreach ($dates as $raw => $formatted)
+                                    <option value="{{ $raw }}" @if($selectedDate === $raw) selected @endif>
+                                        {{ $formatted }}
                                     </option>
                                 @endforeach
                             </select>
