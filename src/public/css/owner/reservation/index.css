@@ -1,0 +1,92 @@
+/* 全体レイアウト */
+.back-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 22px;
+    text-align: center;
+    line-height: 36px;
+    background-color: white;
+    color: #333;
+    border-radius: 6px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.owner-reservation__title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+/* 予約一覧テーブル */
+.reservation-table {
+    width: 100%;
+    margin: 60px auto;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    overflow: hidden;
+}
+
+.reservation-table__thead {
+    background-color: #2962ff;
+    color: white;
+}
+
+.reservation-table__head {
+    padding: 15px;
+    font-weight: bold;
+    font-size: 18px;
+    border: 1px solid #ddd;
+}
+
+.reservation-table__content {
+    padding: 10px;
+    font-size: 16px;
+    color: black;
+    font-weight: 500;
+    border: 1px solid #ddd;
+    background-color: #fff;
+}
+
+.owner-reservation__empty {
+    width: 40%;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.reservation-table__select {
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* option要素の文字色（ブラウザ依存あり） */
+.reservation-table__select option {
+    color: black;
+    background-color: white;
+}
+
+/* レスポンシブデザイン (タブレット768px - 850px) */
+@media screen and (min-width: 768px) and (max-width: 850px) {
+    .reservation-table {
+
+    }
+
+    .owner-reservation__empty {
+        width: 100%;
+    }
+}
