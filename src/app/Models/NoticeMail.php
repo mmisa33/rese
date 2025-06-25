@@ -9,5 +9,11 @@ class NoticeMail extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['subject', 'message', 'target'];
+    protected $fillable = [
+        'user_id',
+        'target',
+        'subject',
+        'message',
+        'custom_emails',
+    ];
 }

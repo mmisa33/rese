@@ -49,6 +49,7 @@
                 @elseif (Auth::user()->role === 'owner')
                     {{-- 店舗代表者用メニュー --}}
                     <a class="header__menu-link" href="{{ route('owner.index') }}">Home</a>
+                    <a class="header__menu-link" href="">Reservations</a>
                     <form class="header__menu-form" method="POST" action="{{ route('owner.logout') }}">
                         @csrf
                         <button type="submit" class="header__menu-form--logout">Logout</button>

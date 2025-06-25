@@ -10,108 +10,142 @@
     <h2 class="owner-home__header">店舗代表者管理画面</h2>
 
     <div class="owner-home__container">
-
         {{-- 店舗情報 --}}
-    <div class="shop-info">
-        <h3 class="shop-info__title">店舗情報</h3>
+        <div class="shop-info">
+            <h3 class="shop-info__title">店舗情報</h3>
 
-        <div class="shop-info__section">
-            {{-- 店舗作成・更新フォーム --}}
-            <form method="POST" action="{{ isset($shop) ? route('owner.shop.update', $shop->id) : route('owner.shop.store') }}" enctype="multipart/form-data">
-            @csrf
-            @if(isset($shop))
-                @method('PUT')
-            @endif
+            <div class="shop-info__section">
+                {{-- 店舗作成・更新フォーム --}}
+                <form method="POST" action="{{ isset($shop) ? route('owner.shop.update', $shop->id) : route('owner.shop.store') }}" enctype="multipart/form-data">
+                @csrf
+                @if(isset($shop))
+                    @method('PUT')
+                @endif
 
-                <div class="shop-info__form">
-                    @if(session('success'))
-                    <div class="flash-message success">
-                        {{ session('success') }}
-                    </div>
-                    @endif
-
-                    {{-- 店舗名 --}}
-                    <div class="shop-info__form-group">
-                        <label for="name" class="shop-info__form--label">店舗名</label>
-                        <input type="text" name="name" id="name" value="{{ old('name', $shop->name ?? '') }}" class="shop-info__form--input">
-                    </div>
-                    @error('name')
-                        <p class="error-message">{{ $message }}</p>
-                    @enderror
-
-                    {{-- 画像 --}}
-                    <div class="shop-info__form-group">
-                        <label for="image"  class="shop-info__form--label">イメージ画像</label>
-                        @if(isset($shop) && $shop->image_path)
-                            <div class="shop-info__img">
-                                <img id="preview-img" src="{{ Storage::url($shop->image_path) }}" alt="Shop Image">
-                            </div>
-                        @else
-                            <div class="shop-info__img">
-                                <img id="preview-img" src="#" alt="Preview Image" style="display: none;">
-                            </div>
+                    <div class="shop-info__form">
+                        @if(session('success'))
+                        <div class="flash-message success">
+                            {{ session('success') }}
+                        </div>
                         @endif
-                        <input type="file" name="image" id="image" class="shop-info__form--input">
-                    </div>
-                    @error('image')
-                        <p class="error-message">{{ $message }}</p>
-                    @enderror
 
-                    {{-- エリア --}}
-                    <div class="shop-info__form-group  select-wrapper">
-                        <label for="area_id"  class="shop-info__form--label">エリア</label>
-                        <select name="area_id" id="area_id" class="shop-info__form--select">
-                            <option value="">エリアを選択</option>
-                            @foreach($areas as $area)
-                                <option value="{{ $area->id }}" {{ (old('area_id', $shop->area_id ?? '') == $area->id) ? 'selected' : '' }}>
-                                    {{ $area->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                        <img src="{{ asset('images/icon/select.png') }}" alt="Select Icon" class="select-icon">
-                    </div>
-                    @error('area_id')
-                        <p class="error-message">{{ $message }}</p>
-                    @enderror
+                        {{-- 店舗名 --}}
+                        <div class="shop-info__form-group">
+                            <label for="name" class="shop-info__form--label">店舗名</label>
+                            <input type="text" name="name" id="name" value="{{ old('name', $shop->name ?? '') }}" class="shop-info__form--input">
+                        </div>
+                        @error('name')
+                            <p class="error-message">{{ $message }}</p>
+                        @enderror
 
-                    {{-- ジャンル --}}
-                    <div class="shop-info__form-group  select-wrapper">
-                        <label for="genre_id"  class="shop-info__form--label">ジャンル</label>
-                        <select name="genre_id" id="genre_id" class="shop-info__form--select">
-                            <option value="">ジャンルを選択</option>
-                            @foreach($genres as $genre)
-                                <option value="{{ $genre->id }}" {{ (old('genre_id', $shop->genre_id ?? '') == $genre->id) ? 'selected' : '' }}>
-                                    {{ $genre->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                        <img src="{{ asset('images/icon/select.png') }}" alt="Select Icon" class="select-icon">
-                    </div>
-                    @error('genre_id')
-                        <p class="error-message">{{ $message }}</p>
-                    @enderror
+                        {{-- 画像 --}}
+                        <div class="shop-info__form-group">
+                            <label for="image"  class="shop-info__form--label">イメージ画像</label>
+                            @if(isset($shop) && $shop->image_path)
+                                <div class="shop-info__img">
+                                    <img id="preview-img" src="{{ Storage::url($shop->image_path) }}" alt="Shop Image">
+                                </div>
+                            @else
+                                <div class="shop-info__img">
+                                    <img id="preview-img" src="#" alt="Preview Image" style="display: none;">
+                                </div>
+                            @endif
+                            <input type="file" name="image" id="image" class="shop-info__form--input">
+                        </div>
+                        @error('image')
+                            <p class="error-message">{{ $message }}</p>
+                        @enderror
 
-                    {{-- 説明 --}}
-                    <div class="shop-info__form-group">
-                        <label for="description" class="shop-info__form--label">店舗説明</label>
-                        <textarea name="description" id="description" class="shop-info__form--textarea" rows="4">{{ old('description', $shop->description ?? '') }}</textarea>
-                    </div>
-                    @error('description')
-                        <p class="error-message">{{ $message }}</p>
-                    @enderror
-                </div>
+                        {{-- エリア --}}
+                        <div class="shop-info__form-group  select-wrapper">
+                            <label for="area_id"  class="shop-info__form--label">エリア</label>
+                            <select name="area_id" id="area_id" class="shop-info__form--select">
+                                <option value="">エリアを選択</option>
+                                @foreach($areas as $area)
+                                    <option value="{{ $area->id }}" {{ (old('area_id', $shop->area_id ?? '') == $area->id) ? 'selected' : '' }}>
+                                        {{ $area->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <img src="{{ asset('images/icon/select.png') }}" alt="Select Icon" class="select-icon">
+                        </div>
+                        @error('area_id')
+                            <p class="error-message">{{ $message }}</p>
+                        @enderror
 
-                <button type="submit" class="shop-info__btn">
-                    {{ isset($shop) ? '更新する' : '登録する' }}
-                </button>
-            </form>
+                        {{-- ジャンル --}}
+                        <div class="shop-info__form-group  select-wrapper">
+                            <label for="genre_id"  class="shop-info__form--label">ジャンル</label>
+                            <select name="genre_id" id="genre_id" class="shop-info__form--select">
+                                <option value="">ジャンルを選択</option>
+                                @foreach($genres as $genre)
+                                    <option value="{{ $genre->id }}" {{ (old('genre_id', $shop->genre_id ?? '') == $genre->id) ? 'selected' : '' }}>
+                                        {{ $genre->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <img src="{{ asset('images/icon/select.png') }}" alt="Select Icon" class="select-icon">
+                        </div>
+                        @error('genre_id')
+                            <p class="error-message">{{ $message }}</p>
+                        @enderror
+
+                        {{-- 説明 --}}
+                        <div class="shop-info__form-group">
+                            <label for="description" class="shop-info__form--label">店舗説明</label>
+                            <textarea name="description" id="description" class="shop-info__form--textarea" rows="4">{{ old('description', $shop->description ?? '') }}</textarea>
+                        </div>
+                        @error('description')
+                            <p class="error-message">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <button type="submit" class="shop-info__btn">
+                        {{ isset($shop) ? '更新する' : '登録する' }}
+                    </button>
+                </form>
+            </div>
         </div>
 
-        {{-- 予約情報 --}}
-        <div class="owner-home__reservation-list">
+        {{-- お知らせメール一覧 --}}
+        <div class="notice-mail">
+            <h3 class="notice-mail__title">お知らせメール</h3>
+            <div class="notice-mail__section">
+                <div class="notice-mail__submit-btn">
+                    <a href="{{ route('owner.notice.form') }}" class="submit-btn">新規作成</a>
+                </div>
+
+                @if ($notices->isNotEmpty())
+                    <ul class="notice-mail__list">
+                        @foreach ($notices as $notice)
+                            <li class="notice-mail__item">
+                                <a href="{{ route('owner.notice.show', $notice->id) }}" class="notice-mail__link">
+                                    <div class="notice-mail__row">
+                                        <div class="notice-mail__date">
+                                            <img src="{{ asset('images/icon/email.png') }}" alt="Email Icon" class="icon">
+                                            {{ $notice->created_at->format('Y/m/d') }}
+                                        </div>
+                                        <div class="notice-mail__subject">{{ $notice->subject }}</div>
+                                    </div>
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                @else
+                    <p class="notice-mail__empty">お知らせは送信されていません</p>
+                @endif
+
+                <div class="pagination">
+                    {{ $notices->links() }}
+                </div>
+            </div>
+        </div>
+
+        {{-- 予約情報
+        <div class="reservation-list">
             <h3 class="reservation-list__title">予約状況</h3>
 
-            <div class="reservation-list">
+            <div class="reservation-list__section">
                 @foreach ($reservations as $index => $reservation)
                     <div class="reservation-card">
                         <div class="reservation-card__title">
@@ -143,7 +177,7 @@
                     </div>
                 @endforeach
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 
