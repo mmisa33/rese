@@ -23,18 +23,11 @@ class FortifyServiceProvider extends ServiceProvider
     {
         $this->app->singleton(LoginResponse::class, CustomLoginResponse::class);
 
-        // 会員登録後にプロフィールサンクスページへリダイレクト
+        // 会員登録後にメール認証ページへリダイレクト
         $this->app->instance(RegisterResponse::class, new class implements RegisterResponse {
             public function toResponse($request)
             {
-                // 登録後に自動ログインされていたらログアウト
-                Auth::logout();
-
-                // セッションの再生成
-                $request->session()->invalidate();
-                $request->session()->regenerateToken();
-
-                return response()->view('auth.thanks');
+                return redirect()->route('verification.notice');
             }
         });
     }

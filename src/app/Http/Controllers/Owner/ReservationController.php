@@ -5,30 +5,38 @@ namespace App\Http\Controllers\Owner;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Reservation;
+use Carbon\Carbon;
 
 class ReservationController extends Controller
 {
     public function index(Request $request)
     {
-        // 予約日で絞り込み用に全予約日の一覧を取得（重複なし）
-        $dates = Reservation::where('shop_id', auth()->user()->shop->id)
+        $shopId = auth()->user()->shop->id;
+        $today = Carbon::today()->format('Y-m-d');
+
+        $dates = Reservation::where('shop_id', $shopId)
             ->select('date')
             ->distinct()
             ->orderBy('date', 'asc')
-            ->pluck('date');
+            ->pluck('date')
+            ->mapWithKeys(function ($date) {
+                return [$date => Carbon::parse($date)->format('Y年n月j日')];
+            });
 
-        // 絞り込み条件の予約日
         $selectedDate = $request->input('date');
 
-        // 予約一覧を取得、予約日で絞り込みがあれば適用
         $query = Reservation::with('user')
-            ->where('shop_id', auth()->user()->shop->id);
+            ->where('shop_id', $shopId);
 
         if ($selectedDate) {
             $query->where('date', $selectedDate);
         }
 
-        $reservations = $query->orderBy('date')->orderBy('time')->get();
+        $allReservations = $query->get();
+
+        $reservations = $allReservations->sortBy(function ($r) use ($today) {
+            return ($r->date < $today ? 1 : 0) . $r->date . $r->time;
+        });
 
         return view('owner.reservation.index', compact('reservations', 'dates', 'selectedDate'));
     }
