@@ -4,8 +4,12 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Reservation;
+use App\Models\Shop;
 use App\Http\Requests\ReservationRequest;
 use Illuminate\Support\Facades\Auth;
+use Stripe\Stripe;
+use Stripe\Checkout\Session as StripeSession;
+use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
@@ -70,5 +74,67 @@ class ReservationController extends Controller
         ]);
 
         return redirect()->route('mypage')->with('status', '予約内容を更新しました');
+    }
+
+    // Stripe決済付き予約処理
+    public function storeWithPayment(ReservationRequest $request)
+    {
+        // Stripe秘密キーを設定
+        Stripe::setApiKey(config('services.stripe.secret'));
+
+        // 対象の店舗情報取得
+        $shop = Shop::findOrFail($request->shop_id);
+        $quantity = (int) $request->number;
+        $unitPrice = 3000; // 1人あたりの金額（円）
+
+        // StripeのCheckoutセッション作成（
+        $checkoutSession = StripeSession::create([
+            'payment_method_types' => ['card'], // カード支払い
+            'line_items' => [[
+                'price_data' => [
+                    'currency' => 'jpy',
+                    'product_data' => [
+                        'name' => $shop->name . ' 予約（' . $quantity . '人）',
+                    ],
+                    'unit_amount' => $unitPrice, // 人数分請求
+                ],
+                'quantity' => $quantity,
+            ]],
+            'mode' => 'payment', // 一括支払い
+            'success_url' => route('reservation.payment.success') . '?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url' => route('shop.show', ['shop_id' => $shop->id]),
+            'metadata' => [
+                'user_id' => Auth::id(),
+                'shop_id' => $shop->id,
+                'date' => $request->date,
+                'time' => $request->time,
+                'number' => $quantity,
+            ],
+        ]);
+
+        // Stripeの決済画面にリダイレクト
+        return redirect($checkoutSession->url);
+    }
+
+    // Stripe決済成功後処理
+    public function paymentSuccess(Request $request)
+    {
+        // Stripeの秘密キーをセット
+        Stripe::setApiKey(config('services.stripe.secret'));
+
+        // セッションIDを元にStripeのセッション情報取得
+        $session = StripeSession::retrieve($request->session_id);
+        $metadata = $session->metadata;
+
+        // メタデータを元に予約確定（DB保存）
+        Reservation::create([
+            'user_id' => $metadata->user_id,
+            'shop_id' => $metadata->shop_id,
+            'date' => $metadata->date,
+            'time' => $metadata->time,
+            'number' => $metadata->number,
+        ]);
+
+        return view('reservation.done');
     }
 }
