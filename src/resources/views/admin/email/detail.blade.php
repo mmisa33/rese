@@ -19,7 +19,12 @@
             </div>
             <div class="admin-notice-detail__item">
                 <div class="admin-notice-detail__label">送付先</div>
-                <div class="admin-notice-detail__value">{{ $targets[$notice->target] ?? '不明' }}</div>
+                <div class="admin-notice-detail__value">
+                    {{ $targets[$notice->target] ?? '不明' }}
+                    @if ($notice->target === 'custom' && $notice->custom_emails)
+                        <br><small>{{ $notice->custom_emails }}</small>
+                    @endif
+                </div>
             </div>
             <div class="admin-notice-detail__item">
                 <div class="admin-notice-detail__label">件名</div>

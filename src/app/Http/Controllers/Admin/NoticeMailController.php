@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NoticeMailRequest;
 use Illuminate\Support\Facades\Mail;
@@ -35,9 +36,11 @@ class NoticeMailController extends Controller
         }
 
         NoticeMail::create([
+            'user_id' => Auth::id(),
             'subject' => $request->subject,
             'message' => $request->message,
             'target'  => $request->target,
+            'custom_emails' => $request->target === 'custom' ? $request->emails : null,
         ]);
 
         return redirect()->route('admin.notice.form')->with('success', 'メールを送信しました');

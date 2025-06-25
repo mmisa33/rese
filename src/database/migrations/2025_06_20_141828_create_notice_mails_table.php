@@ -15,9 +15,12 @@ class CreateNoticeMailsTable extends Migration
     {
         Schema::create('notice_mails', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('target');
+            $table->text('custom_emails')->nullable();
             $table->string('subject');
             $table->text('message');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

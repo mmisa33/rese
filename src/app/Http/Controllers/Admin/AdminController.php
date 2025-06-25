@@ -14,7 +14,7 @@ class AdminController extends Controller
         $owners = User::where('role', 'owner')->with('shop')->paginate(15);
 
         // お知らせメール一覧
-        $notices = NoticeMail::latest()->take(10)->get();
+        $notices = NoticeMail::where('user_id', auth()->id())->latest()->paginate(10);
 
         return view('admin.index', compact( 'owners', 'notices'));
     }

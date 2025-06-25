@@ -14,7 +14,7 @@ class NoticeMailRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'target'  => ['required', 'in:all,owners,custom'],
+            'target'  => ['required', 'in:all,owners,users,reservations,likes,custom'],
             'subject' => ['required', 'string', 'max:50'],
             'message' => ['required', 'string', 'max:2000'],
             'emails'  => ['required_if:target,custom'],

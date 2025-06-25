@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ShopRequest;
 use App\Models\Area;
 use App\Models\Genre;
+use App\Models\NoticeMail;
 
 class OwnerController extends Controller
 {
@@ -19,10 +20,13 @@ class OwnerController extends Controller
             ? $shop->reservations()->orderBy('date', 'desc')->orderBy('time', 'desc')->get()
             : collect();
 
+        // ログイン中のオーナーが送信したお知らせメールだけ取得
+        $notices = NoticeMail::where('user_id', auth()->id())->latest()->paginate(10);
+
         $areas = Area::all();
         $genres = Genre::all();
 
-        return view('owner.index', compact('shop', 'reservations', 'areas', 'genres'));
+        return view('owner.index', compact('shop', 'reservations', 'areas', 'genres', 'notices'));
     }
 
     public function storeShop(ShopRequest $request)

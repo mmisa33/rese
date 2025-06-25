@@ -50,7 +50,7 @@
         <div class="notice-mail">
             <h3 class="notice-mail__title">お知らせメール</h3>
             <div class="notice-mail__section">
-                <div class="owner-list__submit-btn">
+                <div class="notice-mail__submit-btn">
                     <a href="{{ route('admin.notice.form') }}" class="submit-btn">新規作成</a>
                 </div>
 
@@ -71,8 +71,12 @@
                         @endforeach
                     </ul>
                 @else
-                    <p class="notice-mail__empty">お知らせは送信されていません</p>
+                    <div class="notice-mail__empty">お知らせは送信されていません</div>
                 @endif
+
+                <div class="pagination">
+                    {{ $notices->links() }}
+                </div>
             </div>
         </div>
     </div>
