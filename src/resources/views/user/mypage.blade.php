@@ -62,13 +62,29 @@
                             </tr>
                         </table>
 
-                        {{-- フッター：予約変更＆レビュー --}}
+                        {{-- フッター：予約変更・QRコード・レビュー --}}
                         <div class="reservation-card__footer">
                             {{-- 予約変更 --}}
                             @if ($reservation->isFuture)
                                 <a href="{{ route('reservation.edit', $reservation->id) }}" class="footer-btn active">予約変更</a>
                             @else
                                 <span class="footer-btn disabled">予約変更</span>
+                            @endif
+
+                            {{-- QRコード --}}
+                            @if ($reservation->isFuture)
+                                <a href="#" class="footer-btn active qr-trigger" data-reservation-id="{{ $reservation->id }}">QRコード</a>
+
+                            {{-- モーダル本体 --}}
+                            <div class="qr-modal" id="qr-modal-{{ $reservation->id }}" style="display: none;">
+                                <div class="qr-modal__content">
+                                    <span class="qr-modal__close" data-reservation-id="{{ $reservation->id }}">&times;</span>
+                                    <p class="qr-modal__name">{{ $reservation->shop->name }}</strong>の予約QRコード</p>
+                                    {!! QrCode::size(200)->generate(route('reservation.verify', ['id' => $reservation->id])) !!}
+                                </div>
+                            </div>
+                            @else
+                                <span class="footer-btn disabled">QRコード</span>
                             @endif
 
                             {{-- レビュー --}}
@@ -143,4 +159,34 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // モーダルを開く
+        document.querySelectorAll('.qr-trigger').forEach(function (btn) {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                const id = btn.dataset.reservationId;
+                const modal = document.getElementById('qr-modal-' + id);
+                if (modal) modal.style.display = 'flex';
+            });
+        });
+
+        // モーダルを閉じる
+        document.querySelectorAll('.qr-modal__close').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                const id = btn.dataset.reservationId;
+                const modal = document.getElementById('qr-modal-' + id);
+                if (modal) modal.style.display = 'none';
+            });
+        });
+
+        // 背景クリックで閉じる
+        document.querySelectorAll('.qr-modal').forEach(function (modal) {
+            modal.addEventListener('click', function (e) {
+                if (e.target === modal) modal.style.display = 'none';
+            });
+        });
+    });
+</script>
 @endsection

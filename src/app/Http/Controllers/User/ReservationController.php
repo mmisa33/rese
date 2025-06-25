@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Stripe\Stripe;
 use Stripe\Checkout\Session as StripeSession;
 use Illuminate\Http\Request;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ReservationController extends Controller
 {
@@ -136,5 +137,12 @@ class ReservationController extends Controller
         ]);
 
         return view('reservation.done');
+    }
+
+    public function verify($id)
+    {
+        $reservation = Reservation::with('shop', 'user')->findOrFail($id);
+
+        return view('reservation.verify', compact('reservation'));
     }
 }

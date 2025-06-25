@@ -55,6 +55,8 @@ Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
     // 決済処理
     Route::post('/reservation/with-payment', [ReservationController::class, 'storeWithPayment'])->name('reservation.with.payment');
     Route::get('/reservation/payment/success', [ReservationController::class, 'paymentSuccess'])->name('reservation.payment.success');
+
+    Route::get('/reservation/verify/{id}', [ReservationController::class, 'verify'])->name('reservation.verify');
 });
 
 // 管理者用
