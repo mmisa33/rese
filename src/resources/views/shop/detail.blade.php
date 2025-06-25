@@ -38,7 +38,7 @@
 
     {{-- 予約フォーム --}}
     <div class="shop-detail__reservation-form">
-        <form action="{{ route('reservation.store') }}" method="POST" class="reservation-form" novalidate>
+        <form action="{{ route('reservation.with.payment') }}" method="POST" class="reservation-form" novalidate>
             @csrf
             <div class="reservation-form__content">
                 <h3 class="reservation-form__title">予約</h3>

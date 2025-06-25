@@ -37,6 +37,7 @@ Route::prefix('owner')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('owner.logout');
 });
 
+// 一般ユーザー用
 Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
     Route::post('/like/{shop_id}', [ShopController::class, 'toggleLike'])->name('shop.like');
     Route::post('/done', [ReservationController::class, 'store'])->name('reservation.store');
@@ -50,6 +51,10 @@ Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
     // 評価ページ表示・保存
     Route::get('/review/{reservation_id}', [ReviewController::class, 'create'])->name('review.create');
     Route::post('/review/{reservation_id}', [ReviewController::class, 'store'])->name('review.store');
+
+    // 決済処理
+    Route::post('/reservation/with-payment', [ReservationController::class, 'storeWithPayment'])->name('reservation.with.payment');
+    Route::get('/reservation/payment/success', [ReservationController::class, 'paymentSuccess'])->name('reservation.payment.success');
 });
 
 // 管理者用
