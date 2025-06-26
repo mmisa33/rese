@@ -20,7 +20,7 @@ class ShopController extends Controller
 
         $shops = Shop::filter($request->only(['area', 'genre', 'keyword']))->get();
 
-        return view('shop.index', compact('shops', 'areas', 'genres'));
+        return view('user.shop.index', compact('shops', 'areas', 'genres'));
     }
 
     // いいね機能
@@ -59,6 +59,6 @@ class ShopController extends Controller
         // 人数選択（1〜10人）
         $peopleOptions = range(1, 10);
 
-        return view('shop.detail', compact('shop', 'timeOptions', 'peopleOptions'));
+        return view('user.shop.detail', compact('shop', 'timeOptions', 'peopleOptions'));
     }
 }
