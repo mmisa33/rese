@@ -22,7 +22,7 @@ class ReviewController extends Controller
 
         $ratings = range(Review::RATING_MIN, Review::RATING_MAX);
 
-        return view('review.create', compact('reservation', 'ratings'));
+        return view('user.review.create', compact('reservation', 'ratings'));
     }
 
     // 評価の登録処理

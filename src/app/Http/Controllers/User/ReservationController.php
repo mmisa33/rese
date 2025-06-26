@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use Stripe\Stripe;
 use Stripe\Checkout\Session as StripeSession;
 use Illuminate\Http\Request;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ReservationController extends Controller
 {
@@ -60,7 +59,7 @@ class ReservationController extends Controller
         // 人数選択（1〜10人）
         $peopleOptions = range(1, 10);
 
-        return view('reservation.edit', compact('reservation', 'timeOptions', 'peopleOptions'));
+        return view('user.reservation.edit', compact('reservation', 'timeOptions', 'peopleOptions'));
     }
 
     // 更新処理
@@ -136,13 +135,13 @@ class ReservationController extends Controller
             'number' => $metadata->number,
         ]);
 
-        return view('reservation.done');
+        return view('user.reservation.done');
     }
 
     public function verify($id)
     {
         $reservation = Reservation::with('shop', 'user')->findOrFail($id);
 
-        return view('reservation.verify', compact('reservation'));
+        return view('user.reservation.verify', compact('reservation'));
     }
 }
