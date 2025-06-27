@@ -23,6 +23,7 @@ Route::get('/verify/check', [AuthController::class, 'verifyCheck'])->name('verif
 Route::get('/', [ShopController::class, 'index'])->name('shop.index');
 Route::get('/search', [ShopController::class, 'index'])->name('shop.search');
 Route::get('/detail/{shop_id}', [ShopController::class, 'show'])->name('shop.show');
+Route::get('/done', [ReservationController::class, 'done'])->name('reservation.done');
 
 // 管理者用ログイン
 Route::prefix('admin')->group(function () {
