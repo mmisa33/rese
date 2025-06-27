@@ -11,6 +11,14 @@ class ReservationController extends Controller
 {
     public function index(Request $request)
     {
+        $user = auth()->user();
+        // 店舗情報がまだ存在しない場合
+        if (!$user->shop) {
+            return view('owner.reservation.index')->with([
+                'shopExists' => false,
+            ]);
+        }
+
         $shopId = auth()->user()->shop->id;
         $today = Carbon::today()->format('Y-m-d');
 
