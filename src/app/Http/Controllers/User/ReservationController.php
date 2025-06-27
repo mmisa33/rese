@@ -30,7 +30,7 @@ class ReservationController extends Controller
     // 予約完了ページを表示
     public function done()
     {
-        return view('reservation.done');
+        return view('user.reservation.done');
     }
 
     // 予約削除
@@ -135,7 +135,7 @@ class ReservationController extends Controller
             'number' => $metadata->number,
         ]);
 
-        return view('user.reservation.done');
+        return redirect()->route('reservation.done');
     }
 
     public function verify($id)

@@ -9,11 +9,9 @@
 ---
 
 **📅 日付：** {{ \Carbon\Carbon::parse($reservation->date)->format('Y年n月j日') }}（本日）  
-**🕒 時間：** {{ $reservation->time }}〜  
-**👥 人数：** {{ $reservation->number }}名様  
 **🏠 店舗名：** {{ $reservation->shop->name }}  
-**📍 エリア：** {{ $reservation->shop->area->name }}  
-**🍽 ジャンル：** {{ $reservation->shop->genre->name }}
+**🕒 時間：** {{ $reservation->time }}〜  
+**👥 人数：** {{ $reservation->number }}名様
 
 ---
 
