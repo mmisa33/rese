@@ -9,7 +9,7 @@ class ThanksAfterVerifyEmailResponse implements VerifyEmailResponseContract
 {
     public function toResponse($request)
     {
-        // JSON リクエストなら 204、通常ブラウザなら /thanks へ
+        // メール認証後にサンクスページに遷移
         return $request->wantsJson()
             ? new JsonResponse([], 204)
             : redirect()->intended('/thanks');

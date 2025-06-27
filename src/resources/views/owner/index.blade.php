@@ -140,44 +140,6 @@
                 </div>
             </div>
         </div>
-
-        {{-- 予約情報
-        <div class="reservation-list">
-            <h3 class="reservation-list__title">予約状況</h3>
-
-            <div class="reservation-list__section">
-                @foreach ($reservations as $index => $reservation)
-                    <div class="reservation-card">
-                        <div class="reservation-card__title">
-                            <img src="{{ asset('images/icon/clock.png') }}" alt="Clock Icon" class="icon">
-                            <div class="reservation-card__header-name">予約{{ $index + 1 }}</div>
-                        </div>
-                        <table class="reservation-card__table">
-                            <tr class="reservation-card__row">
-                                <th class="reservation-card__header">Name</th>
-                                <td class="reservation-card__cell">{{ $reservation->user->name }}</td>
-                            </tr>
-                            <tr class="reservation-card__row">
-                                <th class="reservation-card__header">Date</th>
-                                <td class="reservation-card__cell">{{ $reservation->date }}</td>
-                            </tr>
-                            <tr class="reservation-card__row">
-                                <th class="reservation-card__header">Time</th>
-                                <td class="reservation-card__cell">{{ $reservation->time }}</td>
-                            </tr>
-                            <tr class="reservation-card__row">
-                                <th class="reservation-card__header">Number</th>
-                                <td class="reservation-card__cell">{{ $reservation->number }}人</td>
-                            </tr>
-                            <tr class="reservation-card__row">
-                                <th class="reservation-card__header">Status</th>
-                                <td class="reservation-card__cell">{{ $reservation->status }}</td>
-                            </tr>
-                        </table>
-                    </div>
-                @endforeach
-            </div>
-        </div> --}}
     </div>
 </div>
 

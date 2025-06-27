@@ -7,11 +7,11 @@
 @section('link')
 {{-- 検索ボックス --}}
 <div class="header__search">
-    <form class="search-form" action="" method="get">
+    <form id="search-form" class="search-form" action="" method="get">
 
         {{-- 地域 --}}
         <div class="search-form__area">
-            <select class="search-form__area-select" name="area">
+            <select class="search-form__area-select auto-submit" name="area">
                 <option value="" {{ request('area') == '' ? 'selected' : '' }}>All area</option>
                 @foreach ($areas as $area)
                     <option value="{{ $area->id }}" {{ request('area') == $area->id ? 'selected' : '' }}>
@@ -24,7 +24,7 @@
 
         {{-- ジャンル --}}
         <div class="search-form__genre">
-            <select class="search-form__genre-select" name="genre">
+            <select class="search-form__genre-select auto-submit" name="genre">
                 <option value="" {{ request('genre') == '' ? 'selected' : '' }}>All genre</option>
                 @foreach ($genres as $genre)
                     <option value="{{ $genre->id }}" {{ request('genre') == $genre->id ? 'selected' : '' }}>
@@ -96,4 +96,13 @@
         @endforeach
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('search-form');
+        document.querySelectorAll('.auto-submit').forEach(el => {
+            el.addEventListener('change', () => form.submit());
+        });
+    });
+</script>
 @endsection
