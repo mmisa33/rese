@@ -62,7 +62,7 @@
                                     <div class="notice-mail__row">
                                         <div class="notice-mail__date">
                                             <img src="{{ asset('images/icon/email.png') }}" alt="Email Icon" class="icon">
-                                            {{ $notice->created_at->format('Y/m/d') }}
+                                            {{ $notice->created_at->format('Y/m/d H:i') }}
                                         </div>
                                         <div class="notice-mail__subject">{{ $notice->subject }}</div>
                                     </div>
