@@ -11,7 +11,7 @@
         <h2 class="owner-reservation__header">予約一覧</h2>
     </div>
 
-    @if (!$shopExists)
+    @if (!isset($shopExists) || !$shopExists)
         <p class="notice-mail__empty">店舗情報が作成されていません</p>
         @else
         @if ($reservations->isEmpty())
