@@ -11,8 +11,6 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        $shops = Shop::all();
-
         // 管理者
         User::create([
             'name' => '管理者',
@@ -22,28 +20,22 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
         ]);
 
-        // 店舗代表者
-        $owner1 = User::create([
-            'name' => '店舗代表者1',
-            'email' => 'owner1@example.com',
-            'password' => Hash::make('password123'),
-            'role' => 'owner',
-            'email_verified_at' => now(),
-        ]);
+        // 全ショップ取得
+        $shops = Shop::all();
 
-        $owner2 = User::create([
-            'name' => '店舗代表者2',
-            'email' => 'owner2@example.com',
-            'password' => Hash::make('password123'),
-            'role' => 'owner',
-            'email_verified_at' => now(),
-        ]);
+        foreach ($shops as $index => $shop) {
+            // オーナー作成
+            $owner = User::create([
+                'name' => '店舗代表者' . ($index + 1),
+                'email' => 'owner' . ($index + 1) . '@example.com',
+                'password' => Hash::make('password123'),
+                'role' => 'owner',
+                'email_verified_at' => now(),
+            ]);
 
-        // Shop側にオーナーを紐付け
-        $shops[0]->owner_id = $owner1->id;
-        $shops[0]->save();
-
-        $shops[1]->owner_id = $owner2->id;
-        $shops[1]->save();
+            // オーナーをショップに紐付け
+            $shop->owner_id = $owner->id;
+            $shop->save();
+        }
     }
 }
