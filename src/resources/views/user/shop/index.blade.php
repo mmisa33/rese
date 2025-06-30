@@ -36,8 +36,8 @@
         </div>
 
         {{-- キーワード --}}
-        <button type="submit" class="search-button">
-            <img src="images/icon/search.png" alt="Search" class="keyword-icon">
+        <button type="submit" class="search-form__btn">
+            <img src="{{ asset('images/icon/search.png') }}" alt="Search" class="keyword-icon">
         </button>
         <input class="search-form__keyword-input" type="text" name="keyword" placeholder="Search &hellip;" value="{{ request('keyword') }}">
     </form>
@@ -97,6 +97,7 @@
     </div>
 </div>
 
+{{-- 検索ボックス選択時に自動で絞り込み --}}
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const form = document.getElementById('search-form');

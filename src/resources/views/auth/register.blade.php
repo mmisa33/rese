@@ -16,7 +16,7 @@
             @csrf
 
             {{-- 名前入力 --}}
-            <div class="register-form__group" @error('name') has-error @enderror">
+            <div class="register-form__group">
                 <label class="register-form__label" for="name"><img src="{{ asset('images/icon/user.png') }}" alt="User Icon" class="icon"></label>
                 <div class="register-form__field">
                     <input class="register-form__input" type="text" name="name" id="name" value="{{ old('name') }}" placeholder="Username">

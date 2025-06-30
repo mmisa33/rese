@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NoticeMailRequest;
-use Illuminate\Support\Facades\Mail;
+use App\Mail\NoticeMail as NoticeMailable;
 use App\Models\User;
 use App\Models\NoticeMail;
-use App\Mail\NoticeMail as NoticeMailable;
 
 class NoticeMailController extends Controller
 {
@@ -31,8 +31,13 @@ class NoticeMailController extends Controller
             $emails = array_map('trim', explode(',', $request->emails));
         }
 
-        foreach ($emails as $email) {
-            Mail::to($email)->send(new NoticeMailable($request->subject, $request->message));
+        try {
+            foreach ($emails as $email) {
+                Mail::to($email)->send(new NoticeMailable($request->subject, $request->message));
+            }
+        // エラー発生時
+        } catch (\Throwable) {
+            return back()->withErrors('メール送信中にエラーが発生しました。再度お試しください。');
         }
 
         NoticeMail::create([

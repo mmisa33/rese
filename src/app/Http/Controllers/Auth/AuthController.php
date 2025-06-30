@@ -45,33 +45,6 @@ class AuthController extends Controller
     }
 
     // 管理者用ログインページ表示
-    public function createOwnerLogin()
-    {
-        return view('owner.auth.login');
-    }
-
-    // 管理者用ログイン処理
-    public function storeOwnerLogin(LoginRequest $request)
-    {
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-
-            if ($user->role !== 'owner') {
-                Auth::logout();
-                return back()->withErrors(['email' => '店舗代表者以外はログインできません']);
-            }
-
-            $request->session()->regenerate();
-
-            return redirect()->intended(route('owner.index'));
-        }
-
-        return back()->withErrors(['email' => 'ログイン情報が登録されていません']);
-    }
-
-    // 管理者用ログインページ表示
     public function createAdminLogin()
     {
         return view('admin.auth.login');
@@ -87,12 +60,39 @@ class AuthController extends Controller
 
             if ($user->role !== 'admin') {
                 Auth::logout();
-                return back()->withErrors(['email' => '管理者以外は画面からログインできません']);
+                return back()->withErrors(['email' => '管理者以外はログインできません']);
             }
 
             $request->session()->regenerate();
 
             return redirect()->intended(route('admin.index'));
+        }
+
+        return back()->withErrors(['email' => 'ログイン情報が登録されていません']);
+    }
+
+    // 店舗代表者用ログインページ表示
+    public function createOwnerLogin()
+    {
+        return view('owner.auth.login');
+    }
+
+    // 店舗代表者用ログイン処理
+    public function storeOwnerLogin(LoginRequest $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+
+            if ($user->role !== 'owner') {
+                Auth::logout();
+                return back()->withErrors(['email' => '店舗代表者以外はログインできません']);
+            }
+
+            $request->session()->regenerate();
+
+            return redirect()->intended(route('owner.index'));
         }
 
         return back()->withErrors(['email' => 'ログイン情報が登録されていません']);

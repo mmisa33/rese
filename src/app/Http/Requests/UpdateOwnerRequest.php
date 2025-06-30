@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use App\Models\User;
 
 class UpdateOwnerRequest extends FormRequest
 {
@@ -31,7 +32,7 @@ class UpdateOwnerRequest extends FormRequest
                 Rule::unique('users', 'email')->ignore($owner ? $owner->id : null),
             ],
             'shop_name' => $owner && $owner->shop
-                ? ['required', 'string', 'max:255']  // 店舗情報が作成されている場合
+                ? ['required', 'string', 'max:50']  // 店舗情報が作成されている場合
                 : ['nullable'],  // 店舗情報が作成されていない場合
             'password' => ['nullable', 'min:8', 'max:50'],
         ];
@@ -42,17 +43,17 @@ class UpdateOwnerRequest extends FormRequest
     {
         $ownerParam = $this->route('owner');
 
-        if ($ownerParam instanceof \App\Models\User) {
+        if ($ownerParam instanceof User) {
             return $ownerParam;
         }
 
-        return \App\Models\User::find($ownerParam);
+        return User::find($ownerParam);
     }
 
     public function messages(): array
     {
         return [
-            'shop_name.max' => '店舗名は255文字以内で入力してください',
+            'shop_name.max' => '店舗名は50文字以内で入力してください',
             'shop_name.required' => '店舗名を入力してください',
 
             'owner_name.required' => '店舗代表者名を入力してください',

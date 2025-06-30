@@ -9,6 +9,7 @@ use Carbon\Carbon;
 
 class ReservationController extends Controller
 {
+    // 予約一覧ページを表示
     public function index(Request $request)
     {
         $user = auth()->user();
@@ -19,32 +20,23 @@ class ReservationController extends Controller
             ]);
         }
 
-        $shopId = auth()->user()->shop->id;
-        $today = Carbon::today()->format('Y-m-d');
+        $shop = $user->shop;
+        $shopId = $shop->id;
 
         $dates = Reservation::where('shop_id', $shopId)
-            ->select('date')
             ->distinct()
             ->orderBy('date', 'asc')
             ->pluck('date')
-            ->mapWithKeys(function ($date) {
-                return [$date => Carbon::parse($date)->format('Y年n月j日')];
-            });
+            ->mapWithKeys(fn($d) => [$d => Carbon::parse($d)->format('Y年n月j日')]);
 
         $selectedDate = $request->input('date');
 
-        $query = Reservation::with('user')
-            ->where('shop_id', $shopId);
-
+        $query = Reservation::with('user')->where('shop_id', $shopId);
         if ($selectedDate) {
             $query->where('date', $selectedDate);
         }
 
-        $allReservations = $query->get();
-
-        $reservations = $allReservations->sortBy(function ($r) use ($today) {
-            return ($r->date < $today ? 1 : 0) . $r->date . $r->time;
-        });
+        $reservations = $query->get()->sortBy([['date', 'asc'], ['time', 'asc']]);
 
         return view('owner.reservation.index', compact('reservations', 'dates', 'selectedDate'));
     }

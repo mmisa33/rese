@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Shop;
 use App\Models\Reservation;
+use App\Models\Review;
 
 class User extends Authenticatable implements MustVerifyEmail
 {

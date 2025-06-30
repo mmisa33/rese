@@ -107,12 +107,13 @@
                 <input type="hidden" name="shop_id" value="{{ $shop->id }}">
             </div>
 
-            {{-- ボタン --}}
+            {{-- 予約ボタン --}}
             <button type="submit" class="reservation-form__btn">予約する</button>
         </form>
     </div>
 </div>
 
+{{-- 選択項目を確認欄に即時反映 --}}
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const date = document.getElementById('date');

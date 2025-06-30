@@ -1,4 +1,4 @@
-/* 会員登録フォーム */
+/* 全体レイアウト */
 .register-form {
     display: flex;
     justify-content: center;
@@ -6,7 +6,7 @@
     height: 100vh;
 }
 
-/* フォームボックス */
+/* 会員登録フォーム */
 .register-form__inner {
     width: 28vw;
     background-color: white;
@@ -15,7 +15,6 @@
     overflow: hidden;
 }
 
-/* ヘッダー部分 */
 .register-form__header {
     background-color: #2962ff;
     color: white;
@@ -25,12 +24,10 @@
     font-size: 18px;
 }
 
-/* フォーム本体 */
 .register-form__form {
     padding: 20px 30px;
 }
 
-/* 各入力グループ */
 .register-form__group {
     display: flex;
     align-items: center;
@@ -40,14 +37,12 @@
     box-sizing: border-box;
 }
 
-/* アイコン */
 .register-form__label .icon {
     width: 28px;
     height: 28px;
     margin-right: 10px;
 }
 
-/* 入力フォーム */
 .register-form__field {
     width: 100%;
     display: flex;

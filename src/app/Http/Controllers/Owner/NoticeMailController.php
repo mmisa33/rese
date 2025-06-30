@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Owner;
 
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NoticeMailRequest;
-use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use App\Models\NoticeMail;
 use App\Mail\NoticeMail as NoticeMailable;
@@ -27,7 +27,7 @@ class NoticeMailController extends Controller
         if ($request->target === 'users') {
             $emails = User::where('role', 'user')->pluck('email')->toArray();
 
-            // 予約ユーザー
+        // 予約ユーザー
         } elseif ($request->target === 'reservations') {
             $shop = $owner->shop;
             if ($shop) {
@@ -39,7 +39,7 @@ class NoticeMailController extends Controller
                     ->toArray();
             }
 
-            // お気に入り登録ユーザー
+        // お気に入り登録ユーザー
         } elseif ($request->target === 'likes') {
             $shop = $owner->shop;
             if ($shop) {
@@ -49,20 +49,25 @@ class NoticeMailController extends Controller
                     ->toArray();
             }
 
-            // 手動指定
+        // 手動指定
         } elseif ($request->target === 'custom') {
             $emails = array_map('trim', explode(',', $request->emails));
         }
 
         // メール送信
-        foreach ($emails as $email) {
-            Mail::to($email)->send(new NoticeMailable(
-                $request->subject,
-                $request->message
-            ));
+        if (empty($emails)) {
+            return back()->withErrors('送信対象のメールアドレスが見つかりません。');
         }
 
-        // データベースに保存
+        try {
+            foreach ($emails as $email) {
+                Mail::to($email)->send(new NoticeMailable($request->subject, $request->message));
+            }
+        // エラー発生時
+        } catch (\Throwable) {
+            return back()->withErrors('メール送信中にエラーが発生しました。再度お試しください。');
+        }
+
         NoticeMail::create([
             'user_id' => $owner->id,
             'subject' => $request->subject,

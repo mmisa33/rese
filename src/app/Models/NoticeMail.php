@@ -16,4 +16,9 @@ class NoticeMail extends Model
         'message',
         'custom_emails',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
