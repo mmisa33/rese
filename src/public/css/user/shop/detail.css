@@ -1,4 +1,4 @@
-/* 飲食店詳細全体 */
+/* 飲食店詳細レイアウト */
 .shop-detail {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -28,7 +28,6 @@
     font-size: 22px;
     font-weight: 500;
     background-color: white;
-    ;
     color: black;
     text-align: center;
     border-radius: 4px;
@@ -61,7 +60,7 @@
 .shop-detail__reservation-form {
     grid-column: 2;
     background-color: #2563eb;
-    border-radius: 8px;
+    border-radius: 6px;
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
 }
 
@@ -93,7 +92,7 @@
     padding: 5px 10px;
     height: 35px;
     background-color: white;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
 }
 
@@ -126,7 +125,7 @@
 /* 予約確認欄 */
 .reservation-form__confirm {
     background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
+    border-radius: 6px;
     margin: 20px 0;
     padding: 25px 20px;
     font-size: 20px;
@@ -140,8 +139,10 @@
 
 .reservation-form__header {
     width: 25%;
+    border-radius: 6px;
     font-weight: 500;
 }
+
 
 .reservation-form__header,
 .reservation-form__cell {
@@ -153,7 +154,7 @@
     width: 100%;
     padding: 20px;
     background-color: blue;
-    border-radius: 0 0 10px 10px;
+    border-radius: 0 0 8px 8px;
     font-size: 20px;
     color: white;
     text-align: center;
@@ -176,13 +177,5 @@
     .shop-detail__info,
     .shop-detail__reservation-form {
         grid-column: auto;
-    }
-
-    .shop-detail__info {
-    order: 1;
-    }
-
-    .shop-detail__reservation-form {
-        order: 2;
     }
 }

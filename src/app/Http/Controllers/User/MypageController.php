@@ -2,28 +2,33 @@
 
 namespace App\Http\Controllers\User;
 
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use App\Models\Like;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Reservation;
 
 class MypageController extends Controller
 {
+    // マイページを表示
     public function mypage()
     {
         $user = Auth::user();
 
-        // 予約を取得して、未来判定フラグを追加
+        // 予約情報を取得
         $reservations = Reservation::where('user_id', $user->id)
             ->with('shop')
-            ->get()
-            ->map(function ($reservation) {
-                $reservation->isFuture = Carbon::parse($reservation->date)->isFuture();
-                return $reservation;
-            });
+            ->orderBy('date', 'desc')
+            ->paginate(10);
 
-        $favorites = Like::with('shop.area', 'shop.genre')->where('user_id', $user->id)->get();
+        foreach ($reservations as $reservation) {
+            $reservation->isFuture = Carbon::parse($reservation->date)->isFuture();
+        }
+
+        // いいね店舗を取得
+        $favorites = Like::with('shop.area', 'shop.genre')
+            ->where('user_id', $user->id)
+            ->paginate(10);
 
         return view('user.mypage', compact('user', 'reservations', 'favorites'));
     }

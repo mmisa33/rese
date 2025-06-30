@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\User;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Reservation;
 use App\Models\Review;
 use App\Http\Requests\ReviewRequest;
-use Illuminate\Support\Facades\Auth;
+
 
 class ReviewController extends Controller
 {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Owner;
 
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ShopRequest;
 use App\Models\Area;
@@ -10,6 +11,7 @@ use App\Models\NoticeMail;
 
 class OwnerController extends Controller
 {
+    // 店舗代表者の管理者ページを表示
     public function index()
     {
         $owner = auth()->user();
@@ -20,8 +22,7 @@ class OwnerController extends Controller
             ? $shop->reservations()->orderBy('date', 'desc')->orderBy('time', 'desc')->get()
             : collect();
 
-        // ログイン中のオーナーが送信したお知らせメールだけ取得
-        $notices = NoticeMail::where('user_id', auth()->id())->latest()->paginate(10);
+        $notices = NoticeMail::where('user_id', auth()->id())->latest()->paginate(15);
 
         $areas = Area::all();
         $genres = Genre::all();
@@ -29,6 +30,7 @@ class OwnerController extends Controller
         return view('owner.index', compact('shop', 'reservations', 'areas', 'genres', 'notices'));
     }
 
+    // 店舗情報の登録処理
     public function storeShop(ShopRequest $request)
     {
         $owner = auth()->user();
@@ -44,6 +46,7 @@ class OwnerController extends Controller
         return redirect()->route('owner.index')->with('success', '店舗情報を登録しました');
     }
 
+    // 店舗情報の更新処理
     public function updateShop(ShopRequest $request)
     {
         $shop = auth()->user()->shop;
@@ -51,6 +54,12 @@ class OwnerController extends Controller
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
+            // 古い画像ファイルを削除
+            if ($shop->image_path && Storage::exists($shop->image_path)) {
+                Storage::delete($shop->image_path);
+            }
+
+            // 新しい画像を保存
             $validated['image_path'] = $request->file('image')->store('public/shop_images');
         }
 
@@ -58,12 +67,4 @@ class OwnerController extends Controller
 
         return redirect()->route('owner.index')->with('success', '店舗情報を更新しました');
     }
-
-    // public function reservations()
-    // {
-    //     $shop = auth()->user()->shop;
-    //     $reservations = $shop->reservations()->with('user')->orderBy('datetime')->get();
-
-    //     return view('owner.reservations.index', compact('reservations'));
-    // }
 }

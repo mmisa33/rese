@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\UpdateOwnerRequest;
-use Illuminate\Http\Request;
 use App\Models\User;
 
 class OwnerController extends Controller
@@ -19,10 +20,12 @@ class OwnerController extends Controller
     // 店舗代表者の登録処理
     public function store(RegisterRequest $request)
     {
+        $data = $request->validated();
+
         User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
             'role' => 'owner',
         ]);
 
@@ -30,9 +33,10 @@ class OwnerController extends Controller
     }
 
     // 店舗代表者詳細ページを表示
-    public function show($id)
+    public function show(User $owner)
     {
-        $owner = User::with('shop')->findOrFail($id);
+        $owner->load('shop');
+
         return view('admin.owner.detail', compact('owner'));
     }
 
@@ -63,11 +67,12 @@ class OwnerController extends Controller
         }
 
         // 店舗があれば先に削除
-        if ($owner->shop) {
-            $owner->shop->delete();
-        }
-
-        $owner->delete();
+        DB::transaction(function () use ($owner) {
+            if ($owner->shop) {
+                $owner->shop->delete();
+            }
+            $owner->delete();
+        });
 
         return redirect()->route('admin.index')
             ->with('status', '店舗代表者を削除しました');

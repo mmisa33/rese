@@ -1,11 +1,11 @@
-/* サンクスフォーム */
+/* 全体レイアウト */
 .thanks-form {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* フォームボックス */
+/* サンクスフォーム */
 .thanks-form__inner {
     width: 28vw;
     padding: 110px 30px;
@@ -39,10 +39,5 @@
 @media screen and (min-width: 768px) and (max-width: 850px) {
     .thanks-form__inner {
         width: 50vw;
-    }
-
-    .thanks-form__message {
-        font-size: 23px;
-        font-weight: 500;
     }
 }

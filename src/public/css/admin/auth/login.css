@@ -1,4 +1,4 @@
-/* ログインフォーム */
+/* 全体レイアウト */
 .admin-login-form {
     display: flex;
     justify-content: center;
@@ -6,7 +6,7 @@
     height: 100vh;
 }
 
-/* フォームボックス */
+/* 管理者用ログインフォーム */
 .admin-login-form__inner {
     width: 28vw;
     background-color: white;
@@ -15,7 +15,6 @@
     overflow: hidden;
 }
 
-/* ヘッダー部分 */
 .admin-login-form__header {
     background-color: #2962ff;
     color: white;
@@ -25,12 +24,10 @@
     font-size: 18px;
 }
 
-/* フォーム本体 */
 .admin-login-form__form {
     padding: 20px 30px;
 }
 
-/* 各入力グループ */
 .admin-login-form__group {
     display: flex;
     align-items: center;
@@ -40,14 +37,12 @@
     box-sizing: border-box;
 }
 
-/* アイコン */
 .admin-login-form__label .icon {
     width: 28px;
     height: 28px;
     margin-right: 10px;
 }
 
-/* 入力フォーム */
 .admin-login-form__field {
     width: 100%;
     display: flex;

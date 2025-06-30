@@ -1,4 +1,4 @@
-/* ログインフォーム */
+/* 全体レイアウト */
 .owner-login-form {
     display: flex;
     justify-content: center;
@@ -6,7 +6,7 @@
     height: 100vh;
 }
 
-/* フォームボックス */
+/* 店舗代表者用ログインフォーム */
 .owner-login-form__inner {
     width: 28vw;
     background-color: white;
@@ -15,7 +15,6 @@
     overflow: hidden;
 }
 
-/* ヘッダー部分 */
 .owner-login-form__header {
     background-color: #2962ff;
     color: white;
@@ -25,12 +24,10 @@
     font-size: 18px;
 }
 
-/* フォーム本体 */
 .owner-login-form__form {
     padding: 20px 30px;
 }
 
-/* 各入力グループ */
 .owner-login-form__group {
     display: flex;
     align-items: center;
@@ -40,14 +37,12 @@
     box-sizing: border-box;
 }
 
-/* アイコン */
 .owner-login-form__label .icon {
     width: 28px;
     height: 28px;
     margin-right: 10px;
 }
 
-/* 入力フォーム */
 .owner-login-form__field {
     width: 100%;
     display: flex;
