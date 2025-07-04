@@ -22,6 +22,8 @@ class CreateShopsTable extends Migration
             $table->text('description');
             $table->string('image_path');
             $table->timestamps();
+
+            $table->unique('owner_id'); // 1ユーザー＝1店舗
         });
     }
 

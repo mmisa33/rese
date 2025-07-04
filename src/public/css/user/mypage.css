@@ -149,7 +149,7 @@
     border-radius: 12px;
     text-align: center;
     position: relative;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
 }
 
 .qr-modal__close {
@@ -185,8 +185,8 @@
     flex-direction: column;
     margin-bottom: 10px;
     background-color: white;
-    box-shadow: 4px 3px 6px rgba(0, 0, 0, 0.4);
-    border-radius: 6px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
     overflow: hidden;
 }
 
