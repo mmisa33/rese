@@ -22,47 +22,38 @@
 
                 {{-- 日付 --}}
                 <div class="reservation-form__select">
-                    <input class="reservation-form__select--date" type="date" name="date" value="{{ old('date', $reservation->date) }}">
+                    <input class="reservation-form__select--date" type="date" id="date" name="date" value="{{ old('date', $reservation->date) }}">
                 </div>
-                @error('date')
-                    <p class="error-message">{{ $message }}</p>
-                @enderror
 
                 {{-- 時間 --}}
                 <div class="reservation-form__select select-wrapper">
-                    <select class="reservation-form__select--time" name="time">
+                    <select class="reservation-form__select--time" id="time" name="time">
                         <option value="">時間を選択</option>
                         @foreach ($timeOptions as $time)
                         <option value="{{ $time }}" {{ old('time', $reservation->time) == $time ? 'selected' : '' }}>{{ $time }}</option>
                         @endforeach
                     </select>
-                    <img src="{{ asset('images/icon/select.png') }}" alt="Select Icon" class="select-icon">
+                    <img src="{{ asset('images/icon/select.png') }}" alt="選択アイコン" class="select-icon">
                 </div>
-                @error('time')
-                    <p class="error-message">{{ $message }}</p>
-                @enderror
 
                 {{-- 人数 --}}
                 <div class="reservation-form__select select-wrapper">
-                    <select class="reservation-form__select--number" name="number">
+                    <select class="reservation-form__select--number" id="number" name="number">
                         <option value="">人数を選択</option>
                         @foreach ($peopleOptions as $num)
                         <option value="{{ $num }}" {{ old('number', $reservation->number) == $num ? 'selected' : '' }}>{{ $num }}人</option>
                         @endforeach
                     </select>
-                    <img src="{{ asset('images/icon/select.png') }}" alt="Select Icon" class="select-icon">
+                    <img src="{{ asset('images/icon/select.png') }}" alt="選択アイコン" class="select-icon">
                 </div>
-                @error('number')
-                    <p class="error-message">{{ $message }}</p>
-                @enderror
 
                 {{-- 確認欄 --}}
                 <div class="reservation-form__confirm">
                     <table class="reservation-form__table">
                         <tr><th class="reservation-form__header">Shop</th><td class="reservation-form__cell">{{ $reservation->shop->name }}</td></tr>
-                        <tr><th class="reservation-form__header">Date</th><td class="reservation-form__cell">{{ old('date', $reservation->date) }}</td></tr>
-                        <tr><th class="reservation-form__header">Time</th><td class="reservation-form__cell">{{ old('time', $reservation->time) }}</td></tr>
-                        <tr><th class="reservation-form__header">Number</th><td class="reservation-form__cell">{{ old('number', $reservation->number) }}人</td></tr>
+                        <tr><th class="reservation-form__header">Date</th><td class="reservation-form__cell" id="confirm-date">{{ old('date', $reservation->date) }}</td></tr>
+                        <tr><th class="reservation-form__header">Time</th><td class="reservation-form__cell" id="confirm-time">{{ old('time', $reservation->time) }}</td></tr>
+                        <tr><th class="reservation-form__header">Number</th><td class="reservation-form__cell" id="confirm-number">{{ old('number', $reservation->number) }}人</td></tr>
                     </table>
                 </div>
             </div>
@@ -71,4 +62,28 @@
         </form>
     </div>
 </div>
+
+{{-- 選択項目を確認欄に即時反映 --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const dateInput = document.getElementById('date');
+        const timeSelect = document.getElementById('time');
+        const numberSelect = document.getElementById('number');
+        const confirmDate = document.getElementById('confirm-date');
+        const confirmTime = document.getElementById('confirm-time');
+        const confirmNumber = document.getElementById('confirm-number');
+
+        function updateConfirm() {
+            confirmDate.textContent = dateInput.value || '未選択';
+            confirmTime.textContent = timeSelect.value || '未選択';
+            confirmNumber.textContent = numberSelect.value ? numberSelect.value + '人' : '未選択';
+        }
+
+        [dateInput, timeSelect, numberSelect].forEach(el => {
+            if (el) el.addEventListener('change', updateConfirm);
+        });
+
+        updateConfirm(); // 初期状態でも反映
+    });
+</script>
 @endsection
