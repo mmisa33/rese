@@ -67,6 +67,7 @@
     </div>
 </div>
 
+{{-- 「手動指定」選択時にメールアドレス入力欄を表示 --}}
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const target = document.getElementById('target');

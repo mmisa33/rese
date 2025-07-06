@@ -43,7 +43,7 @@
                             <label for="image"  class="shop-info__form--label">イメージ画像</label>
                             @if(isset($shop) && $shop->image_path)
                                 <div class="shop-info__img">
-                                    <img id="preview-img" src="{{ Storage::url($shop->image_path) }}" alt="Shop Image">
+                                    <img id="preview-img" src="{{ Storage::disk(config('filesystems.default') === 'local' ? 'public' : config('filesystems.default'))->url($shop->image_path) }}" alt="Shop Image">
                                 </div>
                             @else
                                 <div class="shop-info__img">

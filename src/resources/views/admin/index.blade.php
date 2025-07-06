@@ -73,10 +73,6 @@
                 @else
                     <div class="notice-mail__empty">お知らせは送信されていません</div>
                 @endif
-
-                <div class="pagination">
-                    {{ $notices->links() }}
-                </div>
             </div>
         </div>
     </div>

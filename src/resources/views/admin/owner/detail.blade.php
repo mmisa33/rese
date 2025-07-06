@@ -11,6 +11,7 @@
         <h2>店舗代表者情報</h2>
     </div>
 
+    {{-- 店舗代表者更新フォーム --}}
     <div class="owner-detail__content">
         <div class="owner-detail__info">
             <form method="POST" action="{{ route('admin.owner.destroy', $owner->id) }}">

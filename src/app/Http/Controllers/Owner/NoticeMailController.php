@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Owner;
 
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NoticeMailRequest;
 use App\Models\User;
@@ -63,9 +64,10 @@ class NoticeMailController extends Controller
             foreach ($emails as $email) {
                 Mail::to($email)->send(new NoticeMailable($request->subject, $request->message));
             }
-        // エラー発生時
-        } catch (\Throwable) {
-            return back()->withErrors('メール送信中にエラーが発生しました。再度お試しください。');
+        } catch (\Throwable $e) {
+            // ログ出力などエラーハンドリング
+            Log::error($e);
+            return back()->withErrors('メール送信中にエラーが発生しました。');
         }
 
         NoticeMail::create([
