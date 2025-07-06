@@ -33,12 +33,26 @@ class OwnerController extends Controller
     // 店舗情報の登録処理
     public function storeShop(ShopRequest $request)
     {
-        $owner = auth()->user();
-
+        $owner     = auth()->user();
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
-            $validated['image_path'] = $request->file('image')->store('public/shop_images');
+            $disk = config('filesystems.default'); // local or s3
+
+            // localが 'local' の場合は、公開用の 'public' に置き換え（storage:link前提）
+            if ($disk === 'local') {
+                $disk = 'public';
+            }
+
+            // 画像をアップロード
+            $path = $request->file('image')->store('shops', $disk);
+
+            // S3の際は公開権限を付与
+            if ($disk === 's3') {
+                Storage::disk('s3')->setVisibility($path, 'public');
+            }
+
+            $validated['image_path'] = $path;
         }
 
         $owner->shop()->create($validated);
@@ -49,18 +63,29 @@ class OwnerController extends Controller
     // 店舗情報の更新処理
     public function updateShop(ShopRequest $request)
     {
-        $shop = auth()->user()->shop;
-
+        $shop      = auth()->user()->shop;
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
-            // 古い画像ファイルを削除
-            if ($shop->image_path && Storage::exists($shop->image_path)) {
-                Storage::delete($shop->image_path);
+            $disk = config('filesystems.default'); // local or s3
+
+            if ($disk === 'local') {
+                $disk = 'public';
             }
 
-            // 新しい画像を保存
-            $validated['image_path'] = $request->file('image')->store('public/shop_images');
+            // 旧ファイルを削除
+            if ($shop->image_path && Storage::disk($disk)->exists($shop->image_path)) {
+                Storage::disk($disk)->delete($shop->image_path);
+            }
+
+            // 新しい画像をアップロード
+            $path = $request->file('image')->store('shops', $disk);
+
+            if ($disk === 's3') {
+                Storage::disk('s3')->setVisibility($path, 'public');
+            }
+
+            $validated['image_path'] = $path;
         }
 
         $shop->update($validated);

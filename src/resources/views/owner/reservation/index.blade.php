@@ -11,27 +11,16 @@
         <h2 class="owner-reservation__header">予約一覧</h2>
     </div>
 
-    @if (!isset($shopExists) || !$shopExists)
-        <p class="notice-mail__empty">店舗情報が作成されていません</p>
+    @if (isset($shopExists) && !$shopExists)
+        <p class="owner-reservation__empty">店舗情報が作成されていません</p>
         @else
         @if ($reservations->isEmpty())
-            <p class="notice-mail__empty">予約はありません</p>
+            <p class="owner-reservation__empty">予約はありません</p>
         @else
             <table class="reservation-table">
                 <thead class="reservation-table__thead">
                     <tr class="reservation-table__row">
-                        <th class="reservation-table__head">
-                            <form method="GET" action="{{ route('owner.reservation') }}">
-                                <select class="reservation-table__select" name="date" id="date" onchange="this.form.submit()">
-                                    <option value="">予約日&emsp;▼</option>
-                                    @foreach ($dates as $raw => $formatted)
-                                        <option value="{{ $raw }}" @if($selectedDate === $raw) selected @endif>
-                                            {{ $formatted }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </form>
-                        </th>
+                        <th class="reservation-table__head">予約日</th>
                         <th class="reservation-table__head">時間</th>
                         <th class="reservation-table__head">人数</th>
                         <th class="reservation-table__head">ユーザー名</th>

@@ -55,7 +55,7 @@
                         <button type="submit" class="header__menu-form--logout">Logout</button>
                     </form>
                 @endif
-=
+
             @else
                 {{-- 未ログイン時 --}}
                 @if (Request::is('admin/*') || Request::is('owner/*'))

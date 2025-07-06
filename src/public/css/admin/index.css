@@ -1,16 +1,14 @@
 /* 全体レイアウト */
 .admin-home__header {
-    width: 100%;
-    margin-bottom: 25px;
     font-size: 36px;
     text-align: center;
+    margin-bottom: 30px;
 }
 
 .admin-home__container {
     display: flex;
-    width: 100%;
     gap: 120px;
-    padding: 30px;
+    padding: 20px;
     margin-bottom: 80px;
 }
 
@@ -33,7 +31,7 @@
     margin-bottom: 40px;
     padding: 40px;
     background-color: white;
-    border-radius: 8px;
+    border-radius: 6px;
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
     font-size: 20px;
     color: black;
@@ -53,13 +51,13 @@
 
 .create-btn,
 .submit-btn {
-    background-color: #3366ff;
+    padding: 10px 25px;
+    background-color: #2962ff;
     color: white;
-    padding: 7px 15px;
-    border-radius: 5px;
+    border-radius: 6px;
     text-align: center;
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 /* 店舗代表者一覧 */
@@ -111,8 +109,8 @@
 
 .notice-mail__subject {
     margin-left: 12px;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 20px;
+    font-weight: 500;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
