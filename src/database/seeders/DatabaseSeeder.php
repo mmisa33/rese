@@ -17,7 +17,10 @@ class DatabaseSeeder extends Seeder
             AreasTableSeeder::class,
             GenresTableSeeder::class,
             ShopsTableSeeder::class,
+            AdminSeeder::class,
+            OwnerSeeder::class,
             UserSeeder::class,
+            NoticeMailsTableSeeder::class,
         ]);
     }
 }

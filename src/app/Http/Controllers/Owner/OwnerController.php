@@ -39,7 +39,7 @@ class OwnerController extends Controller
         if ($request->hasFile('image')) {
             $disk = config('filesystems.default'); // local or s3
 
-            // localが 'local' の場合は、公開用の 'public' に置き換え（storage:link前提）
+            // localが 'local' の場合は、公開用の 'public' に置き換え
             if ($disk === 'local') {
                 $disk = 'public';
             }
