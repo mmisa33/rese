@@ -64,7 +64,7 @@ Reseは、飲食店の検索・予約・レビューができるWebアプリケ�
 
 ## 使用技術（実行環境）  
 - **言語／フレームワーク**: PHP 8.4.4 / Laravel 8.83.8
-- **データベース**: MariaDB 10.3.39 (MySQL互換)
+- **データベース**: MySQL 8.0.41（開発環境では MariaDB 10.3.39 を使用）
 - **インフラ**: AWS（EC2, RDS, S3）
 - **開発環境構築**: Docker
 - **バージョン管理**: GitHub
@@ -86,7 +86,7 @@ Reseは、飲食店の検索・予約・レビューができるWebアプリケ�
 
 1. リポジトリをクローン
    ```bash
-   git clone git@github.com:mmisa33/rese-reservation-app.git
+   git clone git@github.com:mmisa33/rese.git
 2. プロジェクトフォルダに移動
     ```bash
     cd rese
