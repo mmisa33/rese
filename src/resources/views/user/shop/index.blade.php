@@ -51,7 +51,7 @@
         @foreach ($shops as $shop)
             <div class="shop__card">
                 {{-- イメージ画像 --}}
-                <img src="{{ Storage::url($shop->image_path) }}" alt="{{ $shops->name }}" class="shop__card-image">
+                <img src="{{ Storage::url($shop->image_path) }}" alt="{{ $shop->name }}" class="shop__card-image">
 
                 <div class="shop__card-body">
                     {{-- 飲食店名 --}}
