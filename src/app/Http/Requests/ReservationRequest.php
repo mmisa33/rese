@@ -7,12 +7,12 @@ use App\Models\Reservation;
 
 class ReservationRequest extends FormRequest
 {
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'date' => ['required', 'date', 'after:today'],
@@ -21,7 +21,7 @@ class ReservationRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'date.required' => '日付を選択してください',
@@ -32,7 +32,7 @@ class ReservationRequest extends FormRequest
     }
 
     // // 同じ店舗に同日に予約が重複していないかをチェック
-    public function withValidator($validator)
+    public function withValidator($validator): void
     {
         $validator->after(function ($validator) {
             $userId = auth()->id();

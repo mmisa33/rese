@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class NoticeMailRequest extends FormRequest
 {
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -34,7 +34,7 @@ class NoticeMailRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'target.required' => '宛先を選択してください',

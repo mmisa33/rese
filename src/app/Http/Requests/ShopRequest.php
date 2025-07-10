@@ -20,11 +20,9 @@ class ShopRequest extends FormRequest
             'description' => ['required', 'string', 'max:500'],
         ];
 
-        if ($this->isMethod('post')) {
-            $rules['image'] = ['required', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'];
-        } else {
-            $rules['image'] = ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'];
-        }
+        $rules['image'] = $this->isMethod('post')
+            ? ['required', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048']
+            : ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'];
 
         return $rules;
     }
