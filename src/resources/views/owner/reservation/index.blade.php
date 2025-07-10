@@ -11,6 +11,32 @@
         <h2 class="owner-reservation__header">予約一覧</h2>
     </div>
 
+    {{-- 検索フォーム --}}
+    <form method="GET" action="{{ route('owner.reservation') }}" class="search-form" id="search-form">
+
+        {{-- 月指定検索 --}}
+        <div class="search-form__month">
+            <input type="month" name="month" value="{{ request('month') }}" class="search-form__month--input">
+        </div>
+
+        {{-- 並び順 --}}
+        <div class="search-form__sort">
+            <select name="sort" class="search-form__sort--select">
+                <option value="">並び替え</option>
+                <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>昇順</option>
+                <option value="desc" {{ request('sort') == 'desc' ? 'selected' : '' }}>降順</option>
+            </select>
+            <img src="{{ asset('images/icon/select.png') }}" alt="Select Icon" class="select-icon">
+        </div>
+
+        {{-- キーワード --}}
+        <button type="submit" class="search-form__btn">
+            <img src="{{ asset('images/icon/search.png') }}" alt="Search" class="keyword-icon">
+        </button>
+        <input class="search-form__keyword-input" type="text" name="keyword" placeholder="予約ユーザー名検索" value="{{ request('keyword') }}">
+    </form>
+
+    {{-- 予約一覧 --}}
     @if (isset($shopExists) && !$shopExists)
         <p class="owner-reservation__empty">店舗情報が作成されていません</p>
         @else
@@ -39,5 +65,25 @@
             </table>
         @endif
     @endif
+
+    <div class="pagination">
+        {{ $reservations->links() }}
+    </div>
 </div>
+
+{{-- 検索ボックス選択時に自動で絞り込み --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('search-form');
+
+        // 月指定・並び順セレクトに変更イベントを設定
+        form.querySelector('input[name="month"]').addEventListener('change', () => {
+            form.submit();
+        });
+
+        form.querySelector('select[name="sort"]').addEventListener('change', () => {
+            form.submit();
+        });
+    });
+</script>
 @endsection

@@ -1,3 +1,60 @@
+/* 検索フォーム */
+.search-form {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    padding: 10px 10px;
+    width: 50%;
+    background-color: white;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.search-form__keyword-input {
+    padding: 0 5px;
+    height: 38px;
+}
+
+.search-form__month,
+.search-form__sort {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 38px;
+    border-right: 1px solid #C8C8C8;
+}
+
+.search-form__month {
+    width: 27%;
+}
+
+.search-form__month--input,
+.search-form__sort--select {
+    padding: 5px 35px 5px 13px;
+    cursor: pointer;
+}
+
+.select-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    width: 15px;
+    height: 10px;
+    cursor: pointer;
+}
+
+.keyword-icon {
+    display: flex;
+    align-items: center;
+    width: 18px;
+    height: 18px;
+    margin: 0 10px;
+}
+
 /* 全体レイアウト */
 .owner-reservation {
     margin-bottom: 80px;
@@ -26,6 +83,7 @@
 }
 
 .owner-reservation__empty {
+    margin-top: 40px;
     padding: 20px;
     text-align: center;
     font-size: 18px;
@@ -78,6 +136,10 @@
         }
 
     .owner-reservation__empty {
+        width: 100%;
+    }
+
+    .search-form {
         width: 100%;
     }
 }

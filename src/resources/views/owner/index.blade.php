@@ -49,6 +49,7 @@
                                     style="{{ $imageUrl ? '' : 'display: none;' }}">
                             </div>
                         <input type="file" name="image" id="image" class="shop-info__form--input">
+                    </div>
                         @error('image')
                             <p class="error-message">{{ $message }}</p>
                         @enderror
