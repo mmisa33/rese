@@ -45,7 +45,7 @@
                             $disk = config('filesystems.default') === 'local' ? 'public' : config('filesystems.default');
                             $imageUrl = isset($shop) && $shop->image_path ? Storage::disk($disk)->url($shop->image_path) : '';
                         @endphp
-                    
+                        
                         <div class="shop-info__img">
                             <img
                                 id="preview-img"
@@ -53,8 +53,8 @@
                                 alt="Shop Image"
                                 style="{{ $imageUrl ? '' : 'display: none;' }}">
                         </div>
-                            <input type="file" name="image" id="image" class="shop-info__form--input">
-                        </div>
+                        
+                        <input type="file" name="image" id="image" class="shop-info__form--input">
                         @error('image')
                             <p class="error-message">{{ $message }}</p>
                         @enderror
