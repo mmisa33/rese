@@ -8,12 +8,7 @@ use App\Models\User;
 
 class UpdateOwnerRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -43,11 +38,9 @@ class UpdateOwnerRequest extends FormRequest
     {
         $ownerParam = $this->route('owner');
 
-        if ($ownerParam instanceof User) {
-            return $ownerParam;
-        }
-
-        return User::find($ownerParam);
+        return $ownerParam instanceof User
+            ? $ownerParam
+            : User::find($ownerParam);
     }
 
     public function messages(): array
