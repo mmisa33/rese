@@ -41,15 +41,18 @@
                         {{-- 画像 --}}
                         <div class="shop-info__form-group">
                             <label for="image"  class="shop-info__form--label">イメージ画像</label>
-                            @if(isset($shop) && $shop->image_path)
-                                <div class="shop-info__img">
-                                    <img id="preview-img" src="{{ Storage::disk(config('filesystems.default') === 'local' ? 'public' : config('filesystems.default'))->url($shop->image_path) }}" alt="Shop Image">
-                                </div>
-                            @else
-                                <div class="shop-info__img">
-                                    <img id="preview-img" src="#" alt="Preview Image" style="display: none;">
-                                </div>
-                            @endif
+                            @php
+                            $disk = config('filesystems.default') === 'local' ? 'public' : config('filesystems.default');
+                            $imageUrl = isset($shop) && $shop->image_path ? Storage::disk($disk)->url($shop->image_path) : '';
+                        @endphp
+                    
+                        <div class="shop-info__img">
+                            <img
+                                id="preview-img"
+                                src="{{ $imageUrl ?: '#' }}"
+                                alt="Shop Image"
+                                style="{{ $imageUrl ? '' : 'display: none;' }}">
+                        </div>
                             <input type="file" name="image" id="image" class="shop-info__form--input">
                         </div>
                         @error('image')
