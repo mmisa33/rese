@@ -24,8 +24,9 @@ class ReservationController extends Controller
         // 検索フィルター
         $filters = [
             'month' => $request->input('month'),
-            'keyword' => $request->input('keyword'),
             'sort' => $request->input('sort'),
+            'visit_status' => $request->input('visit_status'),
+            'keyword' => $request->input('keyword'),
         ];
 
         $reservations = Reservation::with('user')
