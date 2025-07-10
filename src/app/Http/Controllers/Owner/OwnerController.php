@@ -27,7 +27,18 @@ class OwnerController extends Controller
         $areas = Area::all();
         $genres = Genre::all();
 
-        return view('owner.index', compact('shop', 'reservations', 'areas', 'genres', 'notices'));
+        $imageUrl = '';
+        if ($shop && $shop->image_path) {
+            $disk = config('filesystems.default');
+            if ($disk === 'local') {
+                $disk = 'public';
+            }
+
+            $imageUrl = Storage::disk($disk)->url($shop->image_path);
+
+        }
+
+        return view('owner.index', compact('shop', 'reservations', 'areas', 'genres', 'notices', 'imageUrl'));
     }
 
     // 店舗情報の登録処理
