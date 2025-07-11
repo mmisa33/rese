@@ -1,9 +1,9 @@
 /* 全体レイアウト */
-.admin-notice-detail {
+.notice-detail {
     margin-bottom: 80px;
 }
 
-.admin-notice-detail__title {
+.notice-detail__title {
     display: flex;
     align-items: center;
     gap: 15px;
@@ -25,7 +25,7 @@
 }
 
 /* メール詳細 */
-.admin-notice-detail__content {
+.notice-detail__content {
     margin: 60px auto;
     width: 48%;
     background-color: #ffffff;
@@ -36,16 +36,16 @@
     font-size: 20px;
 }
 
-.admin-notice-detail__item {
+.notice-detail__item {
     margin-bottom: 25px;
 }
 
-.admin-notice-detail__label {
+.notice-detail__label {
     margin-bottom: 6px;
     font-weight: 500;
 }
 
-.admin-notice-detail__value {
+.notice-detail__value {
     background-color: #f9fafc;
     padding: 8px 14px;
     border: 1px solid #ddd;
@@ -55,7 +55,7 @@
 
 /* レスポンシブデザイン (タブレット768px - 850px) */
 @media screen and (min-width: 768px) and (max-width: 850px) {
-    .admin-notice-detail__content {
+    .notice-detail__content {
         width: 95%;
     }
 }

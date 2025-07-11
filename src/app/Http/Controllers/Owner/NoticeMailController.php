@@ -45,6 +45,7 @@ class NoticeMailController extends Controller
             $shop = $owner->shop;
             if ($shop) {
                 $emails = $shop->likedByUsers()
+                    ->get()
                     ->pluck('email')
                     ->unique()
                     ->toArray();
@@ -55,9 +56,9 @@ class NoticeMailController extends Controller
             $emails = array_map('trim', explode(',', $request->emails));
         }
 
-        // メール送信
+        // エラー表示
         if (empty($emails)) {
-            return back()->withErrors('送信対象のメールアドレスが見つかりません。');
+            return back()->withErrors(['send_error' => '送信対象のメールアドレスが見つかりません']);
         }
 
         try {
@@ -65,9 +66,8 @@ class NoticeMailController extends Controller
                 Mail::to($email)->send(new NoticeMailable($request->subject, $request->message));
             }
         } catch (\Throwable $e) {
-            // ログ出力などエラーハンドリング
             Log::error($e);
-            return back()->withErrors('メール送信中にエラーが発生しました。');
+            return back()->withErrors(['send_error' => 'メール送信中にエラーが発生しました']);
         }
 
         NoticeMail::create([

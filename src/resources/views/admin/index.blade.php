@@ -2,6 +2,7 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/admin/index.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/shared/notice/list.css') }}">
 @endsection
 
 @section('content')
@@ -41,40 +42,18 @@
                 @endforeach
 
                 <div class="pagination">
-                    {{ $owners->links() }}
+                    {{ $owners->appends(request()->except('owners_page'))->links() }}
                 </div>
             </div>
         </div>
 
         {{-- お知らせメール一覧 --}}
-        <div class="notice-mail">
-            <h3 class="notice-mail__title">お知らせメール</h3>
-            <div class="notice-mail__section">
-                <div class="notice-mail__submit-btn">
-                    <a href="{{ route('admin.notice.form') }}" class="submit-btn">新規作成</a>
-                </div>
-
-                @if ($notices->isNotEmpty())
-                    <ul class="notice-mail__list">
-                        @foreach ($notices as $notice)
-                            <li class="notice-mail__item">
-                                <a href="{{ route('admin.notice.show', $notice->id) }}" class="notice-mail__link">
-                                    <div class="notice-mail__row">
-                                        <div class="notice-mail__date">
-                                            <img src="{{ asset('images/icon/email.png') }}" alt="Email Icon" class="icon">
-                                            {{ $notice->created_at->format('Y/m/d H:i') }}
-                                        </div>
-                                        <div class="notice-mail__subject">{{ $notice->subject }}</div>
-                                    </div>
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                @else
-                    <div class="notice-mail__empty">お知らせは送信されていません</div>
-                @endif
-            </div>
-        </div>
+        @include('shared.notice.list', [
+            'title' => 'お知らせメール',
+            'createRoute' => route('admin.notice.form'),
+            'showRoute' => 'admin.notice.show',
+            'notices' => $notices
+        ])
     </div>
 </div>
 @endsection

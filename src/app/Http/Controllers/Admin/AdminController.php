@@ -12,10 +12,10 @@ class AdminController extends Controller
     public function index()
     {
         // 店舗代表者を取得
-        $owners = User::where('role', 'owner')->with('shop')->paginate(15);
+        $owners = User::where('role', 'owner')->with('shop')->paginate(15, ['*'], 'owners_page');
 
         // お知らせメール一覧
-        $notices = NoticeMail::where('user_id', auth()->id())->latest()->paginate(15);
+        $notices = NoticeMail::where('user_id', auth()->id())->latest()->paginate(15, ['*'], 'notices_page');
 
         return view('admin.index', compact('owners', 'notices'));
     }
