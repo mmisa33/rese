@@ -56,11 +56,7 @@ class OwnerController extends Controller
             }
 
             // 画像をアップロード
-            $filename = pathinfo($request->file('image')->getClientOriginalName(), PATHINFO_FILENAME);
-            $extension = $request->file('image')->getClientOriginalExtension();
-            $uniqueFilename = $filename . '_' . time() . '.' . $extension;
-
-            $path = $request->file('image')->storeAs('shops', $uniqueFilename, $disk);
+            $path = $request->file('image')->store('shops', $disk);
 
             // S3の際は公開権限を付与
             if ($disk === 's3') {
@@ -88,17 +84,8 @@ class OwnerController extends Controller
                 $disk = 'public';
             }
 
-            // 旧ファイルを削除
-            if ($shop->image_path && Storage::disk($disk)->exists($shop->image_path)) {
-                Storage::disk($disk)->delete($shop->image_path);
-            }
-
             // 新しい画像をアップロード
-            $filename = pathinfo($request->file('image')->getClientOriginalName(), PATHINFO_FILENAME);
-            $extension = $request->file('image')->getClientOriginalExtension();
-            $uniqueFilename = $filename . '_' . time() . '.' . $extension;
-
-            $path = $request->file('image')->storeAs('shops', $uniqueFilename, $disk);
+            $path = $request->file('image')->store('shops', $disk);
 
             if ($disk === 's3') {
                 Storage::disk('s3')->setVisibility($path, 'public');
