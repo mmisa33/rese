@@ -1,13 +1,12 @@
 /* 全体レイアウト */
-.admin-login-form {
+.auth-form {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
-/* 管理者用ログインフォーム */
-.admin-login-form__inner {
+.auth-form__inner {
     width: 28vw;
     background-color: white;
     border-radius: 6px;
@@ -15,7 +14,8 @@
     overflow: hidden;
 }
 
-.admin-login-form__header {
+/* ヘッダー */
+.auth-form__header {
     background-color: #2962ff;
     color: white;
     font-weight: bold;
@@ -24,11 +24,13 @@
     font-size: 18px;
 }
 
-.admin-login-form__form {
+/* フォーム全体 */
+.auth-form__form {
     padding: 20px 30px;
 }
 
-.admin-login-form__group {
+/* 入力グループ */
+.auth-form__group {
     display: flex;
     align-items: center;
     width: 100%;
@@ -37,19 +39,22 @@
     box-sizing: border-box;
 }
 
-.admin-login-form__label .icon {
+/* ラベルのアイコン */
+.auth-form__label .icon {
     width: 28px;
     height: 28px;
     margin-right: 10px;
 }
 
-.admin-login-form__field {
+/* 入力フィールドのラッパー */
+.auth-form__field {
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.admin-login-form__input {
+/* 入力フォーム */
+.auth-form__input {
     width: 100%;
     outline: none;
     border: none;
@@ -67,13 +72,14 @@
     color: red;
 }
 
-/* ログインボタン */
-.admin-login-form__btn {
+/* ボタンラッパー */
+.auth-form__btn {
     text-align: right;
     margin-top: 25px;
 }
 
-.admin-login-form__btn--submit {
+/* 送信ボタン */
+.auth-form__btn--submit {
     background-color: #2962ff;
     color: white;
     padding: 7px 15px;
@@ -84,7 +90,7 @@
 
 /* レスポンシブデザイン (タブレット768px - 850px) */
 @media screen and (min-width: 768px) and (max-width: 850px) {
-    .admin-login-form__inner {
+    .auth-form__inner {
         width: 50vw;
     }
 }
