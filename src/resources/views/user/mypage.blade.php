@@ -103,55 +103,12 @@
             </div>
         </div>
 
-        {{-- いいね一覧 --}}
+        {{-- いいね店舗一覧 --}}
         <div class="mypage__like">
             <h3 class="mypage__like-title">お気に入り店舗</h3>
-            <div class="shop__grid-container">
+            <div class="mypage__grid-container">
                 @forelse ($favorites as $favorite)
-                    <div class="shop__card">
-                        {{-- イメージ画像 --}}
-                        <img src="{{ Storage::url($favorite->shop->image_path) }}" alt="{{ $favorite->shop->name }}" class="shop__card-image">
-
-                        <div class="shop__card-body">
-                            {{-- 飲食店名 --}}
-                            <h3 class="shop__card-title">
-                                {{ $favorite->shop->name }}
-                            </h3>
-
-                            {{-- タグ --}}
-                            <p class="shop__card-tags">
-                                <span>#{{ $favorite->shop->area->name }}</span>
-                                <span>#{{ $favorite->shop->genre->name }}</span>
-                            </p>
-
-                            {{-- 詳細ボタン --}}
-                            <div class="shop__card-actions">
-                                <div class="shop__details-btn">
-                                    <a href="{{ route('shop.show', ['shop_id' => $favorite->shop->id]) }}" class="shop__details-btn--submit">詳しくみる</a>
-                                </div>
-
-                                {{-- いいねボタン --}}
-                                <div class="shop__like-btn">
-                                    @auth
-                                        <form method="POST" action="{{ route('shop.like', ['shop_id' => $favorite->shop->id]) }}" class="shop__like-form">
-                                            @csrf
-                                            <button type="submit" class="shop__like-button">
-                                                @if (auth()->user()->likes->contains('id', $favorite->shop->id))
-                                                    <i class="fa-solid fa-heart liked"></i>
-                                                @else
-                                                    <i class="fa-solid fa-heart not-liked"></i>
-                                                @endif
-                                            </button>
-                                        </form>
-                                    @else
-                                        <a href="{{ route('login') }}" class="shop__like-button">
-                                            <i class="fa-regular fa-heart"></i>
-                                        </a>
-                                    @endauth
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @include('shared.shop.card', ['shop' => $favorite->shop])
                 @empty
                     <p class="empty-message">お気に入り店舗はありません</p>
                 @endforelse
