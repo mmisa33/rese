@@ -3,15 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Shared\BaseNoticeMailController;
 use App\Http\Requests\NoticeMailRequest;
-use App\Mail\NoticeMail as NoticeMailable;
 use App\Models\User;
 use App\Models\NoticeMail;
 
-class NoticeMailController extends Controller
+class NoticeMailController extends BaseNoticeMailController
 {
     // お知らせメール送信ページを表示
     public function showNoticeForm()
@@ -32,32 +29,15 @@ class NoticeMailController extends Controller
             $emails = array_map('trim', explode(',', $request->emails));
         }
 
-        // エラー表示
-        if (empty($emails)) {
-            return back()->withErrors(['send_error' => '送信対象のメールアドレスが見つかりません']);
-        }
+        $error = $this->sendEmails($emails, $request->subject, $request->message);
+        if ($error) return $error;
 
-        try {
-            foreach ($emails as $email) {
-                Mail::to($email)->send(new NoticeMailable($request->subject, $request->message));
-            }
-        } catch (\Throwable $e) {
-            Log::error($e);
-            return back()->withErrors(['send_error' => 'メール送信中にエラーが発生しました']);
-        }
-
-        NoticeMail::create([
-            'user_id' => Auth::id(),
-            'subject' => $request->subject,
-            'message' => $request->message,
-            'target'  => $request->target,
-            'custom_emails' => $request->target === 'custom' ? $request->emails : null,
-        ]);
+        $this->createNoticeMail(Auth::id(), $request);
 
         return redirect()->route('admin.notice.form')->with('success', 'メールを送信しました');
     }
 
-    // お知らせメール送詳細ページを表示
+    // お知らせメール詳細ページを表示
     public function showNotice($id)
     {
         $notice = NoticeMail::findOrFail($id);

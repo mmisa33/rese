@@ -1,6 +1,6 @@
 <?php
 
-namespace atabase\Seeders;
+namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;

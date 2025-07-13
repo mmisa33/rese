@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers\Owner;
 
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Shared\BaseNoticeMailController;
 use App\Http\Requests\NoticeMailRequest;
 use App\Models\User;
 use App\Models\NoticeMail;
-use App\Mail\NoticeMail as NoticeMailable;
 
-class NoticeMailController extends Controller
+class NoticeMailController extends BaseNoticeMailController
 {
     // お知らせメール送信ページを表示
     public function showNoticeForm()
@@ -24,11 +21,8 @@ class NoticeMailController extends Controller
         $owner = auth()->user();
         $emails = [];
 
-        // 全一般ユーザー
         if ($request->target === 'users') {
             $emails = User::where('role', 'user')->pluck('email')->toArray();
-
-        // 予約ユーザー
         } elseif ($request->target === 'reservations') {
             $shop = $owner->shop;
             if ($shop) {
@@ -39,8 +33,6 @@ class NoticeMailController extends Controller
                     ->unique()
                     ->toArray();
             }
-
-        // お気に入り登録ユーザー
         } elseif ($request->target === 'likes') {
             $shop = $owner->shop;
             if ($shop) {
@@ -50,38 +42,19 @@ class NoticeMailController extends Controller
                     ->unique()
                     ->toArray();
             }
-
-        // 手動指定
         } elseif ($request->target === 'custom') {
             $emails = array_map('trim', explode(',', $request->emails));
         }
 
-        // エラー表示
-        if (empty($emails)) {
-            return back()->withErrors(['send_error' => '送信対象のメールアドレスが見つかりません']);
-        }
+        $error = $this->sendEmails($emails, $request->subject, $request->message);
+        if ($error) return $error;
 
-        try {
-            foreach ($emails as $email) {
-                Mail::to($email)->send(new NoticeMailable($request->subject, $request->message));
-            }
-        } catch (\Throwable $e) {
-            Log::error($e);
-            return back()->withErrors(['send_error' => 'メール送信中にエラーが発生しました']);
-        }
-
-        NoticeMail::create([
-            'user_id' => $owner->id,
-            'subject' => $request->subject,
-            'message' => $request->message,
-            'target'  => $request->target,
-            'custom_emails' => $request->target === 'custom' ? $request->emails : null,
-        ]);
+        $this->createNoticeMail($owner->id, $request);
 
         return redirect()->route('owner.notice.form')->with('success', 'メールを送信しました');
     }
 
-    // お知らせメール送詳細ページを表示
+    // お知らせメール詳細ページを表示
     public function showNotice($id)
     {
         $notice = NoticeMail::findOrFail($id);

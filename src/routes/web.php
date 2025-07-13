@@ -33,6 +33,11 @@ Route::get('/detail/{shop_id}', [ShopController::class, 'show'])->name('shop.sho
 Route::get('/done', [ReservationController::class, 'done'])->name('reservation.done');
 
 /**
+ * ▼ 一般ユーザーログイン用
+ */
+Route::post('/login', [AuthController::class, 'storeUserLogin'])->name('login.submit');
+
+/**
  * ▼ 管理者ログイン用
  */
 Route::prefix('admin')->group(function () {

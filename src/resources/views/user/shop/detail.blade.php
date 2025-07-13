@@ -10,7 +10,6 @@
     {{-- 飲食店情報 --}}
     <div class="shop-detail__info">
         <div class="page-title">
-            {{-- 戻るボタン --}}
             <a href="{{ route('shop.index') }}" class="back-btn">&lt;</a>
             <h2>{{ $shop->name }}</h2>
         </div>
