@@ -31,8 +31,8 @@ class AuthController extends Controller
 
             $request->session()->regenerate();
 
-            // ユーザーはメール認証が必須
-            if ($user instanceof MustVerifyEmail && ! $user->hasVerifiedEmail()) {
+            // ユーザーはメール認証が必須（ローカル環境の場合のみ）
+            if (app()->environment('local') && $user instanceof MustVerifyEmail && ! $user->hasVerifiedEmail()) {
                 Auth::logout();
                 return redirect()->route('verification.notice')
                     ->with('error', 'メール認証が完了していません');

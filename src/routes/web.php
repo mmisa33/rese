@@ -58,7 +58,13 @@ Route::prefix('owner')->group(function () {
 /**
  * ▼ 一般ユーザー専用ルート（ログイン＋認証必須）
  */
-Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
+$middleware = ['auth', 'role:user'];
+
+if (app()->environment('local')) {
+    $middleware[] = 'verified';
+}
+
+Route::middleware($middleware)->group(function () {
     // いいね機能
     Route::post('/like/{shop_id}', [ShopController::class, 'toggleLike'])->name('shop.like');
 
