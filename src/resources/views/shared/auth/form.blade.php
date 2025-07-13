@@ -11,7 +11,7 @@
                 <img src="{{ asset('images/icon/user.png') }}" alt="User Icon" class="icon">
             </label>
             <div class="auth-form__field">
-                <input type="text" name="name" id="name" value="{{ old('name') }}" placeholder="Username" class="auth-form__input">
+                <input type="text" name="name" id="name" value="{{ old('name') }}" placeholder="{{ $namePlaceholder ?? 'Username' }}" class="auth-form__input">
                 @error('name')
                 <p class="error-message">{{ $message }}</p>
                 @enderror

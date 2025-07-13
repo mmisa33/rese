@@ -4,6 +4,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+
 }
 
 .auth-form__inner {
@@ -91,6 +92,6 @@
 /* レスポンシブデザイン (タブレット768px - 850px) */
 @media screen and (min-width: 768px) and (max-width: 850px) {
     .auth-form__inner {
-        width: 50vw;
+        width: 55vw;
     }
 }
