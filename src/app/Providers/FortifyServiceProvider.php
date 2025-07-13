@@ -22,11 +22,15 @@ class FortifyServiceProvider extends ServiceProvider
     {
         $this->app->singleton(LoginResponse::class, CustomLoginResponse::class);
 
-        // 会員登録後にメール認証ページへリダイレクト
+        // 環境によって、登録後のリダイレクト先を変更
         $this->app->instance(RegisterResponse::class, new class implements RegisterResponse {
             public function toResponse($request)
             {
-                return redirect()->route('verification.notice');
+                if (app()->environment('production')) {
+                    return redirect()->route('thanks'); // 本番ではthanksへ
+                }
+
+                return redirect()->route('verification.notice'); // ローカルでは認証画面へ
             }
         });
     }
