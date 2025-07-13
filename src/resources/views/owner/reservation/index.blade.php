@@ -48,10 +48,10 @@
 
     {{-- 予約一覧 --}}
     @if (isset($shopExists) && !$shopExists)
-        <p class="owner-reservation__empty">店舗情報が作成されていません</p>
+        <p class="empty-message">店舗情報が作成されていません</p>
     @else
         @if ($reservations->isEmpty())
-            <p class="owner-reservation__empty">予約はありません</p>
+            <p class="empty-message">予約はありません</p>
         @else
             <table class="reservation-table">
                 <thead class="reservation-table__thead">

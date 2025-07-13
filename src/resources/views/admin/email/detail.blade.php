@@ -1,1 +1,1 @@
-@include('shared.notice.detail', ['role' => 'admin'])
+@include('common.notice.detail', ['role' => 'admin'])

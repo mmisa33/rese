@@ -7,7 +7,7 @@
     <title>Rese</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css" />
-    <link rel="stylesheet" href="{{ asset('css/common.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/common/common.css')}}">
     @yield('css')
 </head>
 

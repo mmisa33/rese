@@ -1,5 +1,6 @@
 /* 検索ボックス */
 .search-form__reservation {
+    margin-top: 40px;
     width: 60%;
     margin-left: auto;
 }
@@ -23,15 +24,8 @@
     margin-bottom: 80px;
 }
 
-.owner-reservation__empty {
+.empty-message {
     margin-top: 40px;
-    padding: 20px;
-    text-align: center;
-    font-size: 18px;
-    color: #666;
-    background-color: #f5f5f5;
-    border-radius: 6px;
-    font-weight: 500;
 }
 
 /* 予約一覧テーブル */
@@ -74,10 +68,6 @@
 
     .reservation-table__content {
         font-size: 17px;
-    }
-
-    .owner-reservation__empty {
-        width: 100%;
     }
 
     .search-form {

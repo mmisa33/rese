@@ -23,7 +23,7 @@
                 @endforeach
             </ul>
         @else
-            <p class="notice-mail__empty">お知らせは送信されていません</p>
+            <p class="empty-message">お知らせは送信されていません</p>
         @endif
 
         <div class="pagination">
