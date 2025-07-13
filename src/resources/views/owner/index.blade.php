@@ -25,7 +25,7 @@
 
                     <div class="shop-info__form">
                         @if(session('success'))
-                        <div class="flash-message success">
+                        <div class="flash-message">
                             {{ session('success') }}
                         </div>
                         @endif

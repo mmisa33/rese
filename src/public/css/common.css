@@ -175,6 +175,46 @@ input[type="text"] {
     pointer-events: none;
 }
 
+/* エラーメッセージ */
+.error-message {
+    margin-top: 4px;
+    color: red;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.error-message.white {
+    margin-top: 2px;
+    color: white;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+/* フラッシュメッセージ */
+.flash-message {
+    background-color: #e6f4ea;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+    padding: 12px 20px;
+    margin: 20px 0;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.flash-message.error {
+    background-color: #fdecea;
+    color: red;
+    border: 1px solid #f5c6cb;
+    padding: 12px 20px;
+    margin: 20px 0;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
 /* 検索ボックス */
 /* 検索フォーム共通 */
 .search-form {

@@ -17,7 +17,7 @@
             @endif
 
             @if ($errors->has('send_error'))
-                <div class="flash-message">
+                <div class="flash-message error">
                     @foreach ($errors->get('send_error') as $error)
                         {{ $error }}
                     @endforeach

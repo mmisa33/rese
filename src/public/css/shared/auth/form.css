@@ -68,9 +68,7 @@
 
 /* エラーメッセージ */
 .error-message {
-    margin-top: 4px;
-    font-size: 14px;
-    color: red;
+    font-size: 15px;
 }
 
 /* ボタンラッパー */

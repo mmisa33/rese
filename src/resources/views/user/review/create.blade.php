@@ -32,7 +32,7 @@
                     </div>
                     <input type="hidden" name="rating" id="rating" value="{{ old('rating') }}">
                     @error('rating')
-                        <p class="error-message">{{ $message }}</p>
+                        <p class="error-message white">{{ $message }}</p>
                     @enderror
                 </div>
 
@@ -42,7 +42,7 @@
                     <textarea name="comment" id="comment" rows="5" placeholder="お店の雰囲気・味・接客など">{{ old('comment') }}</textarea>
                 </div>
                 @error('comment')
-                    <p class="error-message">{{ $message }}</p>
+                    <p class="error-message white">{{ $message }}</p>
                 @enderror
             </div>
 

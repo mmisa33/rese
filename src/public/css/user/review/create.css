@@ -90,13 +90,6 @@
     border: none;
 }
 
-/* エラーメッセージ */
-.error-message {
-    margin-top: 2px;
-    color: white;
-    font-weight: 500;
-}
-
 /* レスポンシブ */
 @media screen and (max-width: 850px) {
     .review-post__form {
