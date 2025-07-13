@@ -6,9 +6,9 @@
 
 @section('content')
 <div class="reservation-edit">
-    <div class="reservation-edit__title">
+    <div class="page-title">
         <a href="{{ route('mypage') }}" class="back-btn">&lt;</a>
-        <h2 class="reservation-edit__name">予約変更</h2>
+        <h2>予約変更</h2>
     </div>
 
     {{-- 予約変更フォーム --}}

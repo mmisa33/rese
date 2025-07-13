@@ -6,9 +6,9 @@
 
 @section('content')
 <div class="owner-create">
-    <div class="owner-create__title">
+    <div class="page-title">
         <a href="{{ route('admin.index') }}" class="back-btn">&lt;</a>
-        <h2 class="owner-create__name">店舗代表者アカウント作成</h2>
+        <h2>店舗代表者アカウント作成</h2>
     </div>
 
     {{-- 店舗代表者作成フォーム --}}

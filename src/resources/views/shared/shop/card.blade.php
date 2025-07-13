@@ -1,4 +1,4 @@
-{{-- 共通ショップカードパーツ --}}
+{{-- 共通店舗カードパーツ --}}
 <div class="shop__card">
     {{-- イメージ画像 --}}
     <img src="{{ Storage::url($shop->image_path) }}" alt="{{ $shop->name }}" class="shop__card-image">

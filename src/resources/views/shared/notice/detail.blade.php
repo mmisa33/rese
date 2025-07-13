@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="notice-detail">
-    <div class="notice-detail__title">
+    <div class="page-title">
         {{-- roleによってリンク先を変更 --}}
         @if ($role === 'admin')
             <a href="{{ route('admin.index') }}" class="back-btn">&lt;</a>
@@ -15,7 +15,7 @@
         @else
             <a href="{{ url()->previous() }}" class="back-btn">&lt;</a>
         @endif
-        <h2 class="notice-detail__header">お知らせ詳細</h2>
+        <h2>お知らせ詳細</h2>
     </div>
 
     <div class="notice-detail__content">

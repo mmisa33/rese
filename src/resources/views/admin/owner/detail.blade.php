@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="owner-detail">
-    <div class="owner-detail__title">
+    <div class="page-title">
         <a href="{{ route('admin.index') }}" class="back-btn">&lt;</a>
         <h2>店舗代表者情報</h2>
     </div>

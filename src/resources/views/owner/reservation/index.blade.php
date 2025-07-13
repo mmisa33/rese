@@ -6,9 +6,9 @@
 
 @section('content')
 <div class="owner-reservation">
-    <div class="owner-reservation__title">
+    <div class="page-title">
         <a href="{{ route('owner.index') }}" class="back-btn">&lt;</a>
-        <h2 class="owner-reservation__header">予約一覧</h2>
+        <h2>予約一覧</h2>
     </div>
 
     {{-- 検索ボックス --}}

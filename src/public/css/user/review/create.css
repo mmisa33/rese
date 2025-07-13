@@ -3,30 +3,6 @@
     margin-bottom: 80px;
 }
 
-.review-post__title {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.back-btn {
-    width: 36px;
-    height: 36px;
-    font-size: 22px;
-    text-align: center;
-    line-height: 36px;
-    background-color: white;
-    color: #333;
-    border-radius: 6px;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
-    text-decoration: none;
-}
-
-.review-post__name {
-    font-size: 36px;
-    font-weight: bold;
-}
-
 /* レビュー投稿フォーム */
 .review-post__form {
     margin: 40px auto;

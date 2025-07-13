@@ -9,14 +9,10 @@
 
     {{-- 飲食店情報 --}}
     <div class="shop-detail__info">
-        <div class="info__title">
+        <div class="page-title">
             {{-- 戻るボタン --}}
             <a href="{{ route('shop.index') }}" class="back-btn">&lt;</a>
-
-            {{-- 飲食店名 --}}
-            <h2 class="info__name">
-                {{ $shop->name }}
-            </h2>
+            <h2>{{ $shop->name }}</h2>
         </div>
 
         {{-- イメージ画像 --}}

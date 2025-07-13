@@ -1,5 +1,5 @@
 <div class="notice">
-    <div class="notice__title">
+    <div class="page-title">
         <a href="{{ $back }}" class="back-btn">&lt;</a>
         <h2>お知らせメール送信</h2>
     </div>

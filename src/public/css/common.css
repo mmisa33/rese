@@ -102,6 +102,30 @@ input[type="text"] {
     width: 50%;
 }
 
+/* 各ページのヘッダー */
+/* 戻るボタン */
+.back-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 22px;
+    text-align: center;
+    line-height: 36px;
+    background-color: white;
+    color: #333;
+    border-radius: 6px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+}
+
+/* ページタイトル */
+.page-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
 /* ページネーション */
 .pagination-wrapper {
     text-align: center;

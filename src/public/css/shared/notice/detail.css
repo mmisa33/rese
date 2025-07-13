@@ -3,27 +3,6 @@
     margin-bottom: 80px;
 }
 
-.notice-detail__title {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    font-size: 25px;
-    font-weight: bold;
-}
-
-.back-btn {
-    width: 36px;
-    height: 36px;
-    font-size: 22px;
-    text-align: center;
-    line-height: 36px;
-    background-color: white;
-    color: #333;
-    border-radius: 6px;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
-    text-decoration: none;
-}
-
 /* メール詳細 */
 .notice-detail__content {
     margin: 60px auto;

@@ -6,9 +6,9 @@
 
 @section('content')
 <div class="review-post">
-    <div class="review-post__title">
+    <div class="page-title">
         <a href="{{ route('mypage') }}" class="back-btn">&lt;</a>
-        <h2 class="review-post__name">{{ $reservation->shop->name }}のレビュー</h2>
+        <h2>{{ $reservation->shop->name }}のレビュー</h2>
     </div>
 
     <div class="review-post__form">
