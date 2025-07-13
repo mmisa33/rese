@@ -151,6 +151,85 @@ input[type="text"] {
     pointer-events: none;
 }
 
+/* 検索ボックス */
+/* 検索フォーム共通 */
+.search-form {
+    display: flex;
+    align-items: center;
+    padding: 10px 10px;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    font-weight: 500;
+    font-size: 15px;
+    gap: 10px;
+}
+
+/* 各セレクトの親コンテナ */
+.search-form__group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid #ccc;
+    height: 38px;
+}
+
+/* 右端はborderなし */
+.search-form__group:last-child {
+    border-right: none;
+}
+
+/* select共通 */
+.search-form__select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    background: transparent;
+    padding: 5px 30px 5px 10px;
+    cursor: pointer;
+}
+
+/* selectの矢印アイコン */
+.search-form__select-icon {
+    position: absolute;
+    right: 10px;
+    width: 15px;
+    height: 10px;
+    pointer-events: none;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* キーワード入力 */
+.search-form__keyword {
+    flex-grow: 1;
+    min-width: 150px;
+    height: 38px;
+    box-sizing: border-box;
+}
+
+/* 検索アイコン */
+.keyword-icon {
+    display: flex;
+    align-items: center;
+    width: 18px;
+    height: 18px;
+    margin: 0 5px;
+}
+
+/* フォームの固有グループ幅 */
+.search-form__group--sort,
+.search-form__group--status,
+.search-form__group--area,
+.search-form__group--genre {
+    max-width: 150px;
+}
+
+.header__search .search-form {
+    width: 100%;
+}
+
 /* レスポンシブデザイン (タブレット768px - 850px) */
 @media screen and (min-width: 768px) and (max-width: 850px) {
     .link {

@@ -11,39 +11,39 @@
         <h2 class="owner-reservation__header">予約一覧</h2>
     </div>
 
-    {{-- 検索フォーム --}}
-    <form method="GET" action="{{ route('owner.reservation') }}" class="search-form" id="search-form">
+    {{-- 検索ボックス --}}
+    <form method="GET" action="{{ route('owner.reservation') }}" class="search-form search-form__reservation" id="search-form">
 
         {{-- 月指定検索 --}}
-        <div class="search-form__month">
-            <input type="month" name="month" value="{{ request('month') }}" class="search-form__month--input">
+        <div class="search-form__group search-form__group--month">
+            <input type="month" name="month" value="{{ request('month') }}" class="search-form__month-input">
         </div>
 
         {{-- 並び順 --}}
-        <div class="search-form__sort">
-            <select name="sort" class="search-form__sort--select">
-                <option value="">並び替え</option>
+        <div class="search-form__group search-form__group--sort">
+            <select name="sort" class="search-form__select">
+                <option value="" disabled selected>並び替え</option>
                 <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>昇順</option>
                 <option value="desc" {{ request('sort') == 'desc' ? 'selected' : '' }}>降順</option>
             </select>
-            <img src="{{ asset('images/icon/select.png') }}" alt="Select Icon" class="select-icon">
+            <img src="{{ asset('images/icon/select.png') }}" alt="Select Icon" class="search-form__select-icon">
         </div>
 
         {{-- 来店状況 --}}
-        <div class="search-form__status">
-            <select name="visit_status" class="search-form__status--select">
+        <div class="search-form__group search-form__group--status">
+            <select name="visit_status" class="search-form__select">
                 <option value="">来店状況</option>
                 <option value="visited" {{ request('visit_status') == 'visited' ? 'selected' : '' }}>来店済</option>
                 <option value="upcoming" {{ request('visit_status') == 'upcoming' ? 'selected' : '' }}>来店前</option>
             </select>
-            <img src="{{ asset('images/icon/select.png') }}" alt="Select Icon" class="select-icon">
+            <img src="{{ asset('images/icon/select.png') }}" alt="Select Icon" class="search-form__select-icon">
         </div>
 
         {{-- キーワード --}}
         <button type="submit" class="search-form__btn">
             <img src="{{ asset('images/icon/search.png') }}" alt="Search" class="keyword-icon">
         </button>
-        <input class="search-form__keyword-input" type="text" name="keyword" placeholder="ユーザー名検索" value="{{ request('keyword') }}">
+        <input type="text" name="keyword" placeholder="ユーザー名検索" value="{{ request('keyword') }}" class="search-form__keyword">
     </form>
 
     {{-- 予約一覧 --}}

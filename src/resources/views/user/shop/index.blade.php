@@ -10,8 +10,8 @@
     <form id="search-form" class="search-form" action="" method="get">
 
         {{-- 地域 --}}
-        <div class="search-form__area">
-            <select class="search-form__area-select auto-submit" name="area">
+        <div class="search-form__group search-form__group--area">
+            <select name="area" class="search-form__select auto-submit">
                 <option value="" {{ request('area') == '' ? 'selected' : '' }}>All area</option>
                 @foreach ($areas as $area)
                     <option value="{{ $area->id }}" {{ request('area') == $area->id ? 'selected' : '' }}>
@@ -19,12 +19,12 @@
                     </option>
                 @endforeach
             </select>
-            <img src="{{ asset('images/icon/select.png') }}" alt="Select Icon" class="select-icon">
+            <img src="{{ asset('images/icon/select.png') }}" alt="Select Icon" class="search-form__select-icon">
         </div>
 
         {{-- ジャンル --}}
-        <div class="search-form__genre">
-            <select class="search-form__genre-select auto-submit" name="genre">
+        <div class="search-form__group search-form__group--genre">
+            <select name="genre" class="search-form__select auto-submit">
                 <option value="" {{ request('genre') == '' ? 'selected' : '' }}>All genre</option>
                 @foreach ($genres as $genre)
                     <option value="{{ $genre->id }}" {{ request('genre') == $genre->id ? 'selected' : '' }}>
@@ -32,14 +32,14 @@
                     </option>
                 @endforeach
             </select>
-            <img src="{{ asset('images/icon/select.png') }}" alt="Select Icon" class="select-icon">
+            <img src="{{ asset('images/icon/select.png') }}" alt="Select Icon" class="search-form__select-icon">
         </div>
 
         {{-- キーワード --}}
         <button type="submit" class="search-form__btn">
             <img src="{{ asset('images/icon/search.png') }}" alt="Search" class="keyword-icon">
         </button>
-        <input class="search-form__keyword-input" type="text" name="keyword" placeholder="Search &hellip;" value="{{ request('keyword') }}">
+        <input type="text" name="keyword" placeholder="Search &hellip;" value="{{ request('keyword') }}" class="search-form__keyword">
     </form>
 </div>
 @endsection

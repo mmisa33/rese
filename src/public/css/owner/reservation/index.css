@@ -1,60 +1,21 @@
-/* 検索フォーム */
-.search-form {
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-    padding: 10px 10px;
+/* 検索ボックス */
+.search-form__reservation {
     width: 60%;
-    background-color: white;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
-    border-radius: 6px;
-    font-size: 17px;
-    font-weight: 500;
+    margin-left: auto;
 }
 
-.search-form__keyword-input {
-    padding: 0 5px;
-    height: 38px;
-}
-
-.search-form__month,
-.search-form__sort,
-.search-form__status {
-    position: relative;
-    display: flex;
-    align-items: center;
-    height: 38px;
-    border-right: 1px solid #C8C8C8;
-}
-
-.search-form__month {
+.search-form__group--month {
     max-width: 180px;
+    border-right: 1px solid #ccc;
 }
 
-.search-form__month--input,
-.search-form__sort--select,
-.search-form__status--select {
-    padding: 5px 35px 5px 13px;
+.search-form__month-input {
+    border: none;
+    padding: 5px 10px;
+    font-size: 15px;
+    height: 38px;
+    background: transparent;
     cursor: pointer;
-}
-
-.select-icon {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-    width: 15px;
-    height: 10px;
-    cursor: pointer;
-}
-
-.keyword-icon {
-    display: flex;
-    align-items: center;
-    width: 18px;
-    height: 18px;
-    margin: 0 10px;
 }
 
 /* 全体レイアウト */
@@ -130,12 +91,12 @@
 /* レスポンシブデザイン (タブレット768px - 850px) */
 @media screen and (min-width: 768px) and (max-width: 850px) {
     .reservation-table__head {
-            font-size: 19px;
-        }
+        font-size: 19px;
+    }
 
     .reservation-table__content {
-            font-size: 17px;
-        }
+        font-size: 17px;
+    }
 
     .owner-reservation__empty {
         width: 100%;
@@ -143,10 +104,5 @@
 
     .search-form {
         width: 100%;
-        font-size: 16px;
-    }
-
-    .search-form__month {
-        max-width: 28%;
     }
 }
