@@ -23,8 +23,8 @@ class ReservationController extends Controller
 
         // 検索フィルター
         $filters = [
-            'month' => $request->input('month'),
-            'sort' => $request->input('sort'),
+            'start_date' => $request->input('start_date'),
+            'end_date'   => $request->input('end_date'),
             'visit_status' => $request->input('visit_status'),
             'keyword' => $request->input('keyword'),
         ];
@@ -32,6 +32,8 @@ class ReservationController extends Controller
         $reservations = Reservation::with('user')
             ->where('shop_id', $shopId)
             ->filter($filters)
+            ->orderBy('date', 'asc')
+            ->orderBy('time', 'asc')
             ->paginate(30);
 
         return view('owner.reservation.index', compact('reservations', 'filters'));

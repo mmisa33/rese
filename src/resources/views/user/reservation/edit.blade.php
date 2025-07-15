@@ -18,12 +18,15 @@
             @method('PUT')
 
             <div class="reservation-form__content">
-                <h3 class="reservation-form__title">予約内容の変更</h3>
+                <h3 class="reservation-form__title">変更内容を入力してください</h3>
 
                 {{-- 日付 --}}
                 <div class="reservation-form__select">
                     <input class="reservation-form__select--date" type="date" id="date" name="date" value="{{ old('date', $reservation->date) }}">
                 </div>
+                @error('date')
+                    <p class="error-message white">{{ $message }}</p>
+                @enderror
 
                 {{-- 時間 --}}
                 <div class="reservation-form__select select-wrapper">
@@ -58,6 +61,7 @@
                 </div>
             </div>
 
+            <input type="hidden" name="shop_id" value="{{ $reservation->shop_id }}">
             <button type="submit" class="reservation-form__btn">更新する</button>
         </form>
     </div>

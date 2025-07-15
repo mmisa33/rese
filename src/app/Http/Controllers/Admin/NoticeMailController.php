@@ -43,7 +43,7 @@ class NoticeMailController extends BaseNoticeMailController
         $notice = NoticeMail::findOrFail($id);
 
         $targets = [
-            'all' => '全ユーザー',
+            'all' => '全登録ユーザー（管理者含む）',
             'owners' => '店舗代表者',
             'custom' => '手動指定',
         ];

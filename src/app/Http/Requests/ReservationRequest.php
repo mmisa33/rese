@@ -31,7 +31,7 @@ class ReservationRequest extends FormRequest
         ];
     }
 
-    // // 同じ店舗に同日に予約が重複していないかをチェック
+    // 同じ店舗に同日に予約が重複していないかをチェック
     public function withValidator($validator): void
     {
         $validator->after(function ($validator) {

@@ -21,16 +21,13 @@ class Reservation extends Model
     // 検索処理
     public function scopeFilter($query, $filters)
     {
-        // 月で絞り込み
-        if (!empty($filters['month']) && preg_match('/^\d{4}-\d{2}$/', $filters['month'])) {
-            $start = Carbon::createFromFormat('Y-m', $filters['month'])->startOfMonth();
-            $end = $start->copy()->endOfMonth();
-            $query->whereBetween('date', [$start->toDateString(), $end->toDateString()]);
+        // 日付範囲で絞り込み
+        if (!empty($filters['start_date']) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $filters['start_date'])) {
+            $query->where('date', '>=', $filters['start_date']);
         }
-
-        // 並び順
-        $sort = in_array($filters['sort'] ?? '', ['asc', 'desc']) ? $filters['sort'] : 'asc';
-        $query->orderBy('date', $sort)->orderBy('time', $sort);
+        if (!empty($filters['end_date']) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $filters['end_date'])) {
+            $query->where('date', '<=', $filters['end_date']);
+        }
 
         // 来店状況で絞り込み
         if (!empty($filters['visit_status'])) {

@@ -52,6 +52,11 @@ class OwnerController extends Controller
 
         $owner->name = $request->input('owner_name');
         $owner->email = $request->input('email');
+
+        if ($request->filled('password')) {
+            $owner->password = Hash::make($request->input('password'));
+        }
+
         $owner->save();
 
         return redirect()->route('admin.index')

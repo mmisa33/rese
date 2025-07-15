@@ -38,6 +38,6 @@
 /* レスポンシブデザイン (タブレット768px - 850px) */
 @media screen and (min-width: 768px) and (max-width: 850px) {
     .thanks-form__inner {
-        width: 50vw;
+        width: 55vw;
     }
 }

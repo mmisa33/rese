@@ -39,7 +39,7 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
         ]);
 
-        // 店舗を6件取得（存在前提）
+        // 店舗を6件取得
         $shopIds = Shop::pluck('id')->take(6)->values();
 
         // Likes（user1が5店舗にいいね）

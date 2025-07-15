@@ -60,7 +60,7 @@ class NoticeMailController extends BaseNoticeMailController
         $notice = NoticeMail::findOrFail($id);
 
         $targets = [
-            'users'        => '全ユーザー',
+            'users'        => '全一般ユーザー',
             'reservations' => '予約ユーザー',
             'likes'        => 'お気に入り登録ユーザー',
             'custom'       => '手動指定',

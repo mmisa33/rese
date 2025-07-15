@@ -92,7 +92,7 @@ class ReservationController extends Controller
 
         try {
             $shop = Shop::findOrFail($request->shop_id);
-            $quantity = (int) $request->number;
+            $quantity = (int) $request->number; // 予約人数
             $unitPrice = self::UNIT_PRICE;  // 1人3,000円
 
             $checkoutSession = StripeSession::create([
@@ -152,6 +152,10 @@ class ReservationController extends Controller
     public function verify($id)
     {
         $reservation = Reservation::with('shop', 'user')->findOrFail($id);
+
+        if ($reservation->user_id !== auth()->id()) {
+            abort(403, 'この予約にはアクセスできません');
+        }
 
         return view('user.reservation.verify', compact('reservation'));
     }

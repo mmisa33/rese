@@ -58,7 +58,7 @@ class NoticeMailsTableSeeder extends Seeder
             [
                 'user_id'       => $owner->id,
                 'target'        => 'custom',
-                'custom_emails' => "vip1@example.com\nvip2@example.com",
+                'custom_emails' => "vip1@example.com, vip2@example.com",
                 'subject'       => '【限定】VIP 会員様ご優待のご案内',
                 'message'       => "日頃のご愛顧に感謝し、特別コースをご用意いたしました。",
                 'created_at'    => $now,

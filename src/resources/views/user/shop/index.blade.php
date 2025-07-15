@@ -7,7 +7,7 @@
 @section('link')
     {{-- 検索ボックス --}}
     <div class="header__search">
-        <form id="search-form" class="search-form" action="" method="get">
+        <form id="search-form" class="search-form" action="{{ route('shop.index') }}" method="get">
 
             {{-- 地域 --}}
             <div class="search-form__group search-form__group--area">

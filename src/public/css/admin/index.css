@@ -46,7 +46,7 @@
 }
 
 .owner-list__name {
-    font-weight: bold;
+    font-weight: 500;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

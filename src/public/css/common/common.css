@@ -295,7 +295,6 @@ input[type="text"] {
 }
 
 /* フォームの固有グループ幅 */
-.search-form__group--sort,
 .search-form__group--status,
 .search-form__group--area,
 .search-form__group--genre {

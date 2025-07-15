@@ -10,7 +10,7 @@
         'action' => route('owner.notice.send'),
         'back' => route('owner.index'),
         'oldTargets' => [
-            'users' => '全ユーザー',
+            'users' => '全一般ユーザー',
             'reservations' => '予約ユーザー',
             'likes' => 'お気に入り登録ユーザー',
             'custom' => '手動指定',

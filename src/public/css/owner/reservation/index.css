@@ -5,17 +5,9 @@
     margin-left: auto;
 }
 
-.search-form__group--month {
-    max-width: 180px;
-    border-right: 1px solid #ccc;
-}
-
-.search-form__month-input {
-    border: none;
+.search-form__date-input {
     padding: 5px 10px;
-    font-size: 15px;
     height: 38px;
-    background: transparent;
     cursor: pointer;
 }
 
@@ -72,5 +64,11 @@
 
     .search-form {
         width: 100%;
+        padding: 10px 5px;
+        font-size: 14px;
+    }
+
+    .search-form__select {
+        padding: 5px 30px 5px 0px;
     }
 }

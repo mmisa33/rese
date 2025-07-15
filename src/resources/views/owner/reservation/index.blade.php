@@ -14,19 +14,11 @@
     {{-- 検索ボックス --}}
     <form method="GET" action="{{ route('owner.reservation') }}" class="search-form search-form__reservation" id="search-form">
 
-        {{-- 月指定検索 --}}
-        <div class="search-form__group search-form__group--month">
-            <input type="month" name="month" value="{{ request('month') }}" class="search-form__month-input">
-        </div>
-
-        {{-- 並び順 --}}
-        <div class="search-form__group search-form__group--sort">
-            <select name="sort" class="search-form__select">
-                <option value="" disabled selected>並び替え</option>
-                <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>昇順</option>
-                <option value="desc" {{ request('sort') == 'desc' ? 'selected' : '' }}>降順</option>
-            </select>
-            <img src="{{ asset('images/icon/select.png') }}" alt="Select Icon" class="search-form__select-icon">
+        {{-- 日付範囲指定 --}}
+        <div class="search-form__group search-form__group--date-range">
+            <input type="date" name="start_date" id="start_date" value="{{ request('start_date') }}" class="search-form__date-input">
+            <span class="search-form__range-separator">〜</span>
+            <input type="date" name="end_date" id="end_date" value="{{ request('end_date') }}" class="search-form__date-input">
         </div>
 
         {{-- 来店状況 --}}
@@ -43,7 +35,7 @@
         <button type="submit" class="search-form__btn">
             <img src="{{ asset('images/icon/search.png') }}" alt="Search" class="keyword-icon">
         </button>
-        <input type="text" name="keyword" placeholder="ユーザー名検索" value="{{ request('keyword') }}" class="search-form__keyword">
+        <input type="text" name="keyword" placeholder="ユーザー名" value="{{ request('keyword') }}" class="search-form__keyword">
     </form>
 
     {{-- 予約一覧 --}}
@@ -88,7 +80,7 @@
     document.addEventListener('DOMContentLoaded', function () {
         const form = document.getElementById('search-form');
 
-        form.querySelectorAll('select, input[type="month"]').forEach(element => {
+        form.querySelectorAll('select, input[type="date"]').forEach(element => {
             element.addEventListener('change', () => {
                 form.submit();
             });

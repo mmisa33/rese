@@ -30,10 +30,9 @@ Route::get('/verify/check', [AuthController::class, 'verifyCheck'])->name('verif
 Route::get('/', [ShopController::class, 'index'])->name('shop.index');
 Route::get('/search', [ShopController::class, 'index'])->name('shop.search');
 Route::get('/detail/{shop_id}', [ShopController::class, 'show'])->name('shop.show');
-Route::get('/done', [ReservationController::class, 'done'])->name('reservation.done');
 
 /**
- * ▼ 一般ユーザーログイン用
+ * ▼ 一般ユーザーログイン用（カスタマイズ）
  */
 Route::post('/login', [AuthController::class, 'storeUserLogin'])->name('login.submit');
 

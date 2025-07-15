@@ -11,6 +11,7 @@ use App\Models\NoticeMail;
 
 abstract class BaseNoticeMailController extends Controller
 {
+    // 複数アドレスへお知らせメール送信処理(管理者・店舗代表者共通)
     protected function sendEmails(array $emails, string $subject, string $message)
     {
         if (empty($emails)) {
@@ -29,6 +30,7 @@ abstract class BaseNoticeMailController extends Controller
         return null; // success
     }
 
+    // お知らせメールDB保存処理(管理者・店舗代表者共通)
     protected function createNoticeMail(int $userId, NoticeMailRequest $request)
     {
         NoticeMail::create([

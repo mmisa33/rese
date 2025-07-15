@@ -16,11 +16,6 @@ class RegisterRequest extends FormRequest
         return self::rulesStatic();
     }
 
-    public function messages(): array
-    {
-        return self::messagesStatic();
-    }
-
     public static function rulesStatic(): array
     {
         return [
@@ -28,6 +23,11 @@ class RegisterRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'unique:users,email', 'max:100'],
             'password' => ['required', 'min:8', 'max:50'],
         ];
+    }
+
+    public function messages(): array
+    {
+        return self::messagesStatic();
     }
 
     public static function messagesStatic(): array

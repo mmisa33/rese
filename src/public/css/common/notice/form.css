@@ -82,7 +82,7 @@
 }
 
 /* レスポンシブデザイン (タブレット768px - 850px) */
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 768px) and (max-width: 850px) {
     .notice__content {
         width: 95%;
         padding: 30px 20px;

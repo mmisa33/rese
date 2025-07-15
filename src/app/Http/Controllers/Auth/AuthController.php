@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 class AuthController extends Controller
 {
@@ -30,13 +29,6 @@ class AuthController extends Controller
             }
 
             $request->session()->regenerate();
-
-            // ユーザーはメール認証が必須（ローカル環境の場合のみ）
-            if (app()->environment('local') && $user instanceof MustVerifyEmail && ! $user->hasVerifiedEmail()) {
-                Auth::logout();
-                return redirect()->route('verification.notice')
-                    ->with('error', 'メール認証が完了していません');
-            }
 
             return redirect()->intended(route('shop.index'));
         }

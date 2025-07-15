@@ -27,19 +27,21 @@
                     <div class="owner-list__create-btn">
                         <a href="{{ route('admin.owner.create') }}" class="create-btn">新規作成</a>
                     </div>
-                    @foreach ($owners as $owner)
-                        <li class="owner-list__list">
-                            <a href="{{ route('admin.owner.show', $owner->id) }}" class="owner-list__link">
-                                <div class="owner-list__row">
-                                    <div class="owner-list__name">
-                                        <img src="{{ asset('images/icon/user.png') }}" alt="User Icon" class="icon">
-                                        {{ $owner->name }}
+                    <ul>
+                        @foreach ($owners as $owner)
+                            <li class="owner-list__list">
+                                <a href="{{ route('admin.owner.show', $owner->id) }}" class="owner-list__link">
+                                    <div class="owner-list__row">
+                                        <div class="owner-list__name">
+                                            <img src="{{ asset('images/icon/user.png') }}" alt="User Icon" class="icon">
+                                            {{ $owner->name }}
+                                        </div>
+                                        <div class="owner-list__email">（{{ $owner->email }}）</div>
                                     </div>
-                                    <div class="owner-list__email">（{{ $owner->email }}）</div>
-                                </div>
-                            </a>
-                        </li>
-                    @endforeach
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
 
                     <div class="pagination">
                         {{ $owners->appends(request()->except('owners_page'))->links() }}

@@ -32,11 +32,11 @@
                 @if (Auth::user()->role === 'user')
                     {{-- 一般ユーザー用メニュー --}}
                     <a class="header__menu-link" href="{{ route('shop.index') }}">Home</a>
-                    <a class="header__menu-link" href="{{ route('mypage') }}">Mypage</a>
                     <form class="header__menu-form" method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="header__menu-form--logout">Logout</button>
                     </form>
+                    <a class="header__menu-link" href="{{ route('mypage') }}">Mypage</a>
 
                 @elseif (Auth::user()->role === 'admin')
                     {{-- 管理者用メニュー --}}
