@@ -19,7 +19,10 @@ class NoticeMailController extends BaseNoticeMailController
     public function sendNotice(NoticeMailRequest $request)
     {
         $owner = auth()->user();
-        $emails = [];
+
+        if (!$owner->shop) {
+            return back()->withErrors(['send_error' => '店舗が登録されていないため、メールを送信できません']);
+        }
 
         if ($request->target === 'users') {
             $emails = User::where('role', 'user')->pluck('email')->toArray();
