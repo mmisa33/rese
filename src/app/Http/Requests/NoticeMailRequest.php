@@ -20,7 +20,7 @@ class NoticeMailRequest extends FormRequest
             $targetRule = ['required', 'in:all,owners,custom'];
         // 店舗代表者の送信対象
         } elseif ($role === 'owner') {
-            $targetRule = ['required', 'in:owners,users,reservations,likes,custom'];
+            $targetRule = ['required', 'in:users,reservations,likes,custom'];
         // 管理者と店舗代表者以外は送信不可
         } else {
             $targetRule = ['prohibited'];
