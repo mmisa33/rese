@@ -44,5 +44,8 @@ class SendReservationReminders extends Command
         }
 
         $this->info('予約リマインダーの送信が完了しました');
+
+        // 送信完了の日時をログに残す
+        Log::info('予約リマインダーメール送信完了: ' . now()->toDateTimeString());
     }
 }
