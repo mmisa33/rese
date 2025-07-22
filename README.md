@@ -146,7 +146,7 @@ Reseは、飲食店の検索・予約・レビューができるWebアプリケ�
     # アプリ設定
     APP_NAME=Rese
     APP_ENV=local
-    APP_KEY=【php artisan key:generateで自動生成】
+    APP_KEY=base64:XXXXXXXXXXXXXXXXX （※ key:generate 実行後に自動入力されます）
     APP_DEBUG=true
     APP_URL=http://localhost
 
@@ -185,7 +185,7 @@ Reseは、飲食店の検索・予約・レビューができるWebアプリケ�
     php artisan db:seed
     ```
     > **💡 補足**  
-    >  - `AdminSeeder`、`AreasTableSeeder`、`GenresTableSeeder` はアプリの動作に必須のデータを挿入します。**必ず  実行してください。**  
+    >  - `AdminSeeder`、`AreasTableSeeder`、`GenresTableSeeder` はアプリの動作に必須のデータを挿入します。**必ず実行してください。**  
     >  - その他のシーダー（ユーザーや店舗など）は開発・テスト用のサンプルデータです正式な本番リリース時にはセキュリテ ィ上の理由からサンプルアカウントは削除または無効化してください。  
     > - **本番環境では**、`AdminSeeder`、`AreasTableSeeder`、`GenresTableSeeder` のみを使用し、それ以外のサンプルデータは使わない想定です。
 11. ストレージリンクを作成（画像表示に必要）
@@ -195,15 +195,21 @@ Reseは、飲食店の検索・予約・レビューができるWebアプリケ�
 
 ### 🔹 本番環境（AWS EC2）
 
-1. リポジトリをクローン
-   ```bash
-   git clone git@github.com:mmisa33/rese.git
-   ```
-2. ローカルの作業フォルダに移動
+> **⚠ 事前準備についての補足**  
+> 本アプリをAWS EC2上で構築・動作させるには、以下のような事前準備が必要です：  
+> - AWS CLIのインストールと設定（必要に応じてS3など確認時に使用）  
+> - GitのSSH鍵の作成およびGitHubへの登録  
+> - EC2インスタンスへのSSH接続準備（`.pem` キーファイルの取得とパーミッション設定）  
+>  
+> これらはLaravel構築前の前提条件にあたるため、本READMEでは詳細を割愛します。  
+> 必要に応じて[AWS公式ドキュメント](https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/cli-chap-welcome.html)や[GitHub公式ドキュメント](https://docs.github.com/ja/authentication/connecting-to-github-with-ssh)をご参照ください。
+
+#### 本番環境へのSSH接続
+1. ローカルの作業フォルダに移動
     ```bash
     cd rese
     ```
-3. SSHへ接続
+2. SSHへ接続
    ```bash
    ssh -i ~/aws-ec2-key-xxxx.pem ec2-user@【EC2のパブリックIP】
    ```
@@ -211,21 +217,58 @@ Reseは、飲食店の検索・予約・レビューができるWebアプリケ�
    >  - `aws-ec2-key-xxxx.pem`: ご自身が作成した .pem キーファイル名に置き換えてください。  
    >  - `【EC2のパブリックIP】`: EC2インスタンスのパブリックIPアドレスに置き換えてください。  
    >  - .pem ファイルのパーミッションエラーが発生した場合は、`chmod 400 ~/aws-ec2-key-xxxx.pem`コマンドで権限を読み取り専用（400）に設定してください。
-4. プロジェクトフォルダへ移動
+
+#### EC2側の初期セットアップ（Apache + Laravel用Webサーバー構成）
+1. Apacheのインストールと起動
+    ```bash
+    sudo yum install -y httpd
+    sudo systemctl start httpd
+    sudo systemctl enable httpd
+    ```
+      > **💡補足**  
+   > ネットワーク（セキュリティグループ）の設定について、SSH（TCP:22）、MySQL（TCP:3306）、およびHTTP（TCP:80）は、それぞれ必要に応じて適切に設定されているものとします。
+2. Laravelの public ディレクトリをWebルートに設定（例：`/etc/httpd/conf.d/laravel.conf`）
+    ```apache
+    <VirtualHost *:80>
+        DocumentRoot "/home/ec2-user/rese/src/public"
+        <Directory "/home/ec2-user/rese/src/public">
+            AllowOverride All
+            Require all granted
+        </Directory>
+    </VirtualHost>
+    ```
+    > **💡補足**  
+   > `.htaccess` がうまく機能しない場合、`/etc/httpd/conf/httpd.conf` 内の `<Directory />` や `<Directory "/var/www">` に `AllowOverride None` が設定されている場合があります。必要に応じて `AllowOverride All` に変更してください。
+3. Apacheの `mod_rewrite` を有効化（URLルーティングのため）
+    ```bash
+    sudo httpd -M | grep rewrite
+    # → rewrite_module (shared) が表示されればOK
+    ```
+4. Apacheを再起動
+    ```bash
+    sudo systemctl restart httpd
+    ```
+
+#### Laravelアプリケーションのセットアップ
+1. EC2上でリポジトリをクローン
+   ```bash
+   git clone git@github.com:mmisa33/rese.git
+   ```
+2. プロジェクトフォルダへ移動
    ```bash
    cd ~/rese/src
    ```
    > **💡 補足**  
-   >  - EC2環境によってはプロジェクトの配置場所が異なることがあります。上記のパスは例ですので、実際のディレクトリ構成に合わせて変更してください。
-5. 必要な依存パッケージをインストール
+   >  - プロジェクトの配置パスは環境によって異なるため、必要に応じて読み替えてください。
+3. 必要な依存パッケージをインストール
     ```bash
     composer install --no-dev
     ```
-6. 環境変数ファイルを作成
+4. 環境変数ファイルを作成
     ```bash
     touch .env
     ```
-7. .env を編集（本番環境）
+5. .env を編集（本番環境）
    ```bash
    nano .env
    ```
@@ -233,7 +276,7 @@ Reseは、飲食店の検索・予約・レビューができるWebアプリケ�
     # アプリ設定
     APP_NAME=Rese
     APP_ENV=production
-    APP_KEY=【php artisan key:generateで自動生成】
+    APP_KEY=base64:XXXXXXXXXXXXXXXXX （※ key:generate 実行後に自動入力されます）
     APP_DEBUG=false
     APP_URL=http://13.211.219.123
 
@@ -274,11 +317,11 @@ Reseは、飲食店の検索・予約・レビューができるWebアプリケ�
     STRIPE_KEY=[pk_test_XXXXXXXXXXXXXXXXX]  # []に取得した公開可能キーを記載
     STRIPE_SECRET=[sk_test_XXXXXXXXXXXXXXXXX]  # []に取得した秘密キーを記載
     ```
-8. ストレージリンクを作成（画像表示に必要）
+6. ストレージリンクを作成（画像表示に必要）
     ```bash
     php artisan storage:link
     ```
-9. ストレージとキャッシュの書き込み権限を設定
+7. ストレージとキャッシュの書き込み権限を設定
    ```bash
    sudo chown -R ec2-user:apache storage bootstrap/cache
    sudo chmod -R 775 storage bootstrap/cache
@@ -286,23 +329,24 @@ Reseは、飲食店の検索・予約・レビューができるWebアプリケ�
    > **💡 補足**  
    >  - apacheはWebサーバの実行ユーザー名です。（Amazon Linux なら apache）
    >  - nginxを使っている場合は apache を nginx に変更してください。
-10. アプリケーションキーを生成
+8. アプリケーションキーを生成
     ```bash
     php artisan key:generate
     ```
-11. キャッシュを反映（.env や設定ファイル変更後）
-     ```bash
+9. キャッシュを反映（.env や設定ファイル変更後）
+    ```bash
+    php artisan config:clear
     php artisan config:cache
     php artisan route:cache
     php artisan view:cache
     ```
     > **💡 補足**  
     >  - EC2環境によってはプロジェクトの配置場所が異なることがあります。上記のパスは例ですので、実際のディレクトリ構成に合わせて変更してください。
-12. データベースをマイグレーション
+10. データベースをマイグレーション
     ```bash
     php artisan migrate
     ```
-13. 必要な初期データを挿入（本番用のみ）
+11. 必要な初期データを挿入（本番用のみ）
      ```bash
     php artisan db:seed --class=AdminSeeder
     php artisan db:seed --class=AreasTableSeeder
